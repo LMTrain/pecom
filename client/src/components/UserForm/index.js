@@ -10,8 +10,9 @@ function UserForm(props) {
       <h4 className="text-center mb-3">Create Account</h4>
         <form className="form-groups">
           <div className="form-group">
-            <label id="user-name">Name</label>
+            <label htmlFor="userName">Name</label>
             <input
+              value={props.userNname}
               type="text"
               id="user-name" 
               className="form-control" 

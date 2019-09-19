@@ -1,17 +1,173 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  name: { type: String, required: true, trim: true, minlength: 2 },
-  email: { type: String, required: true, unique: true, trim: true, minlength: 5 },
-  password: { type: String, required: true, minlength: 5 },
-  address: {type: String},
-  phone: {type: String },
-  ccard: {type: String },  
-  date: { type: Date, default: Date.now },
-}, {
-  timestamps: true,
-});
+const userSchema = new Schema({  
+  "$jsonschema": {    
+    "title": "User",
+    "description": "A user in PeCom",
+    "type": "object",
+    "properties": {
+      "memberId": {
+        "description": "The unique identifier for a user",
+        "type": "string"
+      },
+      "memberName": {
+        "description": "Name of the user",
+        "type": "string"
+      },
+       "userName": {
+        "description": "User log in identity",
+        "type": "string"     
+      },
+      "email": {
+        "description": "emails for the user",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "minItems": 1,
+        "uniqueItems": true
+      },
+      "password": {
+        "description": "User password",
+        "type": "string"
+      },
+      "cCard": {
+        "description": "User credit card",
+        "type": "number"
+      },
+      "contact": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "number"
+          },
+          "email": {
+            "type": "string"          
+          }
+        },     
+        "required": [ "email" ]
+       
+      },
+      "cart": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "qty": {
+            "type": "number"
+          },
+          "unitPrice": {
+            "type": "number"         
+          },
+          "link": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "type": "string"
+          },
+          "customerRating": {
+            "type": "string"
+          },
+        },      
+       
+      },
+      "savedItems": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "string"
+          },        
+          "unitPrice": {
+            "type": "number"         
+          },
+          "link": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "type": "string"
+          },
+          "customerRating": {
+            "type": "string"
+          },
+        },      
+       
+      },
+      
+      "theme": {
+        "type": "object",
+        "properties": {
+          "theme1": {
+            "type": "boolean"          
+          },
+          "theme2": {
+            "type": "boolean"
+          },
+          "theme3": {
+            "type": "boolean"
+          },
+          "theme4": {
+            "type": "boolean"
+          },
+          "theme5": {
+            "type": "boolean"
+          },
+          "userImage": {
+            "type": "string"        
+          }
+        },
+        
+      },
+      "bookExchange": {
+        "type": "object",
+        "properties": {
+          "bookId": {
+            "type": "string"          
+          },        
+          "title": {
+            "type": "string"         
+          },
+          "authors": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "type": "string"
+          },        
+          "description": {
+            "type": "string"
+          },
+          "publisheddate": {
+            "type": "string"
+          },
+          "request": {
+            "type": "boolean"
+          },
+          "deny": {
+            "type": "boolean"
+    
+    
+          }
+  
+        }
+
+      },     
+    }    
+  },
+  "required": [ "memberId", "memberName", "userName", "email", "password" ]
+  });
 
 const User = mongoose.model("User", userSchema);
 
