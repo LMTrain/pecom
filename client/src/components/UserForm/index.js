@@ -10,37 +10,52 @@ function UserForm(props) {
       <h4 className="text-center mb-3">Create Account</h4>
         <form className="form-groups">
           <div className="form-group">
-            <label htmlFor="userName">Name</label>
+            <label htmlFor="membername">Name</label>
             <input
-              value={props.userNname}
+              value={props.membername}
+              onChange={props.handleInputChange}
+              name="membername"
               type="text"
-              id="user-name" 
               className="form-control" 
-              placeholder="Enter Your Name"/>
+              placeholder="Enter Your Name"
+              id="membername"
+              />
           </div>
           <div className="form-group">
-            <label id="user-email">Email</label>
+            <label htmlFor="memberemail">Email</label>
             <input 
-              type="text" 
-              id="user-email" 
-              className="form-control" 
-              placeholder="Enter Your Email"/>
+              value={props.memberemail}
+              onChange={props.handleInputChange}
+              name="memberemail"
+              type="text"
+              className="form-control"  
+              placeholder="Enter Your Email"
+              id="memberemail"
+              />
           </div>
           <div className="form-group">
-            <label id="user-password">Password</label>
-            <input 
+            <label htmlFor="memberpassword">Password</label>
+            <input
+              value={props.memberpassword}
+              onChange={props.handleInputChange}
+              name="memberpassword"
               type="password" 
-              id="user-password" 
               className="form-control" 
-              placeholder="Enter User Password"/>
+              placeholder="Enter User Password"
+              id="memberpassword" 
+              />
           </div>
           <div className="form-group">
-            <label id="confirm-password">Confirm Password</label>
-            <input 
+            <label id="confirmpassword">Confirm Password</label>
+            <input
+              value={props.confirmpassword}
+              onChange={props.handleInputChange}
+              name="confirmpassword"
               type="password" 
-              id="confirm-password" 
               className="form-control" 
-              placeholder="Confirm Password"/>
+              placeholder="Confirm Password"
+              id="confirmpassword" 
+              />
           </div>
           <span className="create-acc-btn"><button type="submit" onClick={props.handleFormSubmit} className="btn btn-primary float-left">Create Account</button></span>
         </form>

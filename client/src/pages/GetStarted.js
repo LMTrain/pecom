@@ -7,17 +7,18 @@ import UserForm from "../components/UserForm";
 
 class GetStarted extends Component {
   state = {
-  id: "",
-  users:[],
-  name: "",
-  username: "",
-  email: "",
-  password: "",
-  address: "",
-  phone: "",
-  ccard: "", 
+  memberId: "",
+  user:{},
+  membername: "",
+  userName: "",
+  memberemail: "",
+  memberpassword: "",
+  confirmpassword: "",
   };
+
+
   
+ 
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -28,57 +29,74 @@ class GetStarted extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    this.saveUser(this.state.userName);         
-  };
-
-  saveUser = (id) => {
     
-    const user = this.state.users.find((user) => user.id === id);
-    console.log('user', user)
-    this.setState({user})
-    let formUserId = String(user.memberId)    
-    let formName = String(user.memberName)    
-    let formUserName = String(user.userName)
-    let formAddress = String(user.contact.address)
-    let formPhone = String(user.contact.phone)
-    let formEmail = String(user.contact.email)
-    let formPassword = String(user.password)
-    let formItem = String(user.cart.item)
-    let formQty = Number(user.cart.qty)
-    let formUnitPrice = Number(user.cart.unitPrice)
-    let formItemLink = String(user.cart.link)
-    let formThumbnail = String(user.cart.thumbnail)
-    let formDescription = String(user.cart.description)
-    let formReview = String(user.cart.customerRating)
-    let formSavedItem = String(user.savedItems.item)  
-    let formSavedUnitPrice = Number(user.savedItems.unitPrice)
-    let formSavedItemLink = String(user.savedItems.link)
-    let formSavedThumbnail = String(user.savedItems.thumbnail)
-    let formSavedDescription = String(user.savedItems.description)
-    let formSavedReview = String(user.savedItems.customerRating)
-    let formCcard = Number(user.cCard)
-    let formTheme = String(user.themes.theme1)
-    let formImage = String(user.themes.userImage)    
+    let userNameField = this.state.membername
+    let userEmailField = this.state.memberemail
+    let passwordField =  this.state. memberpassword
+    let confirmPasswordField = this.state.confirmpassword
 
-    API.saveUser({
+    let fieldName = userNameField
+    let userEmail = userEmailField
+    let password = passwordField
+    let confirmPassword = confirmPasswordField
 
-      userid: formUserId,
-      name: formName,
-      username: formUserName,
+    if (!fieldName) {
+      alert("Name field can not be empty");
+      return;
+    }
+
+    if (!userEmail) {
+      alert("email cannot be empty");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Passwords should match!");
+      return;
+    }
+    let formUserId = String(userEmail)    
+    let formName = String(fieldName)    
+    let formUserName = String(userEmail)
+    let formPassword = String(password)
+    let formEmail = String(userEmail)
+    let formCcard = 0
+    let formAddress = ""
+    let formPhone = ""
+    let formItem = ""
+    let formQty = 0
+    let formUnitPrice = 0
+    let formItemLink = ""
+    let formThumbnail = ""
+    let formDescription = ""
+    let formReview = ""
+    let formSavedItem = ""  
+    let formSavedUnitPrice = 0
+    let formSavedItemLink = ""
+    let formSavedThumbnail = ""
+    let formSavedDescription = ""
+    let formSavedReview = ""    
+    let formImage = ""
+
+    let user = {
+
+      memberId: formUserId,
+      memberName: formName,
+      userName: formUserName,
+      email: [formEmail],
+      password: formPassword,
       contact: {
                   address: formAddress,
                   phone: formPhone,
                   email: formEmail,
                 },
-      password: formPassword,
       cart: {
               item: formItem,
               qty:	formQty,
-              unitprice: formUnitPrice,
-              itemlink: formItemLink,
+              unitPrice: formUnitPrice,
+              link: formItemLink,
               thumbnail: formThumbnail,
               description: formDescription,
-              review: formReview,
+              customerRating: formReview,
             },
     saveditems: {
                   item: formSavedItem,	
@@ -90,15 +108,31 @@ class GetStarted extends Component {
                 },
     ccard: formCcard,
     theme: {
-              theme1: formTheme,
+              theme1:false,
+              theme2:false,
+              theme3:false,
+              theme4:false,
+              theme5:false,
               image: formImage, 
-            },  
-    })
-      .then(res => {console.log(res)})
-      .catch(err => console.log(err));  
-    
+            },
+    bookExchange: {
+                    bookId: "",
+                    title:  "",
+                    authors: "",
+                    link: "",
+                    thumbnail: "",
+                    description: "",
+                    publisheddate: "",
+                    request: false,       
+                    deny: true,
+                  },                
+    };
+    API.saveUser({user})  
+    .then(res => {console.log(res)})
+    .catch(err => console.log(err));  
+  
   };
- 
+
  
   render() {
   
@@ -107,10 +141,10 @@ class GetStarted extends Component {
         <Container style={{ marginTop: 80 }}>        
 
           <UserForm
-            name={this.state.name}
-            username={this.state.email}
-            email={this.state.email}
-            password={this.state.password}         
+            membername={this.state.membername}
+            memberemail={this.state.memberemail}
+            memberpassword={this.state.memberpassword}         
+            confirmpassword={this.state.confirmpassword}
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}            
           />

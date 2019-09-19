@@ -20,6 +20,6 @@ export default {
   },
   // Saves a user to the database
   saveUser: function(userData) {
-    return axios.post("/api/users", userData);
+    return axios.post("/api/users", async (userData));
   }
 };
