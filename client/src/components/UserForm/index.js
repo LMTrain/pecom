@@ -6,7 +6,7 @@ import "./style.css";
 function UserForm(props) {
   return (
     <div className="card card-body">
-      <div className="message"></div>
+      <div id="message"></div>
       <h4 className="text-center mb-3">Create Account</h4>
         <form className="form-groups">
           <div className="form-group">
@@ -59,7 +59,7 @@ function UserForm(props) {
           </div>
           <span className="create-acc-btn"><button type="submit" onClick={props.handleFormSubmit} className="btn btn-primary float-left">Create Account</button></span>
         </form>
-        <p className="lead mt-4">Have An Account? <a href="/Signin">Sign In</a></p>
+        <p className="lead mt-4">Have An Account? <a href="/Signin/">Sign In</a></p>
     </div>
   );
 }

@@ -19,7 +19,8 @@ export default {
     return axios.delete("/api/users/" + id);
   },
   // Saves a user to the database
-  saveUser: function(userData) {
-    return axios.post("/api/users", async (userData));
+  saveUser: function(newAccount) {
+    console.log(newAccount)
+    return axios.post("/api/users", newAccount);
   }
 };

@@ -8,14 +8,14 @@ const userSchema = new Schema({
     "type": "object",
     "properties": {
       "memberId": {
-        "description": "The unique identifier for a user",
+        "description": "The identifier for a user",
         "type": "string"
       },
       "memberName": {
         "description": "Name of the user",
         "type": "string"
       },
-       "userName": {
+       "userNamme": {
         "description": "User log in identity",
         "type": "string"     
       },
@@ -26,7 +26,7 @@ const userSchema = new Schema({
           "type": "string"
         },
         "minItems": 1,
-        "uniqueItems": true
+        "uniqueItems": false
       },
       "password": {
         "description": "User password",
@@ -49,7 +49,7 @@ const userSchema = new Schema({
             "type": "string"          
           }
         },     
-        "required": [ "email" ]
+        
        
       },
       "cart": {
@@ -166,7 +166,7 @@ const userSchema = new Schema({
       },     
     }    
   },
-  "required": [ "memberId", "memberName", "userName", "email", "password" ]
+  "required": [ "email", "password" ]
   });
 
 const User = mongoose.model("User", userSchema);

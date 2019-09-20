@@ -1,5 +1,6 @@
 const db = require("../models");
 const bcrypt = require("bcrypt");
+// const await = require(await)
 
 // Defining methods for the usersController
 module.exports = {
@@ -16,35 +17,24 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+
   create: function(req, res) {
-    let userCount;  
-    try {
-        userCount = await db.User.findAndCountAll({userName}).count;
-        console.log('USER COUNT from db', userCount);
-    } catch (err) {
-        console.error(err);
-        res.status(503).json({message: "Could not connect to the database"})
-    }    
-    if (userCount) {
-        return res.status(422).json({message: "Error! The user already exists."})
-        // $('.message').text('Username not found');
-    }
+    // let userCount= db.User.count({"userName" : "jami@yahoo"})
+    // if (userCount > 0) {
+    //   console.log('USER COUNT from db is > 0'); 
+    // }       
+    // if (userCount) {
+    //     return res.status(422).json({message: "Error! The user already exists."})
+    // }
+      
+    req.body.password = bcrypt.hashSync(req.body.password, 10);
+    // console.log("HASH", req.body.password)
+    db.User.collection
+      .insertOne(req.body)
+      .then(dbModel => {
+        console.log("create user", dbModel)
+        res.json(dbModel)})
 
-    // Hash the user password
-    let hash;
-    try {
-        hash = await bcrypt.hash(password, 10)
-    } catch (err) {
-        res.status(422).json({message: "Invalid password"})
-    }
-
-    // Create the user in the db
-    let createdUser;
-    try {
-
-    db.User
-      .create(req.body)
-      .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
 

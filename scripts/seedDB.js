@@ -5,7 +5,7 @@ const db = require("../models");
 
 mongoose.connect(
   process.env.MONGODB_URI ||
-  "mongodb://localhost/pecomusers"
+  "mongodb://localhost/usersinpecom"
 );
 
 
@@ -13,7 +13,7 @@ const userSeed = [
   {
     "memberId": "james@yahoo.com",
     "memberName": "Tony James",
-    "userName": "james@yahoo.com",
+    "userNamme": "james@yahoo.com",
     "email": [ "james@yahoo.com" ],    
     "password": "123456",
     "cCard": 2635211252523654,

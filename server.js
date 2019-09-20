@@ -16,23 +16,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(routes);
 
-// const uri = process.env.MONGODB_URI;
-// mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true}
-// );
-// const connection = mongoose.connection;
-// connection.once("open", () => {
-//     console.log("MongoDB connected");
-// })
-// const server = require('http').createServer(app);
+
 
 // Serve up static assets (usually on homeimageku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-// Add routes, both API and view
+
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/pecomusers");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/usersinpecom");
 
 
 

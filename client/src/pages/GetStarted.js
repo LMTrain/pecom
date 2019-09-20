@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import Container from "../components/Container";
 import UserForm from "../components/UserForm";
+import { Redirect } from "react-router-dom";
+
 // import UserPage from "../components/UserPage";
 // import Details from "../components/Details";
 
@@ -14,51 +16,91 @@ class GetStarted extends Component {
   memberemail: "",
   memberpassword: "",
   confirmpassword: "",
+  redirect: false
   };
 
-
+  
+  loadSignInPage = () => {
+    this.setRedirect()
+    // localStorage.clear();
+    // console.log("cliasdk");
+    // return(
+    //     <Redirect to="/Signin/"/>
+    // )
+  }
+  
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/Signin' />
+    }
+  }
   
  
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
+
   handleFormSubmit = event => {
     event.preventDefault();
+
+    const {membername, memberemail, memberpassword, confirmpassword} = this.state
+
+    if (!membername) {
+      document.getElementById("message").textContent = "Name field can not be empty";
+      // alert("Name field can not be empty");
+      return;
+    }else{document.getElementById("message").textContent = "";}
+
+    if (!memberemail) {
+      document.getElementById("message").textContent = "Email cannot be empty";
+      // alert("Email cannot be empty");
+      return;
+    }else{document.getElementById("message").textContent = "";}
     
-    let userNameField = this.state.membername
-    let userEmailField = this.state.memberemail
-    let passwordField =  this.state. memberpassword
-    let confirmPasswordField = this.state.confirmpassword
-
-    let fieldName = userNameField
-    let userEmail = userEmailField
-    let password = passwordField
-    let confirmPassword = confirmPasswordField
-
-    if (!fieldName) {
-      alert("Name field can not be empty");
+    if (!memberpassword) {
+      document.getElementById("message").textContent = "Password cannot be empty";
+      // alert("Password cannot be empty");
       return;
+    }else{document.getElementById("message").textContent = "";}
+
+    if (memberpassword !== confirmpassword) {
+      document.getElementById("message").textContent = "Passwords should match!";
+      
+      // alert("Passwords should match!");
+      return;
+    }else{document.getElementById("message").textContent = "";}
+
+    const newAccount = {
+      membername,
+      memberemail,
+      memberpassword,
+      confirmpassword
     }
 
-    if (!userEmail) {
-      alert("email cannot be empty");
-      return;
-    }
+    this.setState({
+      memberemail: '',
+      membername: '',
+      memberpassword: '',
+      confirmpassword: ''
+    })
+    
 
-    if (password !== confirmPassword) {
-      alert("Passwords should match!");
-      return;
-    }
-    let formUserId = String(userEmail)    
-    let formName = String(fieldName)    
-    let formUserName = String(userEmail)
-    let formPassword = String(password)
-    let formEmail = String(userEmail)
+    console.log('newAccount', newAccount)
+    let memberId = String(newAccount.memberemail)
+    let memberName = String(newAccount.membername)
+    let userName = String(newAccount.memberemail)
+    let email = String(newAccount.memberemail)
+    let password = String(newAccount.memberpassword)
     let formCcard = 0
     let formAddress = ""
     let formPhone = ""
@@ -77,79 +119,82 @@ class GetStarted extends Component {
     let formSavedReview = ""    
     let formImage = ""
 
-    let user = {
-
-      memberId: formUserId,
-      memberName: formName,
-      userName: formUserName,
-      email: [formEmail],
-      password: formPassword,
+    API.saveUser({
+      memberId: memberId,
+      memberName: memberName,
+      userName: userName,
+      email: [email],
+      password: password,
+      cCard: formCcard,
       contact: {
-                  address: formAddress,
-                  phone: formPhone,
-                  email: formEmail,
-                },
+                    address: formAddress,
+                    phone: formPhone,
+                    email: email,
+                  },
       cart: {
               item: formItem,
               qty:	formQty,
               unitPrice: formUnitPrice,
               link: formItemLink,
-              thumbnail: formThumbnail,
               description: formDescription,
+              thumbnail: formThumbnail,
               customerRating: formReview,
             },
-    saveditems: {
-                  item: formSavedItem,	
-                  unitprice: formSavedUnitPrice,
-                  itemlink: formSavedItemLink,
-                  thumbnail: formSavedThumbnail,
-                  description: formSavedDescription,
-                  review: formSavedReview
-                },
-    ccard: formCcard,
-    theme: {
-              theme1:false,
-              theme2:false,
-              theme3:false,
-              theme4:false,
-              theme5:false,
-              image: formImage, 
-            },
-    bookExchange: {
-                    bookId: "",
-                    title:  "",
-                    authors: "",
-                    link: "",
-                    thumbnail: "",
-                    description: "",
-                    publisheddate: "",
-                    request: false,       
-                    deny: true,
-                  },                
-    };
-    API.saveUser({user})  
-    .then(res => {console.log(res)})
-    .catch(err => console.log(err));  
-  
+      savedItems: {
+                    item: formSavedItem,	
+                    unitPrice: formSavedUnitPrice,
+                    link: formSavedItemLink,
+                    description: formSavedDescription,
+                    thumbnail: formSavedThumbnail,
+                    customerRating: formSavedReview
+                  },
+      themes: {
+                theme1:false,
+                theme2:false,
+                theme3:false,
+                theme4:false,
+                theme5:false,
+                userImage: formImage, 
+              },
+      bookExchange: {
+                      bookId: "",
+                      title:  "",
+                      authors: "",
+                      link: "",
+                      thumbnail: "",
+                      description: "",
+                      publisheddate: "",
+                      request: false,       
+                      deny: true,
+                    },                
+    })
+      .then(res => {this.loadSignInPage()})
+      
+      .catch(err => console.log(err));  
+    
   };
+
+   
 
  
   render() {
   
     return (
       <div>
+        {this.renderRedirect()}
         <Container style={{ marginTop: 80 }}>        
 
           <UserForm
+            id="message"
             membername={this.state.membername}
             memberemail={this.state.memberemail}
             memberpassword={this.state.memberpassword}         
             confirmpassword={this.state.confirmpassword}
             handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange}            
-          />
-          {/* <UserPage user={this.state.user}
-          />        */}
+            handleInputChange={this.handleInputChange}
+                       
+          /> 
+      
          
         </Container>
       </div>

@@ -58,3 +58,7 @@ form.search button[type="submit"] {
   font-size: 14px;
   font-weight: 300;
 }
+
+#message{
+  color:red;
+}
