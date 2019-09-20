@@ -122,6 +122,9 @@ const userSchema = new Schema({
           "theme5": {
             "type": "boolean"
           },
+          "theme6": {
+            "type": "boolean"
+          },
           "userImage": {
             "type": "string"        
           }

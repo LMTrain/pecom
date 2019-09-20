@@ -10,12 +10,20 @@ import "./style.css";
 // import API from "../utils/API";
 
 
-
+var createdAccount = 1
 class Signin extends Component {
   state = {
     user: {},
    
   };
+
+  accountCreated = () => {
+    if (createdAccount >= 1) {
+      document.getElementById("welcomeMessage").textContent = "Welcome!";   
+      return;
+    }else{document.getElementById("welcomeMessage").textContent = "";}
+  }
+
 
   // When the component mounts, get a list of all Favorite books in DB and update this.state.
   // componentWillMount() {  
@@ -38,6 +46,7 @@ class Signin extends Component {
     
     return (
       <div>
+        <div id="welcomeMessage">Welcome!</div>
         <Container style={{ marginTop: 80 }}>
           <div className="card card-body">
             <div id="message"></div>

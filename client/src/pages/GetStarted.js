@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 // import UserPage from "../components/UserPage";
 // import Details from "../components/Details";
 
+
 class GetStarted extends Component {
   state = {
   memberId: "",
@@ -16,11 +17,12 @@ class GetStarted extends Component {
   memberemail: "",
   memberpassword: "",
   confirmpassword: "",
-  redirect: false
+  redirect: false,
+  createdAccount: 0
   };
 
   
-  loadSignInPage = () => {
+  loadSignInPage = () => {    
     this.setRedirect()
     // localStorage.clear();
     // console.log("cliasdk");
@@ -28,15 +30,16 @@ class GetStarted extends Component {
     //     <Redirect to="/Signin/"/>
     // )
   }
-  
-  setRedirect = () => {
+
+  setRedirect = () => {    
     this.setState({
-      redirect: true
+      redirect: true,
+      createdAccount: 1
     })
   }
   renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to='/Signin' />
+    if (this.state.redirect) {      
+      return <Redirect to='/PersonalizePage' />
     }
   }
   
@@ -56,27 +59,22 @@ class GetStarted extends Component {
     const {membername, memberemail, memberpassword, confirmpassword} = this.state
 
     if (!membername) {
-      document.getElementById("message").textContent = "Name field can not be empty";
-      // alert("Name field can not be empty");
+      document.getElementById("message").textContent = "Name field can not be empty";   
       return;
     }else{document.getElementById("message").textContent = "";}
 
     if (!memberemail) {
-      document.getElementById("message").textContent = "Email cannot be empty";
-      // alert("Email cannot be empty");
+      document.getElementById("message").textContent = "Email cannot be empty";    
       return;
     }else{document.getElementById("message").textContent = "";}
     
     if (!memberpassword) {
-      document.getElementById("message").textContent = "Password cannot be empty";
-      // alert("Password cannot be empty");
+      document.getElementById("message").textContent = "Password cannot be empty";   
       return;
     }else{document.getElementById("message").textContent = "";}
 
     if (memberpassword !== confirmpassword) {
-      document.getElementById("message").textContent = "Passwords should match!";
-      
-      // alert("Passwords should match!");
+      document.getElementById("message").textContent = "Passwords should match!";     
       return;
     }else{document.getElementById("message").textContent = "";}
 
@@ -191,8 +189,7 @@ class GetStarted extends Component {
             memberpassword={this.state.memberpassword}         
             confirmpassword={this.state.confirmpassword}
             handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange}
-                       
+            handleInputChange={this.handleInputChange}                       
           /> 
       
          
