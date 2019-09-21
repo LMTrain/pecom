@@ -22,7 +22,7 @@ class GetStarted extends Component {
   };
 
   
-  loadSignInPage = () => {    
+  loadPersonalizePage = () => {    
     this.setRedirect()
     // localStorage.clear();
     // console.log("cliasdk");
@@ -152,6 +152,7 @@ class GetStarted extends Component {
                 theme3:false,
                 theme4:false,
                 theme5:false,
+                theme6:false,
                 userImage: formImage, 
               },
       bookExchange: {
@@ -166,7 +167,7 @@ class GetStarted extends Component {
                       deny: true,
                     },                
     })
-      .then(res => {this.loadSignInPage()})
+      .then(res => {this.loadPersonalizePage()})
       
       .catch(err => console.log(err));  
     

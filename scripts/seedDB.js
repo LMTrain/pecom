@@ -13,7 +13,7 @@ const userSeed = [
   {
     "memberId": "james@yahoo.com",
     "memberName": "Tony James",
-    "userNamme": "james@yahoo.com",
+    "userName": "james@yahoo.com",
     "email": [ "james@yahoo.com" ],    
     "password": "123456",
     "cCard": 2635211252523654,
@@ -41,10 +41,11 @@ const userSeed = [
     },
     "themes": {
       "theme1": false,
-      "theme2":false,
-      "theme3":true,
+      "theme2": false,
+      "theme3": true,
       "theme4": false,
       "theme5": false,
+      "theme6": false,
       "userImage": "https://lmtrain.github.io/lm-images/assets/images/bugatti_1.jpg",
     },
     "bookExchange": {

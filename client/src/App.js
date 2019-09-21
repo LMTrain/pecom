@@ -6,7 +6,7 @@ import GetStarted from "./pages/GetStarted";
 import PersonalizePage from "./pages/PersonalizePage";
 // import Details from "./components/Details";
 import Navbar from "./components/Navbar";
-import ThemeNavbar from "./components/ThemeNavbar";
+// import ThemeNavbar from "./components/ThemeNavbar";
 
 import Wrapper from "./components/Wrapper";
 

@@ -15,7 +15,7 @@ const userSchema = new Schema({
         "description": "Name of the user",
         "type": "string"
       },
-       "userNamme": {
+       "userName": {
         "description": "User log in identity",
         "type": "string"     
       },
@@ -26,7 +26,7 @@ const userSchema = new Schema({
           "type": "string"
         },
         "minItems": 1,
-        "uniqueItems": false
+        "uniqueItems": true
       },
       "password": {
         "description": "User password",
@@ -169,7 +169,7 @@ const userSchema = new Schema({
       },     
     }    
   },
-  "required": [ "email", "password" ]
+  "required": [ "memberName", "userName", "email", "password" ]
   });
 
 const User = mongoose.model("User", userSchema);
