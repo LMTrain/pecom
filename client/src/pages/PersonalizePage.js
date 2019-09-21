@@ -41,17 +41,8 @@ class PersonalizePage extends Component {
 
   
   choosenTheme = (id) => {
-    themeChoosen = themeChoosen * 2
-    console.log(themeChoosen)
-    let themeArray = [...this.state.userThemes]
-    console.log(themeArray, "COMPLETE")
-    let reduceTheme = themeArray.filter(theme => {
-      return theme.id === id;
-     
-    });
-    this.setState({reduceTheme})
-    console.log(reduceTheme, "INCOMPLETE")
-    console.log(id, "ID")
+    console.log(id)
+   
   }
 
   render() {    
@@ -64,7 +55,7 @@ class PersonalizePage extends Component {
             <div className="choosetheme">Choose a Theme</div>
             <Row>
               <Col size="md-4">
-                <div className="theme"  type="submit" id="theme1" onClick={(id) => this.choosenTheme(id)}>
+                <div className="theme"  type="submit" id="theme1" onClick={() => this.choosenTheme(this.state.userThemes[0])}>
                   <div className="img-container" >                   
                     <img alt="Theme 1" width="180" height="120" title="Waterfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_field-wf5.jpg' />                   
                   </div>                  

@@ -19,23 +19,29 @@ module.exports = {
   },
 
   create: function(req, res) {
-    // let userCount= db.User.count({"userName" : "jami@yahoo"})
-    // if (userCount > 0) {
-    //   console.log('USER COUNT from db is > 0'); 
-    // }       
-    // if (userCount) {
-    //     return res.status(422).json({message: "Error! The user already exists."})
-    // }
-      
-    req.body.password = bcrypt.hashSync(req.body.password, 10);
-    // console.log("HASH", req.body.password)
-    db.User.collection
-      .insertOne(req.body)
-      .then(dbModel => {
-        console.log("create user", dbModel)
-        res.json(dbModel)})
+  db.User.find({"userName" : req.body.userName}, function(error, data){
+    if(error) throw error
+      if(data.length !== 0){
+        console.log('data', data)
+      return res.json({
+          "data": "You can't create data",
+          "error": "Email already exist"
+        })
+      }else{
+        console.log('there is no data', data)
+        req.body.password = bcrypt.hashSync(req.body.password, 10);
+        // console.log("HASH", req.body.password)
+        db.User.collection
+          .insertOne(req.body)
+          .then(dbModel => {
+            console.log("create user", dbModel)
+            res.json(dbModel)})
+    
+          .catch(err => res.status(422).json(err));;
+      }
 
-      .catch(err => res.status(422).json(err));
+    })
+   
   },
 
   update: function(req, res) {

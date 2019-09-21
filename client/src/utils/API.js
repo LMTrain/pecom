@@ -20,7 +20,7 @@ export default {
   },
   // Saves a user to the database
   saveUser: function(newAccount) {
-    console.log(newAccount)
+    // console.log(newAccount)
     return axios.post("/api/users", newAccount);
   }
 };

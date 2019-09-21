@@ -93,7 +93,7 @@ class GetStarted extends Component {
     })
     
 
-    console.log('newAccount', newAccount)
+    // console.log('newAccount', newAccount)
     let memberId = String(newAccount.memberemail)
     let memberName = String(newAccount.membername)
     let userName = String(newAccount.memberemail)
@@ -167,7 +167,17 @@ class GetStarted extends Component {
                       deny: true,
                     },                
     })
-      .then(res => {this.loadPersonalizePage()})
+      .then(res => {
+        // console.log('res========', res.data.error)
+        if(res.data.error ){
+          console.log(res.data.error)
+          document.getElementById("message").textContent = res.data.error;
+        }else{
+          // console.log("No exisit")
+          this.loadPersonalizePage()
+        }
+        // this.loadPersonalizePage()
+      })
       
       .catch(err => console.log(err));  
     
