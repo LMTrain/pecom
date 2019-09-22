@@ -5,11 +5,11 @@ import "./style.css";
 // import Row from "../components/Row";
 // import Col from "../components/Col";
 
-function Home() {
+function Home(props) {
   return (
     <Container style={{ marginTop: -25 }}>
       <div>
-        <Homeimage backgroundImage="https://lmtrain.github.io/lm-images/assets/images/ls_wf1.jpg">
+        <Homeimage backgroundImage={props.getTheme()}>
 
           <h1>eCommerce StoreFront</h1>
         </Homeimage>        

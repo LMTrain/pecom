@@ -45,10 +45,22 @@ module.exports = {
   },
 
   update: function(req, res) {
-    db.User
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+    db.User.find({"memberId" : req.body.memberId}, function(error, data){
+      if(error) throw error
+        if(data.length !== 0){
+          console.log('data', data)
+        return res.json({
+            "data": "You can't create data",
+            "error": "User does not exist"
+          })
+        }else{
+          console.log('THEME', data)
+          db.User
+            .UpdateOne(req.body)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+        }
+    })
   },
   remove: function(req, res) {
     db.user

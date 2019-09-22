@@ -3,11 +3,13 @@ import API from "../utils/API";
 import Container from "../components/Container";
 import UserForm from "../components/UserForm";
 import { Redirect } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import PersonalizePage from "./PersonalizePage";
 
 // import UserPage from "../components/UserPage";
 // import Details from "../components/Details";
 
-
+var UsermemberID = ""
 class GetStarted extends Component {
   state = {
   memberId: "",
@@ -38,7 +40,9 @@ class GetStarted extends Component {
     })
   }
   renderRedirect = () => {
-    if (this.state.redirect) {      
+    if (this.state.redirect) {
+      console.log(UsermemberID, "PersonalizePageUserID Page ID")
+      this.props.saveMemberID(UsermemberID)         
       return <Redirect to='/PersonalizePage' />
     }
   }
@@ -94,6 +98,7 @@ class GetStarted extends Component {
     
 
     // console.log('newAccount', newAccount)
+    UsermemberID = String(newAccount.memberemail)
     let memberId = String(newAccount.memberemail)
     let memberName = String(newAccount.membername)
     let userName = String(newAccount.memberemail)
@@ -114,7 +119,8 @@ class GetStarted extends Component {
     let formSavedItemLink = ""
     let formSavedThumbnail = ""
     let formSavedDescription = ""
-    let formSavedReview = ""    
+    let formSavedReview = ""
+    let formTheme = ""   
     let formImage = ""
 
     API.saveUser({
@@ -124,6 +130,8 @@ class GetStarted extends Component {
       email: [email],
       password: password,
       cCard: formCcard,
+      userTheme:formTheme,
+      userImage: formImage,
       contact: {
                     address: formAddress,
                     phone: formPhone,
@@ -145,16 +153,7 @@ class GetStarted extends Component {
                     description: formSavedDescription,
                     thumbnail: formSavedThumbnail,
                     customerRating: formSavedReview
-                  },
-      themes: {
-                theme1:false,
-                theme2:false,
-                theme3:false,
-                theme4:false,
-                theme5:false,
-                theme6:false,
-                userImage: formImage, 
-              },
+                  },      
       bookExchange: {
                       bookId: "",
                       title:  "",
@@ -201,8 +200,7 @@ class GetStarted extends Component {
             confirmpassword={this.state.confirmpassword}
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}                       
-          /> 
-      
+          />
          
         </Container>
       </div>

@@ -54,12 +54,13 @@ button {
 }
 
 .get-started-box{
-  margin-left: 16px;
+  margin-left: 86px;
   display: block;
   font-weight: 400;
   font-family: medium-content-sans-serif-font, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-rendering: optimizeLegibility;  
   color: rgba(184, 38, 38, 0.8);
+  text-align: right;
 
 }
 *, *:before, *:after {
@@ -68,9 +69,24 @@ button {
 .nav-icon-space{
   width: 1px;
   height: 24px;
-  margin-right: 14px;
-  margin-left: 950px;
+  margin-right: -35px;
+  margin-left: 600px;
   border-left: 1px solid rgba(0, 0, 0, 0.2);
   display: block;
   box-sizing: inherit;
+  text-align: right;
+}
+.nav-icon-space1{
+  width: 1px;
+  height: 24px;
+  margin-right: -100px;
+  margin-left: 150px;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  display: block;
+  box-sizing: inherit;
+  text-align: left;
+}
+#memberinfo{
+  color: antiquewhite;
+  text-align: left;
 }

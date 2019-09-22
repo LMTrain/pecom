@@ -36,6 +36,14 @@ const userSchema = new Schema({
         "description": "User credit card",
         "type": "number"
       },
+      "userTheme": {
+        "description": "User choosen personal theme",
+        "type": "string"
+      },
+      "userImage": {
+        "description": "User personal profile picture",
+        "type": "string"
+      },
       "contact": {
         "type": "object",
         "properties": {
@@ -48,9 +56,7 @@ const userSchema = new Schema({
           "email": {
             "type": "string"          
           }
-        },     
-        
-       
+        },       
       },
       "cart": {
         "type": "object",
@@ -76,8 +82,7 @@ const userSchema = new Schema({
           "customerRating": {
             "type": "string"
           },
-        },      
-       
+        },       
       },
       "savedItems": {
         "type": "object",
@@ -102,35 +107,7 @@ const userSchema = new Schema({
           },
         },      
        
-      },
-      
-      "theme": {
-        "type": "object",
-        "properties": {
-          "theme1": {
-            "type": "boolean"          
-          },
-          "theme2": {
-            "type": "boolean"
-          },
-          "theme3": {
-            "type": "boolean"
-          },
-          "theme4": {
-            "type": "boolean"
-          },
-          "theme5": {
-            "type": "boolean"
-          },
-          "theme6": {
-            "type": "boolean"
-          },
-          "userImage": {
-            "type": "string"        
-          }
-        },
-        
-      },
+      },      
       "bookExchange": {
         "type": "object",
         "properties": {
@@ -159,8 +136,7 @@ const userSchema = new Schema({
             "type": "boolean"
           },
           "deny": {
-            "type": "boolean"
-    
+            "type": "boolean"    
     
           }
   

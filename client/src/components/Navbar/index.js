@@ -22,9 +22,13 @@ function Navbar() {
             >
               <h5>PeCom</h5>
             </Link>
-          </li>
+          </li>                 
           <span className="nav-icon-space"></span>
+          {/* <span id="memberinfo">Member :</span> */}
+          <span id="memberinfo"></span>
+          <span className="nav-icon-space1"></span>          
           <li className="nav-item">
+            
             <Link
               to="/Signin"
               className={window.location.pathname === "/Signin" ? "nav-link active" : "nav-link"}
