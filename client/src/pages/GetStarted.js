@@ -36,12 +36,12 @@ class GetStarted extends Component {
   setRedirect = () => {    
     this.setState({
       redirect: true,
-      createdAccount: 1
+      
     })
   }
   renderRedirect = () => {
     if (this.state.redirect) {
-      console.log(UsermemberID, "PersonalizePageUserID Page ID")
+      // console.log(UsermemberID, "PersonalizePageUserID Page ID")
       this.props.saveMemberID(UsermemberID)         
       return <Redirect to='/PersonalizePage' />
     }

@@ -22,11 +22,21 @@ function Navbar() {
             >
               <h5>PeCom</h5>
             </Link>
-          </li>                 
+          </li>
+          <span className="nav-icon-space1"></span>          
+          <form className="form-inline">
+            <div className="input-group"></div>
+              <div id="item-search-icon" ></div>
+                {/* <div className="input-group-append"> */}
+                  <button type="button" className="btn btn-secondary"><i className="fa fa-search"></i></button>
+                <input id="item-input" type="text" className="form-control" placeholder="Search for an item" />
+                {/* </div> */}
+          </form>
+                
           <span className="nav-icon-space"></span>
           {/* <span id="memberinfo">Member :</span> */}
-          <span id="memberinfo"></span>
-          <span className="nav-icon-space1"></span>          
+          {/* <span id="memberinfo"></span> */}
+          
           <li className="nav-item">
             
             <Link

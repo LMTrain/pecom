@@ -11,7 +11,7 @@ function Home(props) {
       <div>
         <Homeimage backgroundImage={props.getTheme()}>
 
-          <h1>eCommerce StoreFront</h1>
+          
         </Homeimage>        
       </div>
       <div>

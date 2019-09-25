@@ -105,8 +105,7 @@ const userSchema = new Schema({
           "customerRating": {
             "type": "string"
           },
-        },      
-       
+        },        
       },      
       "bookExchange": {
         "type": "object",

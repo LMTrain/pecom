@@ -69,8 +69,8 @@ button {
 .nav-icon-space{
   width: 1px;
   height: 24px;
-  margin-right: -35px;
-  margin-left: 600px;
+  margin-right: 5px;
+  margin-left: 300px;
   border-left: 1px solid rgba(0, 0, 0, 0.2);
   display: block;
   box-sizing: inherit;
@@ -79,8 +79,8 @@ button {
 .nav-icon-space1{
   width: 1px;
   height: 24px;
-  margin-right: -100px;
-  margin-left: 150px;
+  margin-right: 180px;
+  margin-left: 180px;
   border-left: 1px solid rgba(0, 0, 0, 0.2);
   display: block;
   box-sizing: inherit;
@@ -89,4 +89,53 @@ button {
 #memberinfo{
   color: antiquewhite;
   text-align: left;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  color: whitesmoke;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: rgb(146, 143, 143);
+  border: 1px blue;
+  padding: .375rem .75rem;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: .25rem;
+  -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.form-inline .form-control {
+  display: inline-block;
+  width: 400px;
+  vertical-align: middle;
+  border-radius: 22px;
+  box-shadow: 0 1px 6px 0 rgb(76, 187, 61);
+  box-sizing: border-box;
+  /* font-size: 16px; */
+  line-height: 21px;
+  max-width: 584px;
+  transition: none;
+}
+
+#item-search-icon {
+  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd…M3LjAxIDUgOS41IDUgMTQgNy4wMSAxNCA5LjUgMTEuOTkgMTQgOS41IDE0eiIvPjwvc3ZnPg==);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100%;
+  background: 24px 24px rgb(117, 117, 117);
+  bottom: 0;
+  display: none;
+  height: 24px;
+  left: 0;
+  margin: auto 0;
+  margin-inline-start: 16px;
+  position: absolute;
+  top: 0;
+  width: 24px;
 }

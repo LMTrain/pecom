@@ -6,11 +6,11 @@ import Col from "../components/Col";
 import { Redirect } from "react-router-dom";
 
 var dbTheme = ""
-// var memberId = ""
+var mID = ""
 class PersonalizePage extends Component {
   
   state = {   
-    userThemes: ["theme0","theme1", "theme2", "theme3", "theme4", "theme5", "theme6"],
+    userThemes: ["theme0","theme1", "theme2", "theme3", "theme4", "theme5", "theme6", "theme7", "theme8", "theme9", "theme10", "theme11", "theme12", "theme13", "theme14", "theme15", "theme16"],
     redirect: false,
     dbTheme: "",
     reduceTheme:-1,
@@ -40,14 +40,15 @@ class PersonalizePage extends Component {
   }
   renderRedirect = () => {
     if (this.state.redirect) {
-      this.props.updateDB()     
+      this.props.updateDBtheme(mID)     
       return <Redirect to='/Signin' />
     }
   }
 
   
-  choosenTheme = (id) => {    
-    // console.log(id)    
+  choosenTheme = (id) => {
+    mID = this.props.currentUser 
+    // console.log("mID is : ", mID)    
     // let themeArray = [...this.state.userThemes]
     // console.log(themeArray, "COMPLETE")
     // let reduceTheme = [id]
@@ -96,55 +97,134 @@ class PersonalizePage extends Component {
         {this.renderRedirect()}
         <div id="welcomeMessage">Personalize Your Account</div>
         <Container style={{ marginTop: 60 }}>
-          <div className="card card-body">
+          {/* <div className="theme-card-body"> */}
             <div className="choosetheme">Choose a Theme</div>
             <div id="memberinfo"></div>
-            <div>{this.props.currentUser}</div>
+            {/* <div>{this.props.currentUser}</div> */}
             <div id="message"></div>
             <Row>
-              <Col size="md-4">
+              <Col size="md-3">
                 <div className="theme"  type="submit" id="theme1" onClick={() => this.choosenTheme(this.state.userThemes[1])}>
                   <div className="img-container">                   
-                    <img alt="Theme 1" width="180" height="120" title="Mountain Waterfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_field-wf5.jpg' />                   
+                    <img alt="Theme 1" width="80" height="80" title="Mountain Waterfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_field-wf5.jpg' />                   
                   </div>                  
                 </div>
               </Col>
-              <Col size="md-4">
+              <Col size="md-3">
                 <div className="theme" type="submit" id="theme2" onClick={() => this.choosenTheme(this.state.userThemes[2])}>
                   <div className="img-container">
-                    <img alt="Theme 2" width="180" height="120" title="Rocky Landscape Daylight" src='https://lmtrain.github.io/lm-images/assets/images/ls_daylight.jpg' />           
+                    <img alt="Theme 2" width="120" height="80" title="Rocky Landscape Daylight" src='https://lmtrain.github.io/lm-images/assets/images/ls_daylight.jpg' />           
                   </div>                  
                 </div>
               </Col>
-              <Col size="md-4">
+              <Col size="md-3">
                 <div className="theme" type="submit" id="theme3" onClick={() => this.choosenTheme(this.state.userThemes[3])}>
                   <div className="img-container">
-                    <img alt="Theme 3" width="180" height="120" title="Desert Landscape Tree" src='https://lmtrain.github.io/lm-images/assets/images/ls_field-cnn.jpg' />           
+                    <img alt="Theme 3" width="120" height="80" title="Desert Landscape Tree" src='https://lmtrain.github.io/lm-images/assets/images/ls_field-cnn.jpg' />           
+                  </div>                  
+                </div>
+              </Col>
+              <Col size="md-3">
+                <div className="theme" type="submit" id="theme4" onClick={() => this.choosenTheme(this.state.userThemes[4])}>
+                  <div className="img-container">
+                    <img alt="Theme 4" width="120" height="80" title="Landscape Field Skyfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_field.jpg' />           
                   </div>                  
                 </div>
               </Col>
             </Row>
             <Row>
-              <Col size="md-4">
-                <div className="theme" type="submit" id="theme4" onClick={() => this.choosenTheme(this.state.userThemes[4])}>
-                  <div className="img-container">
-                    <img alt="Theme 4" width="180" height="120" title="Landscape Field Skyfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_field.jpg' />           
-                  </div>                  
-                </div>
-              </Col>
-              <Col size="md-4">
+              <Col size="md-3">
                 <div className="theme" type="submit" id="theme5" onClick={() => this.choosenTheme(this.state.userThemes[5])}>
                   <div className="img-container">
-                    <img alt="Theme 5" width="180" height="120" title="Iceland Waterfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_wf1.png' />            
+                    <img alt="Theme 5" width="120" height="80" title="Iceland Waterfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg' />            
                   </div>                  
                 </div>
               </Col>
-              <Col size="md-4">
+              <Col size="md-3">
                 <div className="theme" type="submit" id="theme6" onClick={() => this.choosenTheme(this.state.userThemes[6])}>
                   <div className="img-container">
-                    <img alt="Theme 6" width="180" height="120" title="Rocky Waterfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_wf2.jpg' />            
+                    <img alt="Theme 6" width="120" height="80" title="Rocky Waterfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_wf2.jpg' />            
                   </div>                  
                 </div>
+              </Col>
+              <Col size="md-3">
+                <div className="theme" type="submit" id="theme7" onClick={() => this.choosenTheme(this.state.userThemes[7])}>
+                  <div className="img-container">
+                    <img alt="Theme 7" width="120" height="80" title="Landscape Day Cloud" src='https://lmtrain.github.io/lm-images/assets/images/ls_field2.jpg' />            
+                  </div>                  
+                </div>
+              </Col>
+              <Col size="md-3">
+                <div className="theme" type="submit" id="theme8" onClick={() => this.choosenTheme(this.state.userThemes[8])}>
+                  <div className="img-container">
+                    <img alt="Theme 8" width="120" height="80" title="Sunset at Hale Azarya" src='https://lmtrain.github.io/lm-images/assets/images/ls_hale-azarya.jpg' />            
+                  </div>                  
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col size="md-3">
+                <div className="theme" type="submit" id="theme9" onClick={() => this.choosenTheme(this.state.userThemes[9])}>
+                  <div className="img-container">
+                    <img alt="Theme 9" width="120" height="80" title="Black Gold Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_blackgold.jpg' />            
+                  </div>                  
+                </div>
+              </Col>
+              <Col size="md-3">
+                <div className="theme" type="submit" id="theme10" onClick={() => this.choosenTheme(this.state.userThemes[10])}>
+                  <div className="img-container">
+                    <img alt="Theme 10" width="120" height="80" title="Black White Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_blackwhite.jpg' />            
+                  </div>                  
+                </div>
+              </Col>
+              <Col size="md-3">
+                <div className="theme" type="submit" id="theme11" onClick={() => this.choosenTheme(this.state.userThemes[11])}>
+                  <div className="img-container">
+                    <img alt="Theme 11" width="120" height="80" title="Blue Cledonia Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_bluecledonia.png' />            
+                  </div>                  
+                </div>
+              </Col>
+              <Col size="md-3">
+                <div className="theme" type="submit" id="theme12" onClick={() => this.choosenTheme(this.state.userThemes[12])}>
+                  <div className="img-container">
+                    <img alt="Theme 12" width="120" height="80" title="Brown Circle Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_browncircle.jpg' />            
+                  </div>                  
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col size="md-3">
+                <div className="theme" type="submit" id="theme13" onClick={() => this.choosenTheme(this.state.userThemes[13])}>
+                  <div className="img-container">
+                    <img alt="Theme 13" width="120" height="80" title="Gold Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_gold.jpg' />            
+                  </div>                  
+                </div>
+              </Col>
+              <Col size="md-3">
+                <div className="theme" type="submit" id="theme14" onClick={() => this.choosenTheme(this.state.userThemes[14])}>
+                  <div className="img-container">
+                    <img alt="" width="120" height="80" title="White" src='' />            
+                  </div>                  
+                </div>
+              </Col>
+              <Col size="md-3">
+                <div className="theme" type="submit" id="theme15" onClick={() => this.choosenTheme(this.state.userThemes[15])}>
+                  <div className="img-container">
+                    <img alt="Theme 15" width="120" height="80" title="Pink Curly Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_pinkmarble.jpg' />            
+                  </div>                  
+                </div>
+              </Col>
+              <Col size="md-3">
+                <div className="theme" type="submit" id="theme16" onClick={() => this.choosenTheme(this.state.userThemes[16])}>
+                  <div className="img-container">
+                    <img alt="Theme 16" width="120" height="80" title="Whit Gray Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_whitegray.jpg' />            
+                  </div>                  
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col size="md-12">              
+                <span>.</span>
               </Col>
             </Row>
             <Row>
@@ -155,7 +235,7 @@ class PersonalizePage extends Component {
               </Col>
             </Row>
             
-          </div>
+          {/* </div> */}
         </Container>
       </div>
     );

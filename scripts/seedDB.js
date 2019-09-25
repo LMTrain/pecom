@@ -17,6 +17,8 @@ const userSeed = [
     "email": [ "james@yahoo.com" ],    
     "password": "123456",
     "cCard": 2635211252523654,
+    "userTheme": "theme1",
+    "userImage": "https://lmtrain.github.io/lm-images/assets/images/bugatti_1.jpg",
     "contact": {
       "address": "5454 Victory Lane, Andover, MN 55304",
       "phone": 2154254252,
@@ -38,16 +40,7 @@ const userSeed = [
       "description": "double pocket bag",
       "thumbnail":"http://books.google.com/books/content?id=NgEwCwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "customerRating": "4.7",      
-    },
-    "themes": {
-      "theme1": false,
-      "theme2": false,
-      "theme3": true,
-      "theme4": false,
-      "theme5": false,
-      "theme6": false,
-      "userImage": "https://lmtrain.github.io/lm-images/assets/images/bugatti_1.jpg",
-    },
+    },    
     "bookExchange": {
       "bookId": "wjXoLQ2NFzE",
       "title":  "Weapons of Math Destruction",
