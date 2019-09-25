@@ -5,7 +5,7 @@ import Row from "../components/Row";
 import Col from "../components/Col";
 import { Redirect } from "react-router-dom";
 
-var dbTheme = ""
+
 var mID = ""
 class PersonalizePage extends Component {
   
@@ -16,9 +16,7 @@ class PersonalizePage extends Component {
     reduceTheme:-1,
   };
 
-  saveThemeToDb = () => {
-    console.log(dbTheme, 'FROM SWICTH')
-  }
+ 
 
 
   // addPicture = () => {
@@ -48,46 +46,8 @@ class PersonalizePage extends Component {
   
   choosenTheme = (id) => {
     mID = this.props.currentUser 
-    // console.log("mID is : ", mID)    
-    // let themeArray = [...this.state.userThemes]
-    // console.log(themeArray, "COMPLETE")
-    // let reduceTheme = [id]
-     
-    this.props.setTheme(id)
-    // console.log(reduceTheme, "INCOMPLETE")
-    // console.log(id, "ID")
-
-    // switch (reduceTheme[0]) {
-    //   case "theme1":   
-    //   dbTheme = reduceTheme[0]
-    //   this.saveThemeToDb()
-       
-    // break;
-    //   case "theme2":   
-    //   dbTheme = reduceTheme[0]
-    //   this.saveThemeToDb() 
-    // break;
-    //   case "theme3":   
-    //   dbTheme = reduceTheme[0]
-    //   this.saveThemeToDb() 
-    // break;
-    //   case "theme4":   
-    //   dbTheme = reduceTheme[0]
-    //   this.saveThemeToDb() 
-    // break;
-    //   case "theme5":   
-    //   dbTheme = reduceTheme[0]
-    //   this.saveThemeToDb() 
-    // break;
-    // case "theme6":   
-    //   dbTheme = reduceTheme[0]
-    //   this.saveThemeToDb()
-    // break;
-    // default:
-    //   dbTheme = "theme0"
-    //   this.saveThemeToDb() 
-    // break;
-    // }
+    console.log("mID is : ", mID)     
+    this.props.setTheme(id)    
   }
 
   render() {
@@ -96,11 +56,11 @@ class PersonalizePage extends Component {
       <div>
         {this.renderRedirect()}
         <div id="welcomeMessage">Personalize Your Account</div>
+            <div>{this.props.currentUser}</div>
         <Container style={{ marginTop: 60 }}>
           {/* <div className="theme-card-body"> */}
             <div className="choosetheme">Choose a Theme</div>
             <div id="memberinfo"></div>
-            {/* <div>{this.props.currentUser}</div> */}
             <div id="message"></div>
             <Row>
               <Col size="md-3">

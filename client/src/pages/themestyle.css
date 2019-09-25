@@ -125,9 +125,10 @@ form.search button[type="submit"] {
   border-radius: 12px;
 }
 .choosetheme {
- color: rgb(75, 71, 71);
+ color: whitesmoke;
  text-align: center;
- font-size: 22px;
+ font-size: 32px;
+ font-weight: bold
 }
 
 .theme > .remove {
@@ -164,11 +165,7 @@ form.search button[type="submit"] {
 .upage-box > .img-container > img {
   width: 100%
 }
-.choosetheme {
- color: rgb(75, 71, 71);
- text-align: center;
- font-size: 22px;
-}
+
 
 .upage-box > .remove {
   color: #ff1744;

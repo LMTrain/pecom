@@ -6,29 +6,41 @@ import Col from "../components/Col";
 import { Redirect } from "react-router-dom";
 // import API from "../utils/API";
 
-
+var mid = "";
 class UserPage extends Component {
   
   state = {   
+    memberId: "",
     user:{},
-    redirect: false
+    membername: "",
+    userName: "",
+    memberemail: "",    
+    redirect: false,    
   };
 
 
-  // componentWillMount() {  
-  //   this.loadUserData();    
-    
-  // }
+  componentWillMount() {  
+    // this.loadUserData();
+    console.log(this.props.currentUser);
+    mid = "theme9"
+    this.userTheme(mid);
+  }
 
   // loadUserData = () => {
   //   API.getUser()
-  //     .then(res => {        
-  //       this.setState({ book: res.data, id: "", title: "", authors: "", link: "", thumbnail: "", description: "", publisheddate: "", note: "",})
+  //     .then(res => {
+  //       console.log("USER DATA FRM DB =====", res.data)       
+  //       this.setState({ user: res.data})
   //     }
   //     )
   //     .catch(err => console.log(err));
   // };
 
+  userTheme = (mid) => {
+    // mID = this.props.currentUser 
+    console.log("mID is : ", mid)     
+    this.props.setTheme(mid)    
+  }
 
   logOutPage = () => {    
     this.setRedirect()
@@ -68,6 +80,7 @@ class UserPage extends Component {
           <div className="row1">            
             <Row>              
               <Col size="md-4">
+                <div>{this.props.currentUser}</div>
                 {/* <div className="upage-box" >
                   <div className="img-container">
                     

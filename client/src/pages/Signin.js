@@ -12,7 +12,7 @@ import "./style.css";
 import API from "../utils/API";
 
 
-// var UsermemberID = ""
+var UsermemberID = ""
 class Signin extends Component {
   state = {
     memberId: "",
@@ -22,7 +22,9 @@ class Signin extends Component {
     memberpassword: "",  
     redirect: false,
     isError: false,
-    errorMessage: '' 
+    errorMessage: '',
+    UsermemberID: ""
+    
   };
 
   // userPage = () => {
@@ -86,32 +88,48 @@ class Signin extends Component {
     // console.log('userAccount', userAccount)  
     let userName = String(userAccount.memberemail)   
     let password = String(userAccount.memberpassword)
-    // UsermemberID = String(userAccount.memberemail)
+    UsermemberID = String(userAccount.memberemail)
     API.loginUser({     
       userName: userName,      
       password: password,
 
     })    
     .then(res => {
-      // console.log('res========', res.data.error)
+      console.log('res========', res.data.error)
       const { data } = res.data;
-      if(data === 0){
-        console.log(data)
-        // document.getElementById("message").textContent = res.data.error;
+      if(res.data.error === "Invalid Password"){
+        console.log(res.data)
+        document.getElementById("message").textContent = res.data.error;
         this.setState({
-          isError: true,
-          // redirect: true,
-          errorMessage: data
+          isError: true,         
+          errorMessage: res.data.error,
+          memberemail: " ",      
+          memberpassword: " ",
         })
-      }else{
+      } else if (res.data.error === "User does not exist!"){
+          console.log(res.data)
+          document.getElementById("message").textContent = res.data.error;
+          this.setState({
+            isError: true,            
+            errorMessage: res.data.error,
+            memberemail: " ",      
+            memberpassword: " ",
+          })
+      
+      } else {
         // console.log("No exisit")
         this.setState({
           redirect: true,
-          userName   
+          userName: data[0].memberId,
+          UsermemberID: data[0].memberId,
+  
         })
+        this.props.saveMemberID(userName)
+        console.log("THIS IS USERNAME", userName)
         console.log("THIS IS HASH PASSWORD", data[0].password)
-        console.log("THIS IS MEMBERID", data[0].password)
+
         console.log("THIS IS RES JSON DATA", data)
+        console.log("APP PROPS", this.props.memberInfo)
         // console.log("THIS IS PASSWORD", res.data.password)
         // this.props.saveMemberID(userName)
       }
@@ -124,6 +142,7 @@ class Signin extends Component {
   render() {
     if (this.state.redirect) {      
       console.log("READY TO LOAD USER PAGE FINALLY")
+      this.props.saveMemberID(UsermemberID)
 
       return <Redirect to='/UserPage' />
     }    

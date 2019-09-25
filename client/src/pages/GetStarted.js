@@ -41,8 +41,8 @@ class GetStarted extends Component {
   }
   renderRedirect = () => {
     if (this.state.redirect) {
-      // console.log(UsermemberID, "PersonalizePageUserID Page ID")
-      this.props.saveMemberID(UsermemberID)         
+      console.log(UsermemberID, "PersonalizePageUserID Page ID")
+      this.props.saveMemberID(UsermemberID) 
       return <Redirect to='/PersonalizePage' />
     }
   }
@@ -89,12 +89,12 @@ class GetStarted extends Component {
       confirmpassword
     }
 
-    this.setState({
-      memberemail: '',
-      membername: '',
-      memberpassword: '',
-      confirmpassword: ''
-    })
+    // this.setState({
+    //   memberemail: '',
+    //   membername: '',
+    //   memberpassword: '',
+    //   confirmpassword: ''
+    // })
     
 
     // console.log('newAccount', newAccount)

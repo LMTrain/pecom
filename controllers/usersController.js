@@ -13,57 +13,51 @@ module.exports = {
   },
 
   findById: function(req, res) {
-    db.Book
-      .findById(req.params.id)
+    db.User
+      .findById({ _id: req.params.id })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
 
 
   find: function(req, res) {
-    // var auth = Buffer.from(req.headers.authorization.split(' ')[1], 'base64');
-    // var userName = auth[0];
-    // var password = auth[1];
     console.log(req.body.userName, req.body.password);
-
     db.User.find({"userName" : req.body.userName}, function(error, data){
+      var hash = "";     
+      // var userArray = []
+      // for (var i = 0; i < data.length; i++) {
+      //   userArray.push(data[i])
+      // }
+      // console.log("USEROBJECT++++", userArray)
+      // console.log("REQ.BODY", req.body)
+      // console.log("DATA FROM DB", data)      
       if(error) throw error
-      if(data.length !== 0){
-        console.log("REQ.BODY", req.body)
-        console.log("DATA FROM DB", data)
-        console.log("HASHED PASSWORD FROM DB", data[0]._doc.password);
-        // for (var i = 0; i < data.length; i++) {
-        //   console.log("THIS IS DATA  :=" + data[i].password)
-        // }
-        // console.log("ARRAY", userArrayInfo)
-                
-        // console.log("DATAAAAA", data[0].password)   
-        // var hash = req.body.password;
-          // console.log('USER DOES NOT EXIST', data)
-        // console.log('HASH', hash)
-        //   if(bcrypt.compareSync(req.body.password, hash)) {
-        // console.log(data);
+      
+      switch(data.length !== 0) {    
+        case true:
+          hash = data[0]._doc.password            
+          switch(bcrypt.compareSync(req.body.password, hash)){
+            case true:
+                return res.json({data,
+                    // "data": "You can't create data",
+                    "error": "YOU ARE IN"
+                    })
+            case false:
+                return res.json({error,
+                    // "data": "You can't create data",
+                    "error": "Invalid Password"
+                    })    
+          }          
+        case false:
+            return console.log('USER DOES NOT EXIST'), res.json({error,
+            // "data": "You can't create data",
+            "error": "User does not exist!"
+            })
+        default :
+          return res.json({error, "error": "Username cannot be empty"})      
+      }
         
-        return res.json({data,
-          // "data": "You can't create data",
-          "error": "YOU ARE IN"
-        })
-        } else {
-          console.log('USER DOES NOT EXIST', data)
-          // console.log('USER EXIST')
-          // console.log('hash:', hash)
-          return res.json({data,
-            // "data": "YOU ARE IN",
-            "error": "USER DOES NOT EXIST"
-          })
-        }
-      })
-          
-
-    // db.User.collection
-    //   .findById(req.params.id)
-    //   .then(dbModel => res.json(dbModel))
-    //   .catch(err => res.status(422).json(err));
+    })    
   },
 
   create: function(req, res) {
