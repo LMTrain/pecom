@@ -4,18 +4,17 @@ import Signin from "./pages/Signin";
 import Home from "./pages/Home";
 import GetStarted from "./pages/GetStarted";
 import PersonalizePage from "./pages/PersonalizePage";
+import Search from "./pages/Search";
 import UserPage from "./pages/UserPage";
 import API from "./utils/API";
 import Navbar from "./components/Navbar";
 // import ThemeNavbar from "./components/ThemeNavbar";
 import Wrapper from "./components/Wrapper";
 
-// require('dotenv').config();
+ require('dotenv').config();
 var memberInfo = ""
 class App extends React.Component {
   state = {
-    search: "",
-    items: [],
     user:{},
     memberId: "",
     membername: "",
@@ -33,20 +32,6 @@ class App extends React.Component {
   //   this.updateDBtheme(mID)
   // }
 
-  searchForBooks = query => {
-    API.search(query)
-      .then(res => this.setState({ items: res.data.items }))     
-      .catch(err => console.log(err));
-  }
-  
-
-  handleInputChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
-    this.setState({
-      [name]: value
-    });
-  };
 
 
 
@@ -168,18 +153,15 @@ class App extends React.Component {
       <Router>
         <div>
           {/* <Navbar id="memberinfo"/> */}
-          <Navbar
-            search={this.state.search}
-            handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange} 
-          />
+          <Navbar />
           <Wrapper getTheme={this.getTheme}>
             <Route exact path="/" render = { () => <Home getTheme={this.getTheme}/>}/>
             <Route exact path="/home" render = { () => <Home getTheme={this.getTheme}/>}/>
             <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} getTheme={this.getTheme}/>}/>     
             <Route exact path="/Getstarted" render = { () => <GetStarted saveMemberID={this.saveMemberID} getTheme={this.getTheme}/>}/>
             <Route exact path="/PersonalizePage" render = { () => <PersonalizePage setTheme={this.setTheme} theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"/>}/>
-            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} getTheme={this.getTheme}/>}/>            
+            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} getTheme={this.getTheme}/>}/>
+            <Route exact path="/search" component={Search} />           
           </Wrapper>
           
         </div>

@@ -1,7 +1,15 @@
 import axios from "axios";
 
+const BASEURL = process.env.REACT_APP_BASEURL
+const APIKEY = process.env.REACT_APP_APIKEY
 
-export default { 
+export default {
+
+  //Search for an item to buy
+  search: function(query) {
+    console.log(query)
+    return axios.get(BASEURL + query + APIKEY);
+  },
     // Gets all users
   getUsers: function() {
     return axios.get("/api/users");

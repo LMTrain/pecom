@@ -26,7 +26,7 @@ function Navbar(props) {
           <span className="nav-icon-space1"></span>          
           <form className="search">
             <div className="form-group">
-              <div id="item-search-icon" ></div>
+              {/* <div id="item-search-icon" ></div> */}
               <label htmlFor="search"></label>
               <input
                 value={props.search}
@@ -36,9 +36,12 @@ function Navbar(props) {
                 className="form-control"
                 placeholder="Type in an item"
                 id="search"
-              />        
+              />
+              <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
+                Search
+              </button>       
                 {/* <div className="input-group-append"> */}
-              <button type="submit" onClick={props.handleFormSubmit} className="btn btn-secondary"><i className="fa fa-search"></i></button>
+              {/* <button type="submit" onClick={props.handleFormSubmit} className="btn btn-secondary"><i className="fa fa-search"></i></button> */}
                 {/* <input id="item-input" type="text" className="form-control" placeholder="Search for an item" /> */}
                 {/* </div> */}
             </div>
@@ -47,7 +50,14 @@ function Navbar(props) {
           <span className="nav-icon-space"></span>
           {/* <span id="memberinfo">Member :</span> */}
           {/* <span id="memberinfo"></span> */}
-          
+          <li className="nav-item">
+            <Link
+              to="/search"
+              className={window.location.pathname === "/search" ? "nav-link active" : "nav-link"}
+            >
+              Search Item
+            </Link>
+          </li>
           <li className="nav-item">
             
             <Link
