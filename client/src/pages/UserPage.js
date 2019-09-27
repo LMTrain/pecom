@@ -4,42 +4,85 @@ import "./themestyle.css";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import { Redirect } from "react-router-dom";
-// import API from "../utils/API";
+import API from "../utils/API";
 
-var mid = "";
+var userArray = []
+var membername = ""
+var userName =""
+var usertheme = "";
+var divStyle = {};
+var pStyle = {};
+
 class UserPage extends Component {
   
-  state = {   
-    memberId: "",
-    user:{},
-    membername: "",
-    userName: "",
-    memberemail: "",    
+  state = {    
+    user:[],   
+    userName: this.props.currentUser,
     redirect: false,    
   };
 
-
-  componentWillMount() {  
-    // this.loadUserData();
-    console.log(this.props.currentUser);
-    mid = "theme9"
-    this.userTheme(mid);
+  
+  componentWillMount() {
+    this.loadUserData();    
   }
 
-  // loadUserData = () => {
-  //   API.getUser()
-  //     .then(res => {
-  //       console.log("USER DATA FRM DB =====", res.data)       
-  //       this.setState({ user: res.data})
-  //     }
-  //     )
-  //     .catch(err => console.log(err));
-  // };
+  loadUserData = () => {
+    this.setState({
+      userName: this.props.currentUser
+    })
+    userName = this.state.userName
+    console.log("THIS IS USERNAME", userName)
+    const currentAccount = {     
+      userName,          
+    }
+    this.loadAPIgetUser(currentAccount.userName);
+  }
 
-  userTheme = (mid) => {
-    // mID = this.props.currentUser 
-    console.log("mID is : ", mid)     
-    this.props.setTheme(mid)    
+  loadAPIgetUser = (id) => {
+    const app = this;
+    id = userName
+    API.getUser({      
+      userName: userName,               
+    })
+    .then(function(res){
+      return new Promise(function(resolve, reject){
+        app.setState({ user: res.data })
+        resolve(true);
+      })
+    }).then(function(){
+      console.log("THIS IS USER OBJECT", app.state.user);
+      userArray = [...app.state.user]
+      console.log("USERNAME API ID$$$$", userArray);
+      console.log(userArray[0].userName)
+      usertheme = userArray[0].userTheme
+      membername = userArray[0].memberName
+      console.log("USER THEME IS ===", usertheme)
+      app.userTheme(usertheme);
+    })    
+    // .then(res => {console.log(res)})
+    .catch(err => console.log(err));
+  }
+
+  userTheme = (id) => {   
+    console.log("mID is : ", usertheme)
+    let colorr = "";
+    let testalignn = "";
+    let fontsizee = "";
+    let fontfamilyy = "";
+    
+    divStyle = {
+      color: colorr,
+      textAlign: testalignn,
+      fontSize: fontsizee,
+      fontFamily: fontfamilyy
+    };
+    pStyle = {
+      color: colorr,
+      fontFamily: fontfamilyy,
+      fontSize: fontsizee,
+      textAlign: testalignn
+    };  
+    this.props.setTheme(id)    
   }
 
   logOutPage = () => {    
@@ -64,23 +107,20 @@ class UserPage extends Component {
   }
 
   
-  // choosenTheme = (id) => {
-  //   mID = this.props.currentUser 
-    
-  // }
+  
 
   render() {
     
     return (
       <div>
         {this.renderRedirect()}
-        <div id="welcomeMessage"> {this.state.userName}</div>
+        <div style={divStyle}><b> Welcome {membername}!</b></div>
         <Container style={{ marginTop: 60 }}>
         <div id="message"></div>
           <div className="row1">            
             <Row>              
               <Col size="md-4">
-                <div>{this.props.currentUser}</div>
+                <div style={pStyle}>{this.props.currentUser}</div>
                 {/* <div className="upage-box" >
                   <div className="img-container">
                     

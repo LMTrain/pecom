@@ -62,11 +62,11 @@ form.search button[type="submit"] {
 #message{
   color:red;
 }
-#welcomeMessage{
+/* #welcomeMessage{
   color: white;
   text-align: center;
   font-size: 38px;
-}
+} */
 
 .card {
   /* position: relative; */
@@ -101,13 +101,12 @@ form.search button[type="submit"] {
 }
 
 .theme {
-  background: #fff;
-  border-radius: 12px;
-  height: 80px;
+  background: #fff;  
+  height: 120px;
   margin: 0.5rem;
   margin-right: -1rem;
   /* position: relative; */
-  width: 120px;
+  width: 180px;
   box-shadow: 0 3px 6px #999, 0 3px 6px #999;
   text-align: left;
 }
@@ -118,17 +117,16 @@ form.search button[type="submit"] {
   text-align: center;
   /* background:#6CADDC; */
   cursor: pointer;
-  border-radius: 12px;
+  
 }
 .theme > .img-container > img {
   width: 100%;
-  border-radius: 12px;
+  
 }
 .choosetheme {
  color: whitesmoke;
  text-align: center;
  font-size: 32px;
- font-weight: bold
 }
 
 .theme > .remove {

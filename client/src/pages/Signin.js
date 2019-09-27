@@ -23,7 +23,7 @@ class Signin extends Component {
     redirect: false,
     isError: false,
     errorMessage: '',
-    UsermemberID: ""
+   
     
   };
 
@@ -121,15 +121,16 @@ class Signin extends Component {
         this.setState({
           redirect: true,
           userName: data[0].memberId,
-          UsermemberID: data[0].memberId,
+          memberId: data[0].memberId,
+          membername: data[0].memberName,
   
         })
-        this.props.saveMemberID(userName)
+        this.props.saveMemberID(userName, data[0].memberName)
         console.log("THIS IS USERNAME", userName)
-        console.log("THIS IS HASH PASSWORD", data[0].password)
+        console.log("THIS IS MEMBERNAME", data[0].memberName)
 
         console.log("THIS IS RES JSON DATA", data)
-        console.log("APP PROPS", this.props.memberInfo)
+        // console.log("APP PROPS", this.props.memberInfo)
         // console.log("THIS IS PASSWORD", res.data.password)
         // this.props.saveMemberID(userName)
       }

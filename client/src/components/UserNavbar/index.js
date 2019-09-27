@@ -1,45 +1,49 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "./style.css";
+// import { Link } from "react-router-dom";
+import "./userNavStyle.css";
 
 // Depending on the current path, this component sets the "active" className on the appropriate navigation link item
-function userNavbar() {
+function userNavbar(props) {
   return (
   <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-    <a href="/" className="navbar-brand">HSS</a>
-    <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-        <span className="navbar-toggler-icon"></span>
-    </button>
 
-    <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-        <div className="navbar-nav">
-            <a href="/" className="nav-item nav-link active">Home</a>
-            <a href="/dashboard" className="nav-item nav-link">Device Dashboard</a>
-            <div className="nav-item dropdown">
-                <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Users</a>
-                <div className="dropdown-menu">
-                  <a href="/register" className="dropdown-item">Register</a>
-                  <a href="/login" className="dropdown-item">Login</a>
-                  <a href="/welcome" className="dropdown-item">Help</a>
-                </div>
-            </div>
-        </div>
+    <span className="nav-icon-space2"></span>
+    <span>      
+      <div id="nav-search">
         <form className="form-inline">
-            <div className="input-group"></div>                   
-                <input type="text" className="form-control" placeholder="Search for Devices">                
-                <div className="input-group-append">
-                 
-
-                  <a href="https://www.google.com/" className="btn btn-secondary btn-block" target="_blank">Search</a>
-              
-                  
-                </div>
-            ></input>
+          <div className="form-group">
+            <div id="item-search-icon" ></div>
+            <label htmlFor="search"></label>
+            <input
+              value={props.search}
+              onChange={props.setSearch}
+              name="search"
+              width="1800px"          
+              type="text"
+              className="form-control"
+              placeholder="Type in an item"
+              id="search"
+              />
+              <button type="submit" onClick={props.submit} className="btn btn-secondary"><i className="fa fa-search"></i></button>
+            {/* <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
+              Search
+            </button>        */}
+              {/* <div className="input-group-append"> */}
+          
+    
+              {/* <input id="item-input" type="text" className="form-control" placeholder="Search for an item" /> */}
+              {/* </div> */}
+          </div>
         </form>
-        <div className="navbar-nav">
-          <a href="/admin" className="nav-item nav-link">Admin Login</a>
-        </div>
-    </div>
+      </div>
+    </span>
+          <span className="nav-icon-space"></span>
+
+
+  
+    
+
+    
   </nav>
   );
 }

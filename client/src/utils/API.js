@@ -7,17 +7,17 @@ export default {
 
   //Search for an item to buy
   search: function(query) {
-    console.log(query)
     return axios.get(BASEURL + query + APIKEY);
+    // return axios.get(BASEURL + APIKEY + query + "&format=json");
   },
     // Gets all users
   getUsers: function() {
     return axios.get("/api/users");
   },
   // Gets the user with the given id
-  getUser: function(id) {
-    console.log("FROM CLIENT API getUser ====", id)
-    return axios.get("/api/users/" + id);
+  getUser: function(currentAccount) {
+    console.log("FROM CLIENT API getUser ====", currentAccount)
+    return axios.get(`/api/users/current/${currentAccount.userName}`);
   },
   // Update the user with the given id
   updateUser: function(id) {
@@ -32,7 +32,7 @@ export default {
   deleteUser: function(id) {    
     return axios.delete("/api/users/" + id);
   },
-  // Saves a user to the database
+  // Saves a user to the database.
   saveUser: function(newAccount) {
     console.log("API saveUser ====", newAccount)
     return axios.post("/api/users", newAccount);

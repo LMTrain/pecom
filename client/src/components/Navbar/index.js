@@ -23,41 +23,37 @@ function Navbar(props) {
               <h5>PeCom</h5>
             </Link>
           </li>
-          <span className="nav-icon-space1"></span>          
-          <form className="search">
-            <div className="form-group">
-              {/* <div id="item-search-icon" ></div> */}
-              <label htmlFor="search"></label>
-              <input
-                value={props.search}
-                onChange={props.handleInputChange}
-                name="search"          
-                type="text"
-                className="form-control"
-                placeholder="Type in an item"
-                id="search"
-              />
-              <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
-                Search
-              </button>       
-                {/* <div className="input-group-append"> */}
-              {/* <button type="submit" onClick={props.handleFormSubmit} className="btn btn-secondary"><i className="fa fa-search"></i></button> */}
-                {/* <input id="item-input" type="text" className="form-control" placeholder="Search for an item" /> */}
-                {/* </div> */}
-            </div>
-          </form>
-                
+          <span className="nav-icon-space1"></span>
+          <li className="nav-item">            
+            <Link to="/TodaysDeal" className={window.location.pathname === "/TodaysDeal" ? "nav-link active" : "nav-link"}>Today's Deal</Link>
+          </li>
+          <li className="nav-item">            
+            <Link to="/BuyAgain" className={window.location.pathname === "/BuyAgain" ? "nav-link active" : "nav-link"}>Buy Again</Link>
+          </li>
+          <li className="nav-item">            
+            <Link to="/Orders" className={window.location.pathname === "/Orders" ? "nav-link active" : "nav-link"}>Orders</Link>
+          </li>
+          <li className="nav-item">            
+            <Link to="/BookExchange" className={window.location.pathname === "/BookExchange" ? "nav-link active" : "nav-link"}>BookExchange</Link>
+          </li>
+          <li className="nav-item">            
+            <Link to="/Help" className={window.location.pathname === "/Help" ? "nav-link active" : "nav-link"}>Help</Link>
+          </li>
+          <li className="nav-item">            
+            <Link to="/YourAccount" className={window.location.pathname === "/YourAccount" ? "nav-link active" : "nav-link"}>Your Account</Link>
+          </li>
+          <li className="nav-item">            
+            <Link to="/Cart" className={window.location.pathname === "/YourAccount" ? "nav-link active" : "nav-link"}>Cart</Link>
+          </li>
           <span className="nav-icon-space"></span>
+          {/*           
+          
+                
+           */}
           {/* <span id="memberinfo">Member :</span> */}
           {/* <span id="memberinfo"></span> */}
-          <li className="nav-item">
-            <Link
-              to="/search"
-              className={window.location.pathname === "/search" ? "nav-link active" : "nav-link"}
-            >
-              Search Item
-            </Link>
-          </li>
+          
+         
           <li className="nav-item">
             
             <Link

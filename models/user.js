@@ -106,6 +106,32 @@ const userSchema = new Schema({
             "type": "string"
           },
         },        
+      },
+      "orders": {
+        "type": "object",
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "qty": {
+            "type": "number"
+          },
+          "unitPrice": {
+            "type": "number"         
+          },
+          "link": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "type": "string"
+          },
+          "customerRating": {
+            "type": "string"
+          },
+        },       
       },      
       "bookExchange": {
         "type": "object",

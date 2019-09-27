@@ -1,8 +1,6 @@
 const db = require("../models");
 const bcrypt = require("bcrypt");
-// const await = require(await)
 
-// Defining methods for the usersController
 module.exports = {
   findAll: function(req, res) {
     db.User
@@ -13,24 +11,17 @@ module.exports = {
   },
 
   findById: function(req, res) {
+    console.log("USERNAME IN FINDBYID=====", req.params.userName)
     db.User
-      .findById({ _id: req.params.id })
+      .find({userName : req.params.userName})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
 
-
   find: function(req, res) {
     console.log(req.body.userName, req.body.password);
     db.User.find({"userName" : req.body.userName}, function(error, data){
-      var hash = "";     
-      // var userArray = []
-      // for (var i = 0; i < data.length; i++) {
-      //   userArray.push(data[i])
-      // }
-      // console.log("USEROBJECT++++", userArray)
-      // console.log("REQ.BODY", req.body)
-      // console.log("DATA FROM DB", data)      
+      var hash = "";      
       if(error) throw error
       
       switch(data.length !== 0) {    
@@ -86,13 +77,6 @@ module.exports = {
    
   },
 
-  // update: function(req, res) {
-  //   db.User
-  //     .save({"memberId" : req.body.memberId, 'userTheme' : req.body.userTheme})
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  // },
-
   update: function(req, res) {
     console.log("memberId", req.body.memberId)
     db.User.find({"memberId" : req.body.memberId}, function(error, data){
@@ -115,6 +99,7 @@ module.exports = {
         }
     })
   },
+  
   remove: function(req, res) {
     db.user
       .findById({ _id: req.params.id })

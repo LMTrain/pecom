@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import API from "../utils/API";
-import Container from "../components/Container";
-import Navbar from "../components/Navbar";
+// import API from "../utils/API";
+// import Container from "../components/Container";
+// import UserNavbar from "../components/UserNavbar";
 import SearchResults from "../components/SearchResults";
-import ItemDetails from "../components/ItemDetails";
+// import ItemDetails from "../components/ItemDetails";
+// import { View } from "react-native";
 
 class Search extends Component {
   state = {
-    search: "",
+    search: this.props.search,
     favMessage:"",
     id: "",      
     items: [],    
@@ -19,62 +20,23 @@ class Search extends Component {
     publisheddate: "",           
     error: "",
     showItem: [],
-    showItemState: false
+    showItemState: true
   };
-  
-  searchForItems = query => {
-    API.search(query)
-      .then(res => this.setState({ Items: res.data.items }))          
-      .catch(err => console.log(err));
-  }  
-
-  handleInputChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleDetailsSubmit = (id) => {  
-    // Find the id in the state
-    const Item = this.state.Items.find((Item) => Item.id === id);
-    // console.log('found Item', Item)
-    this.setState({showItem: [Item], showItemState: true})
-        
-  }  
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-    this.searchForItems(this.state.search);
-    console.log(this.state.search);        
-  };
-  
   
  
-  render() {
-    console.log('this.state.showItem', this.state.showItem)
 
-    const {showItemState, showItem} = this.state
+
+  render() {
+    console.log('this.state.showItem', this.state.showItem)    
 
     return (
       <div>
-        <Container style={{ marginTop: -25 }}>
-          
-          
-          <Navbar
-            search={this.state.search}
-            handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange}            
-          />
-          {!showItemState ? <SearchResults Items={this.state.Items === undefined ? [] : this.state.Items}
-                   
-          handleDetailsSubmit={this.handleDetailsSubmit}
-          
-          
-          /> : <ItemDetails showItem={showItem}/>}       
+        {/* <Container style={{ marginTop: -25 }}> */}         
          
-        </Container>
+          {/* <View style={{flex: 1, flexDirection: 'row'}}></View> */}
+        {this.props.items && <SearchResults Items={this.props.items} />}
+         
+        {/* </Container> */}
       </div>
       
     );
