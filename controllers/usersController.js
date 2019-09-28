@@ -92,10 +92,10 @@ module.exports = {
           console.log("memberId", req.body.memberId)
           console.log("userTheme", req.body.userTheme)
           db.User.collection
-            .updateOne( { "memberId": req.body.memberId }, {$set: {"userTheme": req.body.userTheme}})
-            // .save({"memberId" : req.body.memberId, 'userTheme' : req.body.userTheme})
+            .updateOne( { "memberId": req.body.memberId }, {$set: {userTheme: req.body.userTheme, colorDb: req.body.colorDb, textalignDb: req.body.textalignDb, divfontsizeDb: req.body.divfontsizeDb, pfontsizeDb: req.body.pfontsizeDb, fontfamilyDb: req.body.fontfamilyDb}})            
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+            
         }
     })
   },

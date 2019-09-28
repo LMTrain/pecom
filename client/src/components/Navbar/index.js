@@ -12,14 +12,7 @@ function Navbar(props) {
             <span></span><img alt="PeCom" width="60" height="80" className="img-fluid" src='https://lmtrain.github.io/lm-images/assets/images/ls_wf1.jpg' />
           </Link>
           <li className="nav-item">
-            <Link
-              to="/"
-              className={
-                window.location.pathname === "/" || window.location.pathname === "/home"
-                  ? "nav-link active"
-                  : "nav-link"
-              }
-            >
+            <Link to="/" className={window.location.pathname === "/" || window.location.pathname === "/home" ? "nav-link active" : "nav-link"} >
               <h5>PeCom</h5>
             </Link>
           </li>
@@ -40,10 +33,10 @@ function Navbar(props) {
             <Link to="/Help" className={window.location.pathname === "/Help" ? "nav-link active" : "nav-link"}>Help</Link>
           </li>
           <li className="nav-item">            
-            <Link to="/YourAccount" className={window.location.pathname === "/YourAccount" ? "nav-link active" : "nav-link"}>Your Account</Link>
+            <Link to="/Settings" className={window.location.pathname === "/Settings" ? "nav-link active" : "nav-link"}>Settings</Link>
           </li>
           <li className="nav-item">            
-            <Link to="/Cart" className={window.location.pathname === "/YourAccount" ? "nav-link active" : "nav-link"}>Cart</Link>
+            <Link to="/Cart" className={window.location.pathname === "/Cart" ? "nav-link active" : "nav-link"}>Cart</Link>
           </li>
           <span className="nav-icon-space"></span>
           {/*           

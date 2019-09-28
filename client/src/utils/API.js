@@ -5,6 +5,8 @@ const APIKEY = process.env.REACT_APP_APIKEY
 
 export default {
 
+  
+
   //Search for an item to buy
   search: function(query) {
     return axios.get(BASEURL + query + APIKEY);

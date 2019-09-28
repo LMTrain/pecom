@@ -19,6 +19,11 @@ const userSeed = [
     "cCard": 2635211252523654,
     "userTheme": "theme1",
     "userImage": "https://lmtrain.github.io/lm-images/assets/images/bugatti_1.jpg",
+    "colorDb": "White",
+    "textalignDb": "center",
+    "divfontsizeDb": "38px",
+    "pfontsizeDb": "16px",
+    "fontfamilyDb": "Calibri",
     "contact": {
       "address": "5454 Victory Lane, Andover, MN 55304",
       "phone": 2154254252,

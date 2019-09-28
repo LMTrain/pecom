@@ -4,6 +4,7 @@ import "./themestyle.css";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import { Redirect } from "react-router-dom";
+// import UserAcctettings from "../components/UserAccSettings"
 
 var divStyle = {}
 var pStyle = {}
@@ -46,7 +47,7 @@ class PersonalizePage extends Component {
 
   
   choosenTheme = (id) => {
-    console.log("mID is : ", mID) 
+ 
     let colorr = "";
     let testalignn = "";    
     let fontfamilyy = "";
@@ -365,7 +366,7 @@ class PersonalizePage extends Component {
               </Col>
             </Row>
             
-          {/* </div> */}
+        {/* <UserAcctettings choosenTheme={this.choosenTheme} /> */}
         </Container>
       </div>
     );

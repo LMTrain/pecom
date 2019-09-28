@@ -44,6 +44,26 @@ const userSchema = new Schema({
         "description": "User personal profile picture",
         "type": "string"
       },
+      "colorDb": {
+        "description": "User personal font color",
+        "type": "string"
+      },
+      "textalignDb": {
+        "description": "User personal font text align",
+        "type": "string"
+      },
+      "divfontsizeDb": {
+        "description": "User personal div font size",
+        "type": "string"
+      },
+      "pfontsizeDb": {
+        "description": "User personal p font size",
+        "type": "string"
+      },
+      "fontfamilyDb": {
+        "description": "User personal font",
+        "type": "string"
+      },
       "contact": {
         "type": "object",
         "properties": {

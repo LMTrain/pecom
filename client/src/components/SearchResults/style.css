@@ -1,3 +1,91 @@
 ul.search-results img {
   margin: 0 auto;
 }
+.card {
+  background:white;
+  border-radius: 2px;
+  height: 480px;
+  margin: 1rem;
+  position: relative;
+  width: 550px;
+  box-shadow: 0 3px 9px #6f6666, 0 3px 9px #6f6666;
+  text-align: left;
+}
+
+
+
+.srcard {
+  background:whitesmoke;
+  border-radius: 2px;
+  height: 300px;
+  margin: 1rem;
+  position: relative;
+  width: 270px;
+  box-shadow: 0 3px 9px #6f6666, 0 3px 9px #6f6666;
+  text-align: left;
+}
+
+.srcard > .img-container {
+  height: 70%;
+  overflow: hidden;
+  text-align: left;
+  background:whitesmoke;
+}
+.srcard > .img-container > img {
+  width: 70%;
+  padding-top: -1rem;
+  padding-left: 4rem;
+
+}
+
+.srcard > .content {
+  padding-top: -4rem;
+  padding-left: -4rem;
+  padding-right: -2rem;
+  font-size: 15px;
+  margin-top: -5px;
+  margin-left: -35px;
+}
+
+.srcard > .content > ul {
+  list-style-type: none;
+}
+
+.srcard > .content > ul > li {
+  margin-top: 8px;
+}
+
+.list-group {
+  display: inline-flex;
+  display: flexbox;  
+  flex-direction: row;
+  padding-left: 1;
+  margin-bottom: 1;
+  direction: ltr;
+}
+
+.list-group-item {
+  position: relative;
+  display: flexbox;
+  padding: .95rem 1rem;
+  margin-bottom: 8px;
+  background-color: white;
+  border: 1px solid whitesmoke;
+  width: 350px;
+  height: 400px;
+  margin-right: 20px;
+}
+
+.list-overflow-container {
+  height: 1000px;
+  border: 1px #DDDDDD solid;
+  border-radius: 4px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  width: 1500px;
+  height: 450px;
+  margin-left: -8px;
+  margin-top: 40px;
+  background-color: whitesmoke;
+  
+}

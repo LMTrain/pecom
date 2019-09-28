@@ -122,6 +122,11 @@ class GetStarted extends Component {
     let formSavedReview = ""
     let formTheme = ""   
     let formImage = ""
+    let formColor = ""
+    let formTextAlign = ""
+    let formDivFontSize = ""
+    let formpFontSize = ""
+    let formfontFamily = ""
 
     API.saveUser({
       memberId: memberId,
@@ -132,6 +137,11 @@ class GetStarted extends Component {
       cCard: formCcard,
       userTheme:formTheme,
       userImage: formImage,
+      colorDb: formColor,
+      textalignDb: formTextAlign,
+      divfontsizeDb: formDivFontSize,
+      pfontsizeDb: formpFontSize,
+      fontfamilyDb: formfontFamily,
       contact: {
                     address: formAddress,
                     phone: formPhone,

@@ -4,47 +4,41 @@ import Signin from "./pages/Signin";
 import Home from "./pages/Home";
 import GetStarted from "./pages/GetStarted";
 import PersonalizePage from "./pages/PersonalizePage";
-import Search from "./pages/Search";
+// import Search from "./pages/Search";
 import UserPage from "./pages/UserPage";
 import API from "./utils/API";
 import Navbar from "./components/Navbar";
 import UserNavbar from "./components/UserNavbar";
+import UserAccSettings from "./components/UserAccSettings"
 // import ThemeNavbar from "./components/ThemeNavbar";
 import Wrapper from "./components/Wrapper";
+import db from "./db.json"
 
  require('dotenv').config();
-var memberInfo = ""
+// var userArray = []
+var memberInfo = ""  
 // var memberNName = ""
+console.log(db)
 class App extends React.Component {
   state = {
-    user:{},
+    user:[],
+    userArray:[],
     memberId: "",
     membername: "",
     userName: "",
     currentUser: null,
     theme: -1,
     search:"",
-    Items:"",
+    Items:[],
   }
-  
-
-
-
-  // updateDB = () => {
-  //   let id = this.state.currentUser
-  //   // memberInfo = id
-  //   this.updateDBtheme(mID)
-  // }
-
-
-
 
   updateDBtheme = (mID) => {
-    let colorrr = ""
-    let testalignnn = ""
-    let divfontsizeee = ""
-    let pfontsizeee = ""
-    let fontfamilyyy = ""
+    var colorrr = ""
+    var testalignnn = ""
+    var divfontsizeee = ""
+    var pfontsizeee = ""
+    var fontfamilyyy = ""
+ 
     switch(this.state.theme){
       case "theme0":
         colorrr = "White";
@@ -172,6 +166,7 @@ class App extends React.Component {
           pfontsizeee = "16px";
           fontfamilyyy = "Calibri";         
     }
+    console.log("colorrr====", colorrr)
     memberInfo = String(this.state.currentUser)
     // memberNName = String(this.state.memberName)
     let memberId = String(this.state.currentUser)
@@ -179,24 +174,23 @@ class App extends React.Component {
     let userName = String(mID)
     let formTheme = String(this.state.theme)
     let formImage = ""
-    let colorr = String(colorrr)
-    let testalignn = String(testalignnn)
-    let divfontsizee =String(divfontsizeee)
-    let pfontsizee = String(pfontsizeee)
-    let fontfamilyy = String(fontfamilyyy)
-    
+    let formcolorr = String(colorrr)
+    let formtestalignn = String(testalignnn)
+    let formdivfontsizee =String(divfontsizeee)
+    let formpfontsizee = String(pfontsizeee)
+    let formfontfamilyy = String(fontfamilyyy)
+    console.log("testalignn====", formtestalignn)
     API.updateUser({
       memberId: memberId,
       memberName:memberName,
-      userName: userName,
+      userName: userName,     
       userTheme: formTheme,
       userImage: formImage,
-      color_db: colorr,
-      testalign_db:testalignn,      
-      divfontsize_db: divfontsizee,
-      pfontsize_db: pfontsizee,
-      fontfamily_db: fontfamilyy,
-               
+      colorDb: formcolorr,
+      textalignDb: formtestalignn,      
+      divfontsizeDb: formdivfontsizee,
+      pfontsizeDb: formpfontsizee,
+      fontfamilyDb: formfontfamilyy,               
     })
       .then(res => {
         
@@ -217,6 +211,8 @@ class App extends React.Component {
 
   saveMemberID = (mID, mName) => {
     memberInfo = mID
+    console.log("MID====>", mID)
+   
     // memberNName = mName
     this.setState({
       currentUser: mID,
@@ -225,28 +221,64 @@ class App extends React.Component {
       userName: mID,
     })
     memberInfo = this.state.currentUser
+    console.log("CURRENTUSER ===>", this.state.currentUser)
     // memberNName = this.state.memberName
     this.getMemberInfo()
   }
 
   getMemberInfo = () => {
-    switch(this.state.currentUser){
-      case this.state.currentUser:
+    switch(this.state.currentUser !== null){
+      case true:          
         console.log("MEMBERINFO====", memberInfo)
         console.log("CURRENT USER ID====", this.state.currentUser)
         console.log("CURRENT USER NAME====", this.state.memberName)
-        // document.getElementById("memberinfo").textContent = memberInfo
-        return memberInfo = this.state.currentUser
+        this.getAPIuserData(memberInfo);
+        // memberInfo = this.state.currentUser
+        break;
+      case false:
+      console.log("WHAT IS INSIDE", this.state.currentUser)
+      console.log("MID====>", memberInfo)
+      break;      
       default:
-        memberInfo = this.state.currentUser
-        // document.getElementById("memberinfo").textContent = memberInfo
-        return memberInfo = "Welcome Guest!"
-    }
-  }
-  setSearch = (e) =>{
+          console.log("FROM DEFAULT MID====>", memberInfo)
+        // memberInfo = this.state.currentUser
+        // this.getAPIuserData(memberInfo);
+        // return memberInfo = "Welcome Guest!"               
+    }    
+  } 
 
-    this.setState({search:e.target.value});
-    
+  getAPIuserData = (id) => {
+    const app = this;
+    id = this.state.userName
+    API.getUser({      
+      userName: memberInfo               
+    })
+    .then(function(res){
+      return new Promise(function(resolve, reject){
+        app.setState({ user: res.data })
+        resolve(true);
+      })
+    }).then(function(){
+      console.log("THIS IS USER OBJECT IN APP", app.state.user);
+      // this.setState({ userArray: app.state.user})
+      // console.log("APP USERARRAY====>", this.state.userArray)
+      // userArray = [...app.state.user]
+      // settingsArray = userArray[0].toLocaleString()
+      // console.log("USERNAME API ID$$$$", userArray);
+      // console.log(userArray[0].userName)
+      // usertheme = userArray[0].userTheme
+      // membername = userArray[0].memberName
+      // contact = userArray[0].contact
+      // console.log("USER THEME IS ===", usertheme)
+      // app.userTheme(usertheme);
+    })    
+    // .then(res => {console.log(res)})
+    .catch(err => console.log(err));
+  }
+
+
+  setSearch = (e) =>{
+    this.setState({search:e.target.value});    
   }
   searchForItems = (e) => {
     e.preventDefault();
@@ -254,8 +286,19 @@ class App extends React.Component {
     API.search(app.state.search)
       .then(res => app.setState({ Items: res.data.items }))          
       .catch(err => console.log(err));
-  }  
+  } 
+  
+  settingSubmit = (id) => {
+    console.log(id, "THIS SHOULD BE A USERNAME")
+    this.updateDBtheme(id);
+  }
+  passwordReset = () => {
+    console.log()
+  }
 
+  userSettings =() => {
+    console.log()
+  }
 
   setTheme = (i) => {
     this.setState({
@@ -317,15 +360,18 @@ class App extends React.Component {
         <div>
           {/* <Navbar id="memberinfo"/> */}
           <UserNavbar search={this.state.search} submit={this.searchForItems} setSearch={this.setSearch}/>
-          <Navbar />
+          <Navbar settingsSubmit={this.userSettings}/>
           <Wrapper getTheme={this.getTheme}>
             <Route exact path="/" render = { () => <Home getTheme={this.getTheme}/>}/>
             <Route exact path="/home" render = { () => <Home getTheme={this.getTheme}/>}/>
             <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} getTheme={this.getTheme}/>}/>     
             <Route exact path="/Getstarted" render = { () => <GetStarted saveMemberID={this.saveMemberID} getTheme={this.getTheme}/>}/>
             <Route exact path="/PersonalizePage" render = { () => <PersonalizePage setTheme={this.setTheme} theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"/>}/>
-            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} getTheme={this.getTheme}/>}/>
-            {this.state.search.length && <Route render = { () => <Search items={this.state.Items} search={this.state.search}/>} />}           
+            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} getTheme={this.getTheme} Items={this.state.Items}/>}/>
+            
+            {/* {this.state.search.length && <Route render = { () => <Search items={this.state.Items} search={this.state.search}/>} />} */}
+            
+            <Route exact path="/Settings" render = { () => <UserAccSettings setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} settingSubmit={this.settingSubmit} passwordReset={this.passwordReset}/>}/>    
           </Wrapper>
           
         </div>

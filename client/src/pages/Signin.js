@@ -2,13 +2,6 @@ import React, { Component } from "react";
 import Container from "../components/Container";
 import { Redirect } from "react-router-dom";
 import "./style.css";
-
-// import { List, ListItem } from "../components/List";
-// import Container from "../components/Container";
-// import UserSignin from "../components/UserSignin";
-// import UserPage from "../components/UserPage";
-// import { List, ListItem } from "../components/List";
-// import "./style.css";
 import API from "../utils/API";
 
 
@@ -26,27 +19,6 @@ class Signin extends Component {
    
     
   };
-
-  // userPage = () => {
-  //   console.log("READY TO LOAD USER PAGE")  
-  //   this.setRedirect()
-    
-  // }
-
-  // setRedirect = () => {    
-  //   this.setState({
-  //     redirect: true,      
-  //   })    
-  // }  
-  // renderRedirect = () => {
-  //   if (this.state.redirect) {      
-  //     console.log("READY TO LOAD USER PAGE FINALLY")
-  //     console.log(UsermemberID)
-  //     this.props.saveMemberID(UsermemberID)
-  //     return <Redirect to='/UserPage' />
-  //   }
-  // }
-
 
 
   handleInputChange = event => {
@@ -130,9 +102,7 @@ class Signin extends Component {
         console.log("THIS IS MEMBERNAME", data[0].memberName)
 
         console.log("THIS IS RES JSON DATA", data)
-        // console.log("APP PROPS", this.props.memberInfo)
-        // console.log("THIS IS PASSWORD", res.data.password)
-        // this.props.saveMemberID(userName)
+        
       }
       // this.loadPersonalizePage()
     })    
@@ -142,7 +112,7 @@ class Signin extends Component {
 
   render() {
     if (this.state.redirect) {      
-      console.log("READY TO LOAD USER PAGE FINALLY")
+      console.log("READY TO LOAD USER PAGE FINALLY===", UsermemberID)
       this.props.saveMemberID(UsermemberID)
 
       return <Redirect to='/UserPage' />

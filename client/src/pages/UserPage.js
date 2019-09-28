@@ -3,23 +3,31 @@ import Container from "../components/Container";
 import "./themestyle.css";
 import Row from "../components/Row";
 import Col from "../components/Col";
+// import UserAccSettings from "../components/UserAccSettings";
 import { Redirect } from "react-router-dom";
 import API from "../utils/API";
+import SearchResults from '../components/SearchResults';
 
 var userArray = []
+
 var membername = ""
 var userName =""
 var usertheme = "";
+
 var divStyle = {};
 var pStyle = {};
 
 class UserPage extends Component {
   
   state = {    
-    user:[],   
+    user:[],
+    userSettings: [],
+    userArray: [],
     userName: this.props.currentUser,
     redirect: false,    
   };
+
+
 
   
   componentWillMount() {
@@ -52,10 +60,12 @@ class UserPage extends Component {
     }).then(function(){
       console.log("THIS IS USER OBJECT", app.state.user);
       userArray = [...app.state.user]
+      // settingsArray = userArray[0].toLocaleString()
       console.log("USERNAME API ID$$$$", userArray);
       console.log(userArray[0].userName)
       usertheme = userArray[0].userTheme
       membername = userArray[0].memberName
+      // contact = userArray[0].contact
       console.log("USER THEME IS ===", usertheme)
       app.userTheme(usertheme);
     })    
@@ -64,23 +74,19 @@ class UserPage extends Component {
   }
 
   userTheme = (id) => {   
-    console.log("mID is : ", usertheme)
-    let colorr = "";
-    let testalignn = "";
-    let fontsizee = "";
-    let fontfamilyy = "";
+    console.log("mID is : ", usertheme)    
     
     divStyle = {
-      color: colorr,
-      textAlign: testalignn,
-      fontSize: fontsizee,
-      fontFamily: fontfamilyy
+      color: userArray[0].colorDb,
+      textAlign: userArray[0].textalignDb,
+      fontSize: userArray[0].divfontsizeDb,
+      fontFamily: userArray[0].fontfamilyDb,
     };
     pStyle = {
-      color: colorr,
-      fontFamily: fontfamilyy,
-      fontSize: fontsizee,
-      textAlign: testalignn
+      color: userArray[0].colorDb,
+      fontFamily: userArray[0].fontfamilyDb,
+      fontSize: userArray[0].pfontsizeDb,
+      
     };  
     this.props.setTheme(id)    
   }
@@ -110,28 +116,18 @@ class UserPage extends Component {
   
 
   render() {
-    
+    console.log('propssss', this.props)
     return (
       <div>
         {this.renderRedirect()}
         <div style={divStyle}><b> Welcome {membername}!</b></div>
         <Container style={{ marginTop: 60 }}>
         <div id="message"></div>
-          <div className="row1">            
-            <Row>              
-              <Col size="md-4">
-                <div style={pStyle}>{this.props.currentUser}</div>
-                {/* <div className="upage-box" >
-                  <div className="img-container">
-                    
-                  </div>                  
-                </div> */}
-              </Col>              
-            </Row>
-          </div>
-          <div className="gap"></div>
-          {/* <div className="row2">
-            </div>            */}
+
+          
+          {this.props.Items.length !== 0 && <SearchResults Items={this.props.Items}/>}
+          
+          <div className="gap"></div>            
             <Row>              
               <Col size="md-4">
                 <div className="contents-r2-c1">
@@ -164,6 +160,8 @@ class UserPage extends Component {
               </div>
               </Col>                           
             </Row>
+            
+            {/* <UserAccSettings userArray={this.state.userArray} settingSubmit={this.settingSubmit}/>       */}
           
         </Container>
       </div>

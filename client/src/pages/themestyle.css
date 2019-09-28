@@ -179,7 +179,7 @@ form.search button[type="submit"] {
 }
 
 .row1 {
-color:red;
+
 background-color: whitesmoke;
 width: 1500px;
 height: 300px;
@@ -189,7 +189,7 @@ margin-top: -65px;
 }
 
 .row2 {
-  color:red;
+ 
   background-color:transparent;
   width: 1500px;
   height: 300px;
@@ -234,7 +234,7 @@ margin-top: -65px;
 }
 
 .gap {
-  color:red;
+  
   background-color: transparent;
   width: 1500px;
   height: 180px;
