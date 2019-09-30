@@ -27,11 +27,18 @@ export default {
     return axios.put("/api/users", id);
   },
   // Update the user with the given id
+  // updateCart: function(id) {
+  //   console.log("FROM CLIENT API updateCart -- MEMBER_id ====", id)
+  //   console.log(id.memberId)
+  //   console.log(id.item)
+  //   return axios.put("/api/cart/" + id );
+  // },
+
   updateCart: function(id) {
     console.log("FROM CLIENT API updateCart -- MEMBER_id ====", id)
     console.log(id.memberId)
     console.log(id.item)
-    return axios.put("/api/cart/" + id );
+    return axios.put("/api/cart/current", id);
   },
   
   deleteUser: function(id) {    

@@ -1,7 +1,7 @@
 module.exports = {
-  User: require("./user"),
-  bookExchange: require("./bookExchange"),
-  cart: require("./cart"),
-  orders: require("./orders"),
-  savedItems: require("./savedItems.js")
+  User: require("./User"),
+  BookExchange: require("./BookExchange"),
+  Cart: require("./Cart"),
+  Orders: require("./Orders"),
+  SavedItems: require("./SavedItems")
 };

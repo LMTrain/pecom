@@ -10,8 +10,7 @@ mongoose.connect(
 
 
 const bookSeed = [
-  {
-    "memberId": "james@yahoo.com",
+  { 
     "bookId": "wjXoLQ2NFzE",
     "title":  "Weapons of Math Destruction",
     "authors": "Cathy O'Neil",
@@ -19,7 +18,7 @@ const bookSeed = [
     "thumbnail": "http://books.google.com/books/content?id=60n0DAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
     "description": "A former Wall Street quant sounds an alarm on the mathematical models that pervade modern life - and threaten to rip apart our social fabric We live in the age of the algorithm. Increasingly, the decisions that affect our lives - where we go to school, whether we get a loan, how much we pay for insurance - are being made not by humans, but by mathematical models.",
     "publisheddate": "2016-09-06",
-    "request": true,       
+    "request": false,       
     "deny": true,
   }  
 ];

@@ -183,6 +183,13 @@ button {
   flex-direction: row;
 }
 
+.hide-navigation-item {
+  display: none !important;
+  color: transparent;
+  display: flex;
+  flex-direction: row;
+}
+
 /* #nav-search{
   position: relative;
   display: block;

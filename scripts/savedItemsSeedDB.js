@@ -10,8 +10,7 @@ mongoose.connect(
 
 
 const savedItemsSeed = [
-  {
-    "memberId": "james@yahoo.com",
+  {    
     "item": "Mini Backpack - Peppa Girls Bag",
     "unitPrice": 17.95,
     "link": "http://c.affil.walmart.com/t/api02?l=https%3A%2F%2Fwww.walmart.com%2Fip%2FMini-Backpack-Peppa-Pig-Pink-w-Friends-10-Girls-Bag-137636-2%2F138392823%3Faffp1%3DEO2CEt1dg2KjOSy0P4q5OwOs71DGZRnKBNAhdJoSy10%26affilsrc%3Dapi%26veh%3Daff%26wmlspartner%3Dreadonlyapi",

@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ordersSchema = new Schema({
-  memberId: { type: String },
-  item: { type: String },
-  price: { type: Number },
-  qty: { type: Number },
-  link: {type: String,},
-  description: { type: String},
-  thumbnail: {type: String },  
+  
+  item: String,
+  price: Number,
+  qty: Number,
+  link: String,
+  description: String,
+  thumbnail: String,  
 });
 
 const Orders = mongoose.model("Orders", ordersSchema);

@@ -10,8 +10,7 @@ mongoose.connect(
 
 
 const ordersSeed = [
-  {
-    "memberId": "james@yahoo.com",
+  {   
     "item": "Mini Backpack - Peppa Girls Bag",
     "qty": 20,
     "unitPrice": 17.95,

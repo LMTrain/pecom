@@ -32,7 +32,7 @@ function Navbar(props) {
           <li className="nav-item">            
             <Link to="/Help" className={window.location.pathname === "/Help" ? "nav-link active" : "nav-link"}>Help</Link><span>.....</span>
           </li>
-          <li className="nav-item">            
+          <li className="hide-navigation-item">           
             <Link to="/Settings" className={window.location.pathname === "/Settings" ? "nav-link active" : "nav-link"}>Settings</Link><span>.....</span>
           </li>
           <li className="nav-item">            

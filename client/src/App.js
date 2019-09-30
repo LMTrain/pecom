@@ -30,6 +30,7 @@ class App extends React.Component {
   state = {
     user:[],
     userArray:[],
+    cart: [],
     memberId: "",
     membername: "",
     userName: "",
@@ -59,7 +60,14 @@ class App extends React.Component {
           this.updateCartDB(userArray[0]._id)
         }          
       }    
-    }   
+    }
+    // loadCartData = () => {
+    //   this.setState({
+        
+
+    //   })
+    // }
+
     updateCartDB = (id) => {
       console.log(id)
 
@@ -75,6 +83,7 @@ class App extends React.Component {
       let customerRatingDB = String(itemToCart[0].customerRating)
       console.log("THIS IS USER DB ID+++", id)
       API.updateCart({
+        _id: id,
         memberId: memberId,
         item: itemDB,
         qty:	qtyDB,
