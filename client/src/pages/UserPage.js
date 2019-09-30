@@ -8,14 +8,13 @@ import { Redirect } from "react-router-dom";
 import API from "../utils/API";
 import SearchResults from '../components/SearchResults';
 
-var userArray = []
 
+
+var userArray = []
 var membername = ""
 var userName =""
 var usertheme = "";
-
 var divStyle = {};
-var pStyle = {};
 
 class UserPage extends Component {
   
@@ -82,13 +81,19 @@ class UserPage extends Component {
       fontSize: userArray[0].divfontsizeDb,
       fontFamily: userArray[0].fontfamilyDb,
     };
-    pStyle = {
-      color: userArray[0].colorDb,
-      fontFamily: userArray[0].fontfamilyDb,
-      fontSize: userArray[0].pfontsizeDb,
-      
-    };  
+
     this.props.setTheme(id)    
+  }
+  addItemToCart = (id) => {
+    console.log("THIS IS ITEM ID FROM USERPAGE===>")
+  }
+
+  userCart = () => {
+    console.log("THIS IS USER CART===>")
+    console.log("THIS IS CURRENT USER===>", userArray[0].userName)
+    this.loadAPIgetUser(userArray[0].userName)
+    console.log(userArray[0].cart)
+    // console.log(props.user[0].contact)
   }
 
   logOutPage = () => {    
@@ -106,8 +111,7 @@ class UserPage extends Component {
     })
   }
   renderRedirect = () => {
-    if (this.state.redirect) {
-      // this.props.updateDBtheme(mID)     
+    if (this.state.redirect) {     
       return <Redirect to='/Logout' />
     }
   }
@@ -125,7 +129,7 @@ class UserPage extends Component {
         <div id="message"></div>
 
           
-          {this.props.Items.length !== 0 && <SearchResults Items={this.props.Items}/>}
+          {this.props.Items.length !== 0 && <SearchResults Items={this.props.Items} addItemToCart={this.props.addItemToCart}/>}
           
           <div className="gap"></div>            
             <Row>              
@@ -134,7 +138,16 @@ class UserPage extends Component {
 
                   <div className="upage-box">
                     <div className="img-container">
-                      
+                      <Row>              
+                        <Col size="md-12">
+                            <div className="inside-upage-box">
+                              <div className="img-container">
+                                <b>Save For Later</b>
+                              </div>                  
+                            </div>
+                          
+                        </Col>
+                      </Row>
                     </div>                  
                   </div>
                 </div>
@@ -144,7 +157,15 @@ class UserPage extends Component {
 
                 <div className="upage-box">
                   <div className="img-container">
-                    
+                  <Row>              
+                    <Col size="md-12">
+                        <div className="inside-upage-box" onClick={() => this.userCart()}>
+                          <div className="img-container">
+                            <b>Cart</b>
+                          </div>                  
+                        </div>                          
+                    </Col>
+                  </Row>                    
                   </div>                  
                 </div>
               </div>
@@ -154,7 +175,15 @@ class UserPage extends Component {
 
                 <div className="upage-box">
                   <div className="img-container">
-                    
+                  <Row>              
+                    <Col size="md-12">
+                        <div className="inside-upage-box">
+                          <div className="img-container">
+                            <b>Orders</b>
+                          </div>                  
+                        </div>                          
+                    </Col>
+                  </Row>                    
                   </div>                  
                 </div>
               </div>

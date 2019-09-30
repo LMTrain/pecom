@@ -23,7 +23,9 @@ class Search extends Component {
     showItemState: true
   };
   
- 
+  // addItemToCart = (id) => {
+  //   console.log("THIS IS ITEM ID===>")
+  // }
 
 
   render() {
@@ -34,7 +36,7 @@ class Search extends Component {
         {/* <Container style={{ marginTop: -25 }}> */}         
          
           {/* <View style={{flex: 1, flexDirection: 'row'}}></View> */}
-        {this.props.items && <SearchResults Items={this.props.items} />}
+        {this.props.items && <SearchResults Items={this.props.items} addItemToCart={this.addItemToCart} />}
          
         {/* </Container> */}
       </div>

@@ -11,7 +11,7 @@ module.exports = {
   },
 
   findById: function(req, res) {
-    console.log("USERNAME IN FINDBYID=====", req.params.userName)
+    // console.log("USERNAME IN FINDBYID IN USERSCONTROLLER=====", req.params.userName)
     db.User
       .find({userName : req.params.userName})
       .then(dbModel => res.json(dbModel))
@@ -64,8 +64,8 @@ module.exports = {
         console.log('there is no data', data)
         req.body.password = bcrypt.hashSync(req.body.password, 10);
         // console.log("HASH", req.body.password)
-        db.User.collection
-          .insertOne(req.body)
+        db.User
+          .create(req.body)
           .then(dbModel => {
             console.log("create user", dbModel)
             res.json(dbModel)})

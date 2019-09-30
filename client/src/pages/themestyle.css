@@ -9,10 +9,6 @@ form.search button[type="submit"] {
   margin-top: 10px;
 }
 
-.form-groups {
-  width: 500px;
-  font-size: 14px;
-}
 
 .form-control {
   display: block;
@@ -25,29 +21,10 @@ form.search button[type="submit"] {
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: .25rem;
+  border: 1px solid #435970;
+  border-radius: 32px;
   font-size: 12px;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-
-.btn {
-  display: inline-block;
-  font-weight: 400;
-  color: #212529;
-  text-align: center;
-  vertical-align: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-color: transparent;
-  border: 1px blue;
-  padding: .375rem .75rem;
-  font-size: 14px;
-  line-height: 1.5;
-  border-radius: .25rem;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 .mt-4, .my-4 {
@@ -62,11 +39,7 @@ form.search button[type="submit"] {
 #message{
   color:red;
 }
-/* #welcomeMessage{
-  color: white;
-  text-align: center;
-  font-size: 38px;
-} */
+
 
 .card {
   /* position: relative; */
@@ -88,7 +61,6 @@ form.search button[type="submit"] {
   position: relative;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
@@ -107,7 +79,7 @@ form.search button[type="submit"] {
   margin-right: -1rem;
   /* position: relative; */
   width: 180px;
-  box-shadow: 0 3px 6px #999, 0 3px 6px #999;
+  box-shadow: 0 -3px 15px #6f6666, 0 3px 15px #6f6666;
   text-align: left;
 }
 
@@ -175,6 +147,52 @@ form.search button[type="submit"] {
 }
 
 .upage-box > .remove:hover {
+  color: #d50000;
+}
+
+
+.inside-upage-box {
+  background: rgb(192, 150, 150);
+  height: 50px;
+  margin: 1rem;
+  position: relative;
+  width: 150px;
+  border-radius: 32px;
+  margin-right: 320px;
+  box-shadow: 0 3px 19px rgb(110, 110, 110), 0 5px 19px rgb(110, 110, 110);
+  text-align: left;
+}
+
+b, strong {
+  font-weight: bolder;
+  padding: 2px;
+  
+}
+.inside-upage-box > .img-container {
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  margin-top: -5px;
+  margin-right: -5px;
+  padding: 10px;
+  /* background:#6CADDC; */
+  cursor: pointer;
+}
+.inside-upage-box > .img-container > img {
+  width: 100%
+}
+
+
+.inside-upage-box > .remove {
+  color: #ff1744;
+  font-size: 48px;
+  position: absolute;
+  top: -20px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.inside-upage-box > .remove:hover {
   color: #d50000;
 }
 

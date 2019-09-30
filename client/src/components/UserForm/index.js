@@ -5,7 +5,7 @@ import "./style.css";
 // Using the datalist element we can create autofill suggestions based on the props.breeds array
 function UserForm(props) {
   return (
-    <div className="card card-body">
+    <div className="gs-card card-body">
       <div id="message"></div>
       <h4 className="text-center mb-3">Create Account</h4>
         <form className="form-groups">

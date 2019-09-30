@@ -4,7 +4,7 @@
 } */
 
 .navbar {
-  height: 50px;
+  height: 60px;
   margin-top: 0px;
 }
 
@@ -40,7 +40,7 @@
   display: inline-block;
   border-style: solid;
   border-width: 1px;
-  border-radius: 4px;
+  border-radius: 32px;
   border-color: rgba(208, 92, 14, 1);
   background: 0;
   padding: 8px 16px;
@@ -88,7 +88,7 @@ button {
 }
 
 .get-started-box{
-  margin-left: 86px;
+  margin-left: 6px;
   display: block;
   font-weight: 400;
   font-family: medium-content-sans-serif-font, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -104,8 +104,8 @@ button {
 .nav-icon-space{
   width: 1px;
   height: 24px;
-  margin-right: 45px;
-  margin-left: 50px;
+  margin-right: 0px;
+  margin-left: 80px;
   border-left: 1px solid rgba(0, 0, 0, 0.2);
   display: block;
   box-sizing: inherit;
@@ -114,8 +114,8 @@ button {
 .nav-icon-space1{
   width: 1px;
   height: 24px;
-  margin-right: 110px;
-  margin-left: 90px;
+  margin-right: 280px;
+  margin-left: -110px;
   border-left: 1px solid rgba(0, 0, 0, 0.2);
   display: block;
   box-sizing: inherit;
@@ -125,33 +125,28 @@ button {
 .nav-icon-space2{
   width: 1px;
   height: 24px;
-  margin-right: 130px;
+  margin-right: 180px;
   margin-left: 200px;
   border-left: 1px solid rgba(0, 0, 0, 0.2);
   display: block;
-  /* box-sizing: inherit; */
-  text-align: left;
-}
-
-#memberinfo{
-  color: antiquewhite;
   text-align: left;
 }
 
 .btn {
   display: inline-block;
   font-weight: 400;
-  color: whitesmoke;
+  color: black;
   text-align: center;
   vertical-align: middle;  
   user-select: none;
-  background-color: rgb(146, 143, 143);
-  border: 1px blue;
-  padding: .375rem .75rem;
+  background-color: rgb(143, 129, 129);
+  block-size: 28px;
+  border: 1px transparent;
+  padding: .3rem .5rem;
+  margin-top: -2px;
   font-size: 14px;
   line-height: 1.5;
-  border-radius: .25rem;
-  -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border-radius: 32px;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
@@ -180,6 +175,12 @@ button {
   position: absolute;
   top: 0;
   width: 24px;
+}
+
+.nav-item{
+  color: transparent;
+  display: flex;
+  flex-direction: row;
 }
 
 /* #nav-search{

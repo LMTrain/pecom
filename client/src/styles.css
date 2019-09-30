@@ -1,18 +1,8 @@
-* * {
+* {
   box-sizing: border-box;
 }
 
 html,
-body,
-#root,
-#root > div,
-div[data-reactroot] {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-/* html,
 body {
   overscroll-behavior-y: contain;
   margin: 0;
@@ -24,7 +14,7 @@ body {
     sans-serif;
   position: fixed;
   overflow: hidden;
-} */
+}
 
 /* #root {
   background: white;
@@ -45,7 +35,7 @@ body {
   justify-content: center;
 } */
 
-/* #root > div > div {
+#root > div > div {
   background-color: white;
   background-size: auto 85%;
   background-repeat: no-repeat;
@@ -57,4 +47,4 @@ body {
   will-change: transform;
   border-radius: 10px;
   box-shadow: 0 12.5px 100px -10px rgba(50, 50, 73, 0.4), 0 10px 10px -10px rgba(50, 50, 73, 0.3);
-}  */
+}

@@ -9,10 +9,10 @@ form.search button[type="submit"] {
   margin-top: 10px;
 }
 
-.form-groups {
+/* .form-groups {
   width: 500px;
   font-size: 14px;
-}
+} */
 
 .form-control {
   display: block;
@@ -22,7 +22,7 @@ form.search button[type="submit"] {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #495057;
+  color: #2c3035;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
@@ -30,7 +30,7 @@ form.search button[type="submit"] {
   font-size: 12px;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
-
+/* 
 .btn {
   display: inline-block;
   font-weight: 400;
@@ -41,14 +41,14 @@ form.search button[type="submit"] {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: transparent;
+  background-color: black;
   border: 1px solid transparent;
   padding: .375rem .75rem;
   font-size: 14px;
   line-height: 1.5;
   border-radius: .25rem;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
+} */
 
 .mt-4, .my-4 {
   margin-top: 1.5rem!important;

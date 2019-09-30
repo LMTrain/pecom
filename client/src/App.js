@@ -4,6 +4,7 @@ import Signin from "./pages/Signin";
 import Home from "./pages/Home";
 import GetStarted from "./pages/GetStarted";
 import PersonalizePage from "./pages/PersonalizePage";
+// import Themes from "./AnimationPersonalize"
 // import Search from "./pages/Search";
 import UserPage from "./pages/UserPage";
 import API from "./utils/API";
@@ -13,9 +14,15 @@ import UserAccSettings from "./components/UserAccSettings"
 // import ThemeNavbar from "./components/ThemeNavbar";
 import Wrapper from "./components/Wrapper";
 import db from "./db.json"
+import dataSet from "./db.json"
+// import Themes from "./AnimationPersonalize";
+// import {spring} from 'react-spring;'
+
 
  require('dotenv').config();
-// var userArray = []
+var itemsArray = []
+var itemToCart = []
+var userArray = []
 var memberInfo = ""  
 // var memberNName = ""
 console.log(db)
@@ -28,9 +35,71 @@ class App extends React.Component {
     userName: "",
     currentUser: null,
     theme: -1,
-    search:"",
+    search:"",    
     Items:[],
+   
+
   }
+
+  addItemToCart = (id) => {
+    console.log("THIS IS USERARRAY OBJECT IN APP$$$$", userArray);
+    itemsArray = [...this.state.Items]
+    console.log("THIS IS ITEM ID FROM APP===>", id)
+    console.log("THESE ARE CURRENT ITEMS===>", itemsArray)
+    for (var i = 0;  i < itemsArray.length; i++) {
+       console.log(i, itemsArray[i])      
+      if (id !== itemsArray[i].parentItemId) {
+            console.log("CONTINUE LOOKING FOR MY ITEM")
+        }else{
+          console.log("THIS IS THE ITEM I WANT===>",itemsArray[i])
+          itemToCart = [itemsArray[i]]            
+          console.log("THIS IS THE ITEM GOING TO DB CART===>", itemToCart)
+          memberInfo = String(this.state.currentUser)
+          id = String(userArray[0]._id)
+          this.updateCartDB(userArray[0]._id)
+        }          
+      }    
+    }   
+    updateCartDB = (id) => {
+      console.log(id)
+
+      let memberId = String(this.state.currentUser)
+      // let memberName = String(this.state.memberName)
+      // let userName = String(this.state.currentUser)
+      let itemDB = String(itemToCart[0].name)
+      let qtyDB = 1
+      let unitPriceDB = Number(itemToCart[0].salePrice)
+      let linkDB = String(itemToCart[0].productUrl)
+      let descriptionDB = String(itemToCart[0].shortDescription)
+      let thumbnailDB = String(itemToCart[0].largeImage)
+      let customerRatingDB = String(itemToCart[0].customerRating)
+      console.log("THIS IS USER DB ID+++", id)
+      API.updateCart({
+        memberId: memberId,
+        item: itemDB,
+        qty:	qtyDB,
+        unitPrice: unitPriceDB,
+        link: linkDB,
+        description: descriptionDB,
+        thumbnail: thumbnailDB,
+        customerRating: customerRatingDB,                      
+      })
+        .then(res => {                  
+          if(res.data.error ){
+            console.log(res.data.error)
+            document.getElementById("message").textContent = res.data.error;
+          }else{
+            // console.log(res.data.error)
+            document.getElementById("message").textContent = " ";
+            
+          }
+        })
+        
+        .catch(err => console.log(err)); 
+    }
+
+    
+
 
   updateDBtheme = (mID) => {
     var colorrr = ""
@@ -261,10 +330,10 @@ class App extends React.Component {
     }).then(function(){
       console.log("THIS IS USER OBJECT IN APP", app.state.user);
       // this.setState({ userArray: app.state.user})
-      // console.log("APP USERARRAY====>", this.state.userArray)
-      // userArray = [...app.state.user]
+      // console.log("APP USERARRAY====>", app.state.userArray)
+      userArray = [...app.state.user]
       // settingsArray = userArray[0].toLocaleString()
-      // console.log("USERNAME API ID$$$$", userArray);
+      // console.log("THIS IS USERARRAY OBJECT IN APP$$$$", userArray);
       // console.log(userArray[0].userName)
       // usertheme = userArray[0].userTheme
       // membername = userArray[0].memberName
@@ -283,9 +352,13 @@ class App extends React.Component {
   searchForItems = (e) => {
     e.preventDefault();
     var app = this;
-    API.search(app.state.search)
-      .then(res => app.setState({ Items: res.data.items }))          
-      .catch(err => console.log(err));
+    // API.search(app.state.search)
+    //   .then(res => app.setState({ Items: res.data.items }))          
+    //   .catch(err => console.log(err));
+    var results = dataSet.filter(item => {
+      return item.name.toLowerCase().indexOf(app.state.search.toLowerCase()) !== -1;
+    })
+    app.setState({ Items: results});
   } 
   
   settingSubmit = (id) => {
@@ -310,11 +383,12 @@ class App extends React.Component {
     
     switch(this.state.theme){
       case "theme0":
-        return "https://lmtrain.github.io/lm-images/assets/images/ls_wf1.jpg"
+        return "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg"
       case "theme1":
         return "https://lmtrain.github.io/lm-images/assets/images/ls_field-wf5.jpg"
       
       case "theme2":
+        
         return "https://lmtrain.github.io/lm-images/assets/images/ls_daylight.jpg"
       
       case "theme3":
@@ -324,7 +398,7 @@ class App extends React.Component {
         return "https://lmtrain.github.io/lm-images/assets/images/ls_field.jpg"
      
       case "theme5":
-        return "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg"
+        return "https://lmtrain.github.io/lm-images/assets/images/ls_wf1.jpg"
      
       case "theme6":
         return "https://lmtrain.github.io/lm-images/assets/images/ls_wf2.jpg"
@@ -349,12 +423,12 @@ class App extends React.Component {
           case "theme16":
             return "https://lmtrain.github.io/lm-images/assets/images/marble_whitegray.jpg"
       default :
-        return "https://lmtrain.github.io/lm-images/assets/images/ls_wf1.jpg"
+        return "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg"
     }
   }
  
   render(){
-
+      // Themes()
     return (
       <Router>
         <div>
@@ -367,8 +441,8 @@ class App extends React.Component {
             <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} getTheme={this.getTheme}/>}/>     
             <Route exact path="/Getstarted" render = { () => <GetStarted saveMemberID={this.saveMemberID} getTheme={this.getTheme}/>}/>
             <Route exact path="/PersonalizePage" render = { () => <PersonalizePage setTheme={this.setTheme} theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"/>}/>
-            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} getTheme={this.getTheme} Items={this.state.Items}/>}/>
-            
+            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} getTheme={this.getTheme} Items={this.state.Items} addItemToCart={this.addItemToCart}/>}/>
+            {/* <Route exact path="/AnimationPersonalize" render = { () => <Themes />}/> */}
             {/* {this.state.search.length && <Route render = { () => <Search items={this.state.Items} search={this.state.search}/>} />} */}
             
             <Route exact path="/Settings" render = { () => <UserAccSettings setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} settingSubmit={this.settingSubmit} passwordReset={this.passwordReset}/>}/>    

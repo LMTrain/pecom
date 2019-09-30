@@ -18,11 +18,6 @@ class PersonalizePage extends Component {
     reduceTheme:-1,
   };
 
- 
-
-
-  // addPicture = () => {
-  // } // pending further decision
 
   loadSignInPage = () => {    
     this.setRedirect()
@@ -215,10 +210,10 @@ class PersonalizePage extends Component {
         fontSize: divfontsizee,
         fontFamily: fontfamilyy
       };
-      pStyle = {
-        color: colorr,
-        fontFamily: fontfamilyy,        
-      };
+      // pStyle = {
+      //   color: colorr,
+      //   fontFamily: fontfamilyy,        
+      // };
     }
 
   render() {
@@ -227,11 +222,11 @@ class PersonalizePage extends Component {
       <div>
         {this.renderRedirect()}
         <div style={divStyle}>Personalize Your Account</div>
-            <div>{this.props.currentUser}</div>
+        {/* <div>{this.props.currentUser}</div> */}
         <Container style={{ marginTop: 60 }}>
           {/* <div className="theme-card-body"> */}
             <div style={divStyle}><b>Choose a Theme</b></div>
-            <div id="memberinfo"></div>
+            <div id="memberinfo" style={pStyle}></div>
             <div id="message"></div>
             <Row>
               <Col size="md-3">
@@ -267,7 +262,7 @@ class PersonalizePage extends Component {
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme5" onClick={() => this.choosenTheme(this.state.userThemes[5])}>
                   <div className="img-container">
-                    <img alt="Theme 5" width="120" height="120" title="Iceland Waterfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg' />            
+                    <img alt="Theme 5" width="120" height="120" title="Iceland Waterfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_wf1.jpg' />            
                   </div>                  
                 </div>
               </Col>
@@ -360,9 +355,9 @@ class PersonalizePage extends Component {
             </Row>
             <Row>
               <Col size="md-12">              
-                <div className="create-acc-btn"><button title="Sign in" type="submit" onClick={() => this.loadSignInPage()} style={pStyle} className="btn btn-primary float-left">Sign in</button></div>
+                <div className="create-acc-btn"><button title="Sign in" type="submit" onClick={() => this.loadSignInPage()} className="btn btn-primary float-left">Sign in</button></div>
                 {/* <div className="create-acc-btn"><button type="submit" onClick={() => this.addPicture()} className="btn btn-primary float-left">Add Your Picture</button> </div> */}
-                <div className="create-acc-btn"><button title="Rock Light Waterfall" type="submit" id="theme0" onClick={() => this.choosenTheme(this.state.userThemes[0])} style={pStyle} className="btn btn-primary float-left">Default Theme</button> </div>
+                <div className="create-acc-btn"><button title="Rock Light Waterfall" type="submit" id="theme0" onClick={() => this.choosenTheme(this.state.userThemes[0])} className="btn btn-primary float-left">Default Theme</button> </div>
               </Col>
             </Row>
             

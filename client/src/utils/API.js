@@ -1,17 +1,17 @@
 import axios from "axios";
 
-const BASEURL = process.env.REACT_APP_BASEURL
-const APIKEY = process.env.REACT_APP_APIKEY
+// const BASEURL = process.env.REACT_APP_BASEURL
+// const APIKEY = process.env.REACT_APP_APIKEY
 
 export default {
-
-  
-
   //Search for an item to buy
-  search: function(query) {
-    return axios.get(BASEURL + query + APIKEY);
+  // search: function(query) {
+    // return axios.get("https://api.walmartlabs.com/v1/search?&apiKey=vng9pukufs97mcyyjs5ps266&query=" +  query + "&format=json");
+    // return axios.get(BASEURL + query + APIKEY);
+    // return axios.get('/api/walmart/'+ query);
     // return axios.get(BASEURL + APIKEY + query + "&format=json");
-  },
+  // },
+  
     // Gets all users
   getUsers: function() {
     return axios.get("/api/users");
@@ -26,11 +26,14 @@ export default {
     console.log("FROM CLIENT API updateUser ====", id)
     return axios.put("/api/users", id);
   },
-  // updateUser: function(id) {
-  //     console.log("API ====", id)
-  //   return axios.put("/api/users/" + id);
-  // },
-  // Deletes the user with the given id
+  // Update the user with the given id
+  updateCart: function(id) {
+    console.log("FROM CLIENT API updateCart -- MEMBER_id ====", id)
+    console.log(id.memberId)
+    console.log(id.item)
+    return axios.put("/api/cart/" + id );
+  },
+  
   deleteUser: function(id) {    
     return axios.delete("/api/users/" + id);
   },

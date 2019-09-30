@@ -11,7 +11,7 @@ ul.search-results img {
   margin-top: 65px;
 }
 
-.list-group-item {
+/* .list-group-item {
   position: relative;
   display: block;
   padding: .75rem 1.25rem;
@@ -21,17 +21,17 @@ ul.search-results img {
   width: 500px;
   height: 550px;
   margin-right: 300px;
-}
+} */
 
 
 
 .setting-box {
   background: #fff;
   border-radius: 2px;
-  height: 650px;
-  margin-right: 90rem;
+  height: 700px;
+  margin-right: 190px;
   position: relative;
-  width: 500px;
+  width: 400px;
   box-shadow: 0 5px 12px #999, 0 10px 12px #999;
   text-align: left;
 }

@@ -1,197 +1,40 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({  
-  "$jsonschema": {    
-    "title": "User",
-    "description": "A user in PeCom",
-    "type": "object",
-    "properties": {
-      "memberId": {
-        "description": "The identifier for a user",
-        "type": "string"
-      },
-      "memberName": {
-        "description": "Name of the user",
-        "type": "string"
-      },
-       "userName": {
-        "description": "User log in identity",
-        "type": "string"     
-      },
-      "email": {
-        "description": "emails for the user",
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "minItems": 1,
-        "uniqueItems": true
-      },
-      "password": {
-        "description": "User password",
-        "type": "string"
-      },
-      "cCard": {
-        "description": "User credit card",
-        "type": "number"
-      },
-      "userTheme": {
-        "description": "User choosen personal theme",
-        "type": "string"
-      },
-      "userImage": {
-        "description": "User personal profile picture",
-        "type": "string"
-      },
-      "colorDb": {
-        "description": "User personal font color",
-        "type": "string"
-      },
-      "textalignDb": {
-        "description": "User personal font text align",
-        "type": "string"
-      },
-      "divfontsizeDb": {
-        "description": "User personal div font size",
-        "type": "string"
-      },
-      "pfontsizeDb": {
-        "description": "User personal p font size",
-        "type": "string"
-      },
-      "fontfamilyDb": {
-        "description": "User personal font",
-        "type": "string"
-      },
-      "contact": {
-        "type": "object",
-        "properties": {
-          "address": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "number"
-          },
-          "email": {
-            "type": "string"          
-          }
-        },       
-      },
-      "cart": {
-        "type": "object",
-        "properties": {
-          "item": {
-            "type": "string"
-          },
-          "qty": {
-            "type": "number"
-          },
-          "unitPrice": {
-            "type": "number"         
-          },
-          "link": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "customerRating": {
-            "type": "string"
-          },
-        },       
-      },
-      "savedItems": {
-        "type": "object",
-        "properties": {
-          "item": {
-            "type": "string"
-          },        
-          "unitPrice": {
-            "type": "number"         
-          },
-          "link": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "customerRating": {
-            "type": "string"
-          },
-        },        
-      },
-      "orders": {
-        "type": "object",
-        "properties": {
-          "item": {
-            "type": "string"
-          },
-          "qty": {
-            "type": "number"
-          },
-          "unitPrice": {
-            "type": "number"         
-          },
-          "link": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },
-          "customerRating": {
-            "type": "string"
-          },
-        },       
-      },      
-      "bookExchange": {
-        "type": "object",
-        "properties": {
-          "bookId": {
-            "type": "string"          
-          },        
-          "title": {
-            "type": "string"         
-          },
-          "authors": {
-            "type": "string"
-          },
-          "link": {
-            "type": "string"
-          },
-          "thumbnail": {
-            "type": "string"
-          },        
-          "description": {
-            "type": "string"
-          },
-          "publisheddate": {
-            "type": "string"
-          },
-          "request": {
-            "type": "boolean"
-          },
-          "deny": {
-            "type": "boolean"    
-    
-          }
-  
-        }
-
-      },     
-    }    
+const userSchema = new Schema({
+  memberId: { type: String },
+  memberName: { type: String, required: true },
+  userName: { type: String, required: true },
+  email: { type: String },
+  address: { type: String },
+  phone: { type: String },
+  password: { type: String, required: true  },
+  cCard: { type: String },
+  userTheme: { type: String },
+  userImage: { type: String },
+  colorDb: { type: String },
+  textalignDb: { type: String },
+  divfontsizeDb: { type: String },
+  pfontsizeDb: { type: String },
+  fontfamilyDb: { type: String },
+  cart: {
+    type: Schema.Types.ObjectId,
+    ref: "Cart"
   },
-  "required": [ "memberName", "userName", "email", "password" ]
-  });
+  bookExchange: {
+    type: Schema.Types.ObjectId,
+    ref: "Book"
+  },
+  orders: {
+    type: Schema.Types.ObjectId,
+    ref: "Orders"
+  },
+  savedItems: {
+    type: Schema.Types.ObjectId,
+    ref: "SavedItems"
+  },
+  
+});
 
 const User = mongoose.model("User", userSchema);
 

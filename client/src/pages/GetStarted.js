@@ -88,15 +88,7 @@ class GetStarted extends Component {
       memberpassword,
       confirmpassword
     }
-
-    // this.setState({
-    //   memberemail: '',
-    //   membername: '',
-    //   memberpassword: '',
-    //   confirmpassword: ''
-    // })
     
-
     // console.log('newAccount', newAccount)
     UsermemberID = String(newAccount.memberemail)
     let memberId = String(newAccount.memberemail)
@@ -106,20 +98,7 @@ class GetStarted extends Component {
     let password = String(newAccount.memberpassword)
     let formCcard = 0
     let formAddress = ""
-    let formPhone = ""
-    let formItem = ""
-    let formQty = 0
-    let formUnitPrice = 0
-    let formItemLink = ""
-    let formThumbnail = ""
-    let formDescription = ""
-    let formReview = ""
-    let formSavedItem = ""  
-    let formSavedUnitPrice = 0
-    let formSavedItemLink = ""
-    let formSavedThumbnail = ""
-    let formSavedDescription = ""
-    let formSavedReview = ""
+    let formPhone = ""    
     let formTheme = ""   
     let formImage = ""
     let formColor = ""
@@ -132,7 +111,7 @@ class GetStarted extends Component {
       memberId: memberId,
       memberName: memberName,
       userName: userName,
-      email: [email],
+      email: email,
       password: password,
       cCard: formCcard,
       userTheme:formTheme,
@@ -143,38 +122,11 @@ class GetStarted extends Component {
       pfontsizeDb: formpFontSize,
       fontfamilyDb: formfontFamily,
       contact: {
-                    address: formAddress,
-                    phone: formPhone,
-                    email: email,
-                  },
-      cart: {
-              item: formItem,
-              qty:	formQty,
-              unitPrice: formUnitPrice,
-              link: formItemLink,
-              description: formDescription,
-              thumbnail: formThumbnail,
-              customerRating: formReview,
-            },
-      savedItems: {
-                    item: formSavedItem,	
-                    unitPrice: formSavedUnitPrice,
-                    link: formSavedItemLink,
-                    description: formSavedDescription,
-                    thumbnail: formSavedThumbnail,
-                    customerRating: formSavedReview
-                  },      
-      bookExchange: {
-                      bookId: "",
-                      title:  "",
-                      authors: "",
-                      link: "",
-                      thumbnail: "",
-                      description: "",
-                      publisheddate: "",
-                      request: false,       
-                      deny: true,
-                    },                
+        address: formAddress,
+        phone: formPhone,
+        email: email,
+      },
+      
     })
       .then(res => {
         // console.log('res========', res.data.error)
