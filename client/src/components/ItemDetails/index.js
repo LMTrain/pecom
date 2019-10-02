@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import { Link } from "react-router-dom";
 
 
 
@@ -7,15 +8,16 @@ function ItemDetails(props) {
 
   return (
     <div>
-      <ul className="list-group search-favItems">
-        {props.showItem.map(favItem => (          
-          <li key={favItem.id} className="list-group-item">
-            <img alt={favItem.volumeInfo.title} width="200" height="220" className="img-fluid" src={favItem.volumeInfo.imageLinks == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : favItem.volumeInfo.imageLinks.thumbnail} /><span></span>
+      <ul className="list-group search-results">
+      {props.Items.map(result => (        
+          <li key={result.id} className="list-group-item">
+            <img alt={result.name} width="120" height="180" className="img-fluid" src={result.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.largeImage} />
             <span><a href = "/search/"><button type="submit" className="btn btn-success">Back To Search</button></a></span>         
-            <p><b>Title             :</b> {favItem.volumeInfo.title}</p>
-            <span><b>Authors         :</b> {favItem.volumeInfo.authors} | |</span>
-            <p><b>Published Date :</b> {favItem.volumeInfo.publishedDate}</p>
-            <p><b>Description :</b> {favItem.volumeInfo.description}</p>          
+            <p><b>Item Name             :</b> {result.name}</p>
+                    <span><b>Price         :</b> ${result.salePrice} | |</span>
+                    <span><b>Rating :</b> {result.customerRating}</span>
+            <p><b>Description :</b> {result.description}</p>
+            <Link to="/UserPage"><button id={props.currentuser} type="submit" className="btn btn-success">Cancel</button></Link>          
           </li>        
         ))}      
       </ul>                

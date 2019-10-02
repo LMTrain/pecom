@@ -32,7 +32,7 @@ function Navbar(props) {
           <li className="nav-item">            
             <Link to="/Help" className={window.location.pathname === "/Help" ? "nav-link active" : "nav-link"}>Help</Link><span>.....</span>
           </li>
-          <li className="hide-navigation-item">           
+          <li className="nav-item">           
             <Link to="/Settings" className={window.location.pathname === "/Settings" ? "nav-link active" : "nav-link"}>Settings</Link><span>.....</span>
           </li>
           <li className="nav-item">            
@@ -46,9 +46,17 @@ function Navbar(props) {
           </li>
           <li className="nav-item">
             <Link
+              to="/Signout" className={window.location.pathname === "/Signout" ? "nav-link active" : "nav-link"}>Sign out</Link>
+          </li>
+          <li className="nav-item">
+            <Link
               to="/GetStarted" className={window.location.pathname === "/GetStarted" ? "nav-link active" : "nav-link"}><div className="get-started-box"><button className="get-started">Get Started</button>
               </div>
             </Link>
+            <li className="hide-navigation-item">
+            <Link
+              to="/itemDetails" className={window.location.pathname === "/itemDetails" ? "nav-link active" : "nav-link"}>itemDetails</Link>
+          </li>
           </li>
         </ul>
       </section>

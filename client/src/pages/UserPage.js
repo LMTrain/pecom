@@ -3,6 +3,7 @@ import Container from "../components/Container";
 import "./themestyle.css";
 import Row from "../components/Row";
 import Col from "../components/Col";
+import { Listup, ListItemup } from "../components/Listup";
 // import UserAccSettings from "../components/UserAccSettings";
 import { Redirect } from "react-router-dom";
 import API from "../utils/API";
@@ -121,6 +122,7 @@ class UserPage extends Component {
 
   render() {
     console.log('propssss', this.props)
+    let itemName = this.props.cart.name
     return (
       <div>
         {this.renderRedirect()}
@@ -129,7 +131,7 @@ class UserPage extends Component {
         <div id="message"></div>
 
           
-          {this.props.Items.length !== 0 && <SearchResults Items={this.props.Items} addItemToCart={this.props.addItemToCart}/>}
+          {this.props.Items.length !== 0 && <SearchResults Items={this.props.Items} cart={this.props.cart} addItemToCart={this.props.addItemToCart} itemDetails={this.props.itemDetails}/>}
           
           <div className="gap"></div>            
             <Row>              
@@ -144,11 +146,26 @@ class UserPage extends Component {
                               <div className="img-container">
                                 <b>Save For Later</b>
                               </div>                  
-                            </div>
-                          
+                            </div>                          
                         </Col>
                       </Row>
-                    </div>                  
+                    </div>
+                   
+                    <div className="upage-box-content">
+                      <Listup className="list-overflow-container-uspage">
+
+
+                        <ListItemup key={this.props.cart.id}>
+                        <img alt={this.props.cart.name} width="80" height="100" className="img-fluid" src={this.props.cart.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : this.props.cart.largeImage} />
+                        <p><b>Item Name             :</b> {itemName}</p>
+                        <b>Price         :</b> ${this.props.cart.salePrice}
+                        </ListItemup>
+
+
+                        
+                      </Listup>                      
+                    </div>
+                                      
                   </div>
                 </div>
               </Col>
@@ -166,7 +183,18 @@ class UserPage extends Component {
                         </div>                          
                     </Col>
                   </Row>                    
-                  </div>                  
+                  </div>
+
+                  <div className="upage-box-content">
+                    <Listup className="list-overflow-container-uspage">
+                      <ListItemup key={this.props.id}>
+                      <img alt={this.props.name} width="80" height="100" className="img-fluid" src={this.props.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : this.props.largeImage} />
+                      <p><b>Item Name             :</b> {this.props.name}</p>
+                      <b>Price         :</b> ${this.props.salePrice}
+                      </ListItemup>
+                    </Listup>               
+                  </div>
+
                 </div>
               </div>
               </Col>
@@ -184,7 +212,18 @@ class UserPage extends Component {
                         </div>                          
                     </Col>
                   </Row>                    
-                  </div>                  
+                  </div>
+                  <div className="upage-box-content">
+
+                    <Listup className="list-overflow-container-uspage">
+                      <ListItemup key={this.props.id}>
+                      <img alt={this.props.name} width="80" height="100" className="img-fluid" src={this.props.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : this.props.largeImage} />
+                      <p><b>Item Name             :</b> {this.props.name}</p>
+                      <b>Price         :</b> ${this.props.salePrice}
+                      </ListItemup>
+                    </Listup>               
+                  </div>
+
                 </div>
               </div>
               </Col>                           

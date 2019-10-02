@@ -1,18 +1,29 @@
 import React from "react";
-import "../UserAccSettings/style.css";
-// import Container from "../Container";
-// import { Link } from "react-router-dom";
+import "./deals.css"
 
+function TodaysDeal(props) {
+    console.log(props)
+    console.log(props.thumbnailImage)
+    console.log(props.salePrice)
 
-getCurrentDate(separator=''){
+    return (
+        
+        props.deals.map(deal => (
+      <div className="deals-box">
+        <div className="img-container" id={deal.itemId} key={deal.itemId} onClick={() => props.handleShuffleClick()}>
+          <img alt={deal.name} width="70" height="90" src={deal.largeImage} />
+          <p><b>Item Name :</b> {deal.name}</p>
+          <p><b>Price :</b>${deal.salePrice}</p>
+          <b>Rating :</b> {deal.customerRating}
 
-  let newDate = new Date()
-  let date = newDate.getDate();
-  let month = newDate.getMonth() + 1;
-  let year = newDate.getFullYear();
-  
-  return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+        </div>
+        
+        <span onClick={() => props.handleRemoveClick(deal.itemId)} className="remove">
+          
+        </span>
+      </div>
+    )));
   }
+  
 
-
-export default TodaysDeal;
+  export default TodaysDeal;

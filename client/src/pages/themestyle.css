@@ -196,6 +196,10 @@ b, strong {
   color: #d50000;
 }
 
+.upage-box-content{
+  margin-top: 20px;
+}
+
 .row1 {
 
 background-color: whitesmoke;
@@ -260,3 +264,16 @@ margin-top: -65px;
   margin-right: -200px;
   margin-top: -70px;
   }
+
+  .list-overflow-container-uspage {
+    height: 350px;
+    border: 1px #DDDDDD solid;
+    background-color: red;
+    border-radius: 4px;
+    margin-right: 35px;
+    margin-top: 10px;
+    margin-left: -17px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 452px;
+}

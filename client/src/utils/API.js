@@ -34,11 +34,16 @@ export default {
   //   return axios.put("/api/cart/" + id );
   // },
 
-  updateCart: function(id) {
-    console.log("FROM CLIENT API updateCart -- MEMBER_id ====", id)
-    console.log(id.memberId)
-    console.log(id.item)
-    return axios.put("/api/cart/current", id);
+  updateCart: function(cart) {
+    // 
+    console.log("FROM CLIENT API updateCart -- MEMBER_id ====", cart)
+    console.log(cart.memberId)
+    console.log(cart.item)
+    const id = cart._id;
+
+    return axios.put(`/api/cart/current/${id}`, cart);
+    // server expects: /api/cart/current/someid
+    // /api/cat/currentsomeid
   },
   
   deleteUser: function(id) {    

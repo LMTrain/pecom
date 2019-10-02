@@ -36,7 +36,7 @@ class Search extends Component {
         {/* <Container style={{ marginTop: -25 }}> */}         
          
           {/* <View style={{flex: 1, flexDirection: 'row'}}></View> */}
-        {this.props.items && <SearchResults Items={this.props.items} addItemToCart={this.addItemToCart} />}
+        {this.props.items && <SearchResults Items={this.props.items} cart={this.props.cart} addItemToCart={this.addItemToCart} itemDetails={this.itemDetails} />}
          
         {/* </Container> */}
       </div>

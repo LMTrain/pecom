@@ -4,6 +4,8 @@ import Signin from "./pages/Signin";
 import Home from "./pages/Home";
 import GetStarted from "./pages/GetStarted";
 import PersonalizePage from "./pages/PersonalizePage";
+import TodaysDeal from "./components/TodaysDeal";
+import ItemDetails from "./components/ItemDetails";
 // import Themes from "./AnimationPersonalize"
 // import Search from "./pages/Search";
 import UserPage from "./pages/UserPage";
@@ -15,6 +17,8 @@ import UserAccSettings from "./components/UserAccSettings"
 import Wrapper from "./components/Wrapper";
 import db from "./db.json"
 import dataSet from "./db.json"
+import deals from "./db.json"
+import { Redirect } from "react-router-dom";
 // import Themes from "./AnimationPersonalize";
 // import {spring} from 'react-spring;'
 
@@ -23,8 +27,10 @@ import dataSet from "./db.json"
 var itemsArray = []
 var itemToCart = []
 var userArray = []
-var memberInfo = ""  
-// var memberNName = ""
+var memberInfo = ""
+var shuffleData = ""
+var ShuffledDatas = []  
+var redirect = false
 console.log(db)
 class App extends React.Component {
   state = {
@@ -38,9 +44,34 @@ class App extends React.Component {
     theme: -1,
     search:"",    
     Items:[],
+    itemDetail:[],
+    deals,
    
-
   }
+  todaysDeals = () => {
+    this.shuffle()
+  }
+
+  removeCar = (id) => {
+    console.log(id, "This is ID");
+    let carsArray = [...this.state.deals]
+    let deals = carsArray.filter(deal => {
+      return deal.id !== id;
+    });
+    this.setState({ deals })
+  }
+
+  shuffle = () => {
+    let dealsArray = [...this.state.deals];
+    let dealsShuffled = [];    
+    for (var i = 0;  i < this.state.deals.length; i++) {        
+          shuffleData = dealsArray.splice(Math.floor(Math.random()*dealsArray.length));        
+          dealsShuffled = [...dealsShuffled, ...shuffleData];
+        }   
+        ShuffledDatas.push(this.state.deals);
+    // Set this.state.deals equal to the new deals array
+    this.setState({ deals: dealsShuffled });  
+  };
 
   addItemToCart = (id) => {
     console.log("THIS IS USERARRAY OBJECT IN APP$$$$", userArray);
@@ -53,45 +84,57 @@ class App extends React.Component {
             console.log("CONTINUE LOOKING FOR MY ITEM")
         }else{
           console.log("THIS IS THE ITEM I WANT===>",itemsArray[i])
-          itemToCart = [itemsArray[i]]            
+          itemToCart.push([itemsArray[i]])           
           console.log("THIS IS THE ITEM GOING TO DB CART===>", itemToCart)
+          this.setState({cart:itemToCart})
           memberInfo = String(this.state.currentUser)
           id = String(userArray[0]._id)
           this.updateCartDB(userArray[0]._id)
+          this.displayCart(userArray[0]._id)
         }          
       }    
     }
-    // loadCartData = () => {
-    //   this.setState({
+    displayCart = (id) => {
+      console.log("THIS IS THE ITEM IN CART STATE===>", itemToCart, id)
+      this.setState({cart:itemToCart})
+    }
+
+    itemDetails= (id) => {
+      console.log('found ITEM ID', id)      
+      var app = this
+      console.log(app.state.Items)
+      console.log("THIS IS REDIRECTING TO DETAIL PAGE");
+      const item = app.state.Items.find((item) => item.id === id);
+      console.log('found ITEM', [item])
+    // this.setState({showBook: [book], showBookState: true})
         
 
-    //   })
-    // }
+      let itempage = redirect
+      itempage = true;      
+        
+      if (itempage === true) {
+        return <Redirect to='/UserPage' />
+      }      
+      
+    }
 
     updateCartDB = (id) => {
       console.log(id)
-
-      let memberId = String(this.state.currentUser)
-      // let memberName = String(this.state.memberName)
-      // let userName = String(this.state.currentUser)
       let itemDB = String(itemToCart[0].name)
       let qtyDB = 1
       let unitPriceDB = Number(itemToCart[0].salePrice)
       let linkDB = String(itemToCart[0].productUrl)
       let descriptionDB = String(itemToCart[0].shortDescription)
       let thumbnailDB = String(itemToCart[0].largeImage)
-      let customerRatingDB = String(itemToCart[0].customerRating)
       console.log("THIS IS USER DB ID+++", id)
       API.updateCart({
         _id: id,
-        memberId: memberId,
         item: itemDB,
         qty:	qtyDB,
-        unitPrice: unitPriceDB,
+        Price: unitPriceDB,
         link: linkDB,
         description: descriptionDB,
         thumbnail: thumbnailDB,
-        customerRating: customerRatingDB,                      
       })
         .then(res => {                  
           if(res.data.error ){
@@ -437,7 +480,7 @@ class App extends React.Component {
   }
  
   render(){
-      // Themes()
+    
     return (
       <Router>
         <div>
@@ -447,15 +490,19 @@ class App extends React.Component {
           <Wrapper getTheme={this.getTheme}>
             <Route exact path="/" render = { () => <Home getTheme={this.getTheme}/>}/>
             <Route exact path="/home" render = { () => <Home getTheme={this.getTheme}/>}/>
-            <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} getTheme={this.getTheme}/>}/>     
+            <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} getTheme={this.getTheme}/>}/>
+            <Route exact path="/Sign out" render = { () => <Home getTheme={this.getTheme}/>}/>
             <Route exact path="/Getstarted" render = { () => <GetStarted saveMemberID={this.saveMemberID} getTheme={this.getTheme}/>}/>
             <Route exact path="/PersonalizePage" render = { () => <PersonalizePage setTheme={this.setTheme} theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"/>}/>
-            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} getTheme={this.getTheme} Items={this.state.Items} addItemToCart={this.addItemToCart}/>}/>
+            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} getTheme={this.getTheme} cart={this.state.cart} Items={this.state.Items} addItemToCart={this.addItemToCart} itemDetails={this.itemDetails}/>}/>
             {/* <Route exact path="/AnimationPersonalize" render = { () => <Themes />}/> */}
             {/* {this.state.search.length && <Route render = { () => <Search items={this.state.Items} search={this.state.search}/>} />} */}
-            
-            <Route exact path="/Settings" render = { () => <UserAccSettings setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} settingSubmit={this.settingSubmit} passwordReset={this.passwordReset}/>}/>    
+            <Route exact path="/TodaysDeal" render = { () => <TodaysDeal getTheme={this.getTheme} deals={this.state.deals} handleRemoveClick={() => this.removeDeal(this.state.itemId)} handleShuffleClick={this.shuffle} id={this.state.itemId} key={this.state.itemId}/>}/>
+            <Route exact path="/Settings" render = { () => <UserAccSettings setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} settingSubmit={this.settingSubmit} passwordReset={this.passwordReset}/>}/>
+            <Route exact path="/ItemDetails" render = { () => <ItemDetails getTheme={this.getTheme} itemDetails={this.itemDetails} cart={this.state.cart} Items={this.state.Items} theme={this.state.theme} currentUser={this.state.currentUser} />}/>
+
           </Wrapper>
+         
           
         </div>
       </Router>
@@ -463,4 +510,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App; 
