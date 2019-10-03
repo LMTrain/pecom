@@ -26,11 +26,7 @@ class GetStarted extends Component {
   
   loadPersonalizePage = () => {    
     this.setRedirect()
-    // localStorage.clear();
-    // console.log("cliasdk");
-    // return(
-    //     <Redirect to="/Signin/"/>
-    // )
+    
   }
 
   setRedirect = () => {    
@@ -41,7 +37,7 @@ class GetStarted extends Component {
   }
   renderRedirect = () => {
     if (this.state.redirect) {
-      console.log(UsermemberID, "PersonalizePageUserID Page ID")
+      
       this.props.saveMemberID(UsermemberID) 
       return <Redirect to='/PersonalizePage' />
     }
@@ -89,7 +85,7 @@ class GetStarted extends Component {
       confirmpassword
     }
     
-    // console.log('newAccount', newAccount)
+ 
     UsermemberID = String(newAccount.memberemail)
     let memberId = String(newAccount.memberemail)
     let memberName = String(newAccount.membername)
@@ -129,12 +125,12 @@ class GetStarted extends Component {
       
     })
       .then(res => {
-        // console.log('res========', res.data.error)
+       
         if(res.data.error ){
           console.log(res.data.error)
           document.getElementById("message").textContent = res.data.error;
         }else{
-          // console.log("No exisit")
+         
           this.loadPersonalizePage()
         }
         // this.loadPersonalizePage()

@@ -23,20 +23,16 @@ class Search extends Component {
     showItemState: true
   };
   
-  // addItemToCart = (id) => {
-  //   console.log("THIS IS ITEM ID===>")
-  // }
-
 
   render() {
-    console.log('this.state.showItem', this.state.showItem)    
+        
 
     return (
       <div>
         {/* <Container style={{ marginTop: -25 }}> */}         
          
           {/* <View style={{flex: 1, flexDirection: 'row'}}></View> */}
-        {this.props.items && <SearchResults Items={this.props.items} cart={this.props.cart} addItemToCart={this.addItemToCart} itemDetails={this.itemDetails} />}
+        {this.props.items && <SearchResults Items={this.props.items} cart={this.props.cart} saveForLater={this.props.saveForLater} detailItem={this.props.detailItem} addItemToCart={this.addItemToCart} addItemToSaveForLater={this.addItemToSaveForLater} additemDetails={this.additemDetails} />}
          
         {/* </Container> */}
       </div>

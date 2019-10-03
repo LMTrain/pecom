@@ -2,13 +2,8 @@ import React from "react";
 import { List, ListItem } from "../List";
 import "../SearchResults/style.css";
 
-// addItemToCart = (id) => {
-//   console.log("THIS IS ITEM ID===>")
-// }
 
 function SearchResults(props) {
-
-  // console.log('props', props)
   
   return (
     <div>
@@ -23,8 +18,8 @@ function SearchResults(props) {
               </div>
             
             <span><button key={result.itemId} id={result.itemId}type="submit" onClick={() => props.addItemToCart(result.itemId)} className="btn btn-success">Add to cart</button></span><span>  </span>
-            <span><button key={result.itemId}id={result.itemId} type="submit" onClick={() => props.itemDetails(result.itemId)} className="btn btn-success">Item Details</button></span><span>  </span>
-            <span><button key={result.itemId}id={result.itemId} type="submit" onClick={() => props.saveForLater(result.itemId)} className="btn btn-success">Save For Later</button></span><span>  </span>                             
+            <span><button key={result.itemId}id={result.itemId} type="submit" onClick={() => props.additemDetails(result.itemId)} className="btn btn-success">Item Details</button></span><span>  </span>
+            <span><button key={result.itemId}id={result.itemId} type="submit" onClick={() => props.addItemToSaveForLater(result.itemId)} className="btn btn-success">Save For Later</button></span><span>  </span>                             
           </ListItem> 
                     
                   

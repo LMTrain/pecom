@@ -2,9 +2,7 @@ import React from "react";
 import "./deals.css"
 
 function TodaysDeal(props) {
-    console.log(props)
-    console.log(props.thumbnailImage)
-    console.log(props.salePrice)
+   
 
     return (
         

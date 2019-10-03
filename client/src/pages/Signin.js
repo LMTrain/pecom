@@ -57,7 +57,7 @@ class Signin extends Component {
       memberpassword: '',    
     })    
         
-    // console.log('userAccount', userAccount)  
+   
     let userName = String(userAccount.memberemail)   
     let password = String(userAccount.memberpassword)
     UsermemberID = String(userAccount.memberemail)
@@ -67,7 +67,7 @@ class Signin extends Component {
 
     })    
     .then(res => {
-      console.log('res========', res.data.error)
+      
       const { data } = res.data;
       if(res.data.error === "Invalid Password"){
         console.log(res.data)
@@ -89,7 +89,7 @@ class Signin extends Component {
           })
       
       } else {
-        // console.log("No exisit")
+    
         this.setState({
           redirect: true,
           userName: data[0].memberId,
@@ -98,13 +98,10 @@ class Signin extends Component {
   
         })
         this.props.saveMemberID(userName, data[0].memberName)
-        console.log("THIS IS USERNAME", userName)
-        console.log("THIS IS MEMBERNAME", data[0].memberName)
-
-        console.log("THIS IS RES JSON DATA", data)
+        
         
       }
-      // this.loadPersonalizePage()
+     
     })    
     .catch(err => console.log(err));      
   };

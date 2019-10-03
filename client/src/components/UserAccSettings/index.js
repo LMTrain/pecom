@@ -7,17 +7,11 @@ import { Link } from "react-router-dom";
 
 function UserAccSettings(props) {
   var divStyle = {};
-  // var pStyle = {};
+ 
   let settingArray = []
   for (var i = 0;  i < props.length; i++) {        
     settingArray.push(props); 
-  }    
-    console.log("THIS IS SETTING ARRAY+++", settingArray)
-
-  console.log('PROPS==>', props)
-  // console.log("THIS IS THE CONTENT OF INDEX 0====>", props.user[0].colorDb)
-
-  // console.log(props.user[0].contact)
+  } 
   
   divStyle = props.user && {
     color: props.user[0].colorDb,
@@ -25,12 +19,7 @@ function UserAccSettings(props) {
     fontSize: props.user[0].divfontsizeDb,
     fontFamily: props.user[0].fontfamilyDb,
   };
-  // pStyle = props.user && {
-  //   color: props.user[0].colorDb,
-  //   fontFamily: props.user[0].fontfamilyDb,
-  //   fontSize: props.user[0].pfontsizeDb,    
-  // }; 
-  // console.log("THIS IS pSTYLE", pStyle)
+ 
   
   return (
              

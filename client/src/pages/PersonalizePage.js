@@ -21,11 +21,7 @@ class PersonalizePage extends Component {
 
   loadSignInPage = () => {    
     this.setRedirect()
-    // localStorage.clear();
-    // console.log("cliasdk");
-    // return(
-    //     <Redirect to="/Signin/"/>
-    // )
+    
   }
 
   setRedirect = () => {    

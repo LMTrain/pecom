@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import GetStarted from "./pages/GetStarted";
 import PersonalizePage from "./pages/PersonalizePage";
 import TodaysDeal from "./components/TodaysDeal";
-import ItemDetails from "./components/ItemDetails";
+// import ItemDetails from "./components/ItemDetails";
 // import Themes from "./AnimationPersonalize"
 // import Search from "./pages/Search";
 import UserPage from "./pages/UserPage";
@@ -15,10 +15,9 @@ import UserNavbar from "./components/UserNavbar";
 import UserAccSettings from "./components/UserAccSettings"
 // import ThemeNavbar from "./components/ThemeNavbar";
 import Wrapper from "./components/Wrapper";
-import db from "./db.json"
 import dataSet from "./db.json"
 import deals from "./db.json"
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 // import Themes from "./AnimationPersonalize";
 // import {spring} from 'react-spring;'
 
@@ -26,17 +25,21 @@ import { Redirect } from "react-router-dom";
  require('dotenv').config();
 var itemsArray = []
 var itemToCart = []
+var itemToSaveForLater = []
+var itemDetailArray = []
 var userArray = []
 var memberInfo = ""
 var shuffleData = ""
 var ShuffledDatas = []  
-var redirect = false
-console.log(db)
+// var redirect = false
+// console.log(db)
 class App extends React.Component {
   state = {
     user:[],
     userArray:[],
     cart: [],
+    detailItem:[],
+    saveForLater: [],
     memberId: "",
     membername: "",
     userName: "",
@@ -44,7 +47,6 @@ class App extends React.Component {
     theme: -1,
     search:"",    
     Items:[],
-    itemDetail:[],
     deals,
    
   }
@@ -73,6 +75,7 @@ class App extends React.Component {
     this.setState({ deals: dealsShuffled });  
   };
 
+  // ADD ITEM TO CART
   addItemToCart = (id) => {
     console.log("THIS IS USERARRAY OBJECT IN APP$$$$", userArray);
     itemsArray = [...this.state.Items]
@@ -83,55 +86,166 @@ class App extends React.Component {
       if (id !== itemsArray[i].parentItemId) {
             console.log("CONTINUE LOOKING FOR MY ITEM")
         }else{
+          var app = this
           console.log("THIS IS THE ITEM I WANT===>",itemsArray[i])
           itemToCart.push([itemsArray[i]])           
           console.log("THIS IS THE ITEM GOING TO DB CART===>", itemToCart)
-          this.setState({cart:itemToCart})
+          console.log("THIS IS THE ITEM GOING TO DB CART NAME===>", itemToCart[0][0].name)
+          app.setState({cart:itemToCart})
+          console.log("THIS IS THE ITEM IN CART STATE===>", app.state.cart, id)
+          console.log("THIS IS THE ITEM IN CART STATE NAME===>", app.state.cart.name)
           memberInfo = String(this.state.currentUser)
-          id = String(userArray[0]._id)
-          this.updateCartDB(userArray[0]._id)
+          // id = String(userArray[0]._id)
+          this.updateOrdersDB(userArray[0]._id)
           this.displayCart(userArray[0]._id)
         }          
       }    
     }
     displayCart = (id) => {
-      console.log("THIS IS THE ITEM IN CART STATE===>", itemToCart, id)
-      this.setState({cart:itemToCart})
-    }
-
-    itemDetails= (id) => {
-      console.log('found ITEM ID', id)      
       var app = this
-      console.log(app.state.Items)
-      console.log("THIS IS REDIRECTING TO DETAIL PAGE");
-      const item = app.state.Items.find((item) => item.id === id);
-      console.log('found ITEM', [item])
-    // this.setState({showBook: [book], showBookState: true})
-        
-
-      let itempage = redirect
-      itempage = true;      
-        
-      if (itempage === true) {
-        return <Redirect to='/UserPage' />
-      }      
+      app.setState({cart:itemToCart})
+      console.log("THIS IS THE ITEM IN CART STATE===>", app.state.cart, id)
+      console.log("THIS IS THE ITEM IN CART STATE NAME===>", app.state.cart.name)
+      this.updateCartDB(userArray[0]._id)
       
     }
 
-    updateCartDB = (id) => {
-      console.log(id)
-      let itemDB = String(itemToCart[0].name)
+  //ITEM SAVED FOR LATER
+  addItemToSaveForLater = (sFlId) => {
+    console.log("THIS IS USERARRAY OBJECT IN APP$$$$", userArray);
+    itemsArray = [...this.state.Items]
+    console.log("THIS IS ITEM ID FROM APP===>", sFlId)
+    console.log("THESE ARE CURRENT ITEMS===>", itemsArray)
+    for (var i = 0;  i < itemsArray.length; i++) {
+        console.log(i, itemsArray[i])      
+      if (sFlId !== itemsArray[i].parentItemId) {
+            console.log("CONTINUE LOOKING FOR MY SAVEDITEM")
+        }else{
+          console.log("THIS IS THE ITEM I WANT TO SAVE===>",itemsArray[i])
+          itemToSaveForLater.push([itemsArray[i]])           
+          console.log("THIS IS THE ITEM GOING TO DB SAVED FOR LATER===>", itemToSaveForLater)
+          this.setState({saveForLater:itemToSaveForLater})
+          memberInfo = String(this.state.currentUser)
+          // id = String(userArray[0]._id)
+          
+          this.displaySaveForLater(userArray[0]._id)
+        }          
+      }    
+    }
+  displaySaveForLater = (id) => {
+    var app = this
+      app.setState({saveForLater:itemToSaveForLater})      
+      console.log("THIS IS THE ITEM IN SAVE ITEM STATE===>", app.state.saveForLater, id)
+      console.log("THIS IS THE ITEM IN SAVE ITEM STATE NAME===>", app.state.saveForLater.name)
+      this.updateSaveItemDB(userArray[0]._id)
+    }
+  
+  // ITEM DETAIL
+  additemDetails = (id) => {     
+    itemsArray = [...this.state.Items]
+    console.log("THIS IS ITEM ID FROM APP===>", id)
+    console.log("THESE ARE CURRENT ITEMS===>", itemsArray)
+    for (var i = 0;  i < itemsArray.length; i++) {
+        console.log(i, itemsArray[i])      
+      if (id !== itemsArray[i].parentItemId) {
+            console.log("CONTINUE LOOKING FOR ITEM DETAIL")
+        }else{
+          var app = this       
+          console.log("THIS IS ITEM DETAIL===>",itemsArray[i])
+          itemDetailArray.push([itemsArray[i]])
+          app.setState({detailItem:itemDetailArray})
+          console.log("THIS IS ITEM DETAILARRAY===>",itemDetailArray)
+          console.log("THIS IS ITEM DETAIL STATE===>", app.state.itemDetail)
+          this.displayItemDetails(userArray[0]._id)          
+          
+        }          
+      }    
+    }
+  displayItemDetails= (id) => {
+   
+    this.setState({detailItem:itemDetailArray})
+    console.log("THIS IS ITEM DETAIL STATE===>", this.state.itemDetail, id)
+  }
+
+    // SAVING ITEM TO DB CART
+    updateCartDB = (id) => {      
+      let memberId = String(this.state.currentUser)
+      let itemDB = String(itemToCart[0][0].name)
       let qtyDB = 1
-      let unitPriceDB = Number(itemToCart[0].salePrice)
-      let linkDB = String(itemToCart[0].productUrl)
-      let descriptionDB = String(itemToCart[0].shortDescription)
-      let thumbnailDB = String(itemToCart[0].largeImage)
-      console.log("THIS IS USER DB ID+++", id)
+      let unitPriceDB = Number(itemToCart[0][0].salePrice)
+      let linkDB = String(itemToCart[0][0].productUrl)
+      let descriptionDB = String(itemToCart[0][0].shortDescription)
+      let thumbnailDB = String(itemToCart[0][0].largeImage)
       API.updateCart({
-        _id: id,
+        memberId: memberId,        
         item: itemDB,
         qty:	qtyDB,
-        Price: unitPriceDB,
+        price: unitPriceDB,
+        link: linkDB,
+        description: descriptionDB,
+        thumbnail: thumbnailDB,
+      })
+        .then(res => {                  
+          if(res.data.error ){
+            console.log(res.data.error)
+            document.getElementById("message").textContent = res.data.error;
+          }else{
+            // console.log(res.data.error)
+            document.getElementById("message").textContent = " ";
+            
+          }
+        })
+        
+        .catch(err => console.log(err)); 
+    }
+
+  // SAVE ORDERS TO DB
+    updateOrdersDB = (id) => {     
+      let memberId = String(this.state.currentUser)
+      let itemDB = String(itemToCart[0][0].name)
+      let qtyDB = 1
+      let unitPriceDB = Number(itemToCart[0][0].salePrice)
+      let linkDB = String(itemToCart[0][0].productUrl)
+      let descriptionDB = String(itemToCart[0][0].shortDescription)
+      let thumbnailDB = String(itemToCart[0][0].largeImage)      
+      API.updateOrders({
+        memberId: memberId,        
+        item: itemDB,
+        qty:	qtyDB,
+        price: unitPriceDB,
+        link: linkDB,
+        description: descriptionDB,
+        thumbnail: thumbnailDB,
+      })
+        .then(res => {                  
+          if(res.data.error ){
+            console.log(res.data.error)
+            document.getElementById("message").textContent = res.data.error;
+          }else{
+            // console.log(res.data.error)
+            document.getElementById("message").textContent = " ";
+            
+          }
+        })
+        
+        .catch(err => console.log(err)); 
+    }
+
+  // SAVE ITEM FOR LATER DB
+
+  updateSaveItemDB = (id) => {
+      console.log(id)
+      let memberId = String(this.state.currentUser)
+      let itemDB = String(itemToSaveForLater[0][0].name)     
+      let unitPriceDB = Number(itemToSaveForLater[0][0].salePrice)
+      let linkDB = String(itemToSaveForLater[0][0].productUrl)
+      let descriptionDB = String(itemToSaveForLater[0][0].shortDescription)
+      let thumbnailDB = String(itemToSaveForLater[0][0].largeImage)
+      console.log("THIS IS USER DB ID+++", id)
+      API.updateSavedItems({
+        memberId: memberId,        
+        item: itemDB,        
+        price: unitPriceDB,
         link: linkDB,
         description: descriptionDB,
         thumbnail: thumbnailDB,
@@ -152,7 +266,7 @@ class App extends React.Component {
 
     
 
-
+  //UPDATE THEME IN DB
   updateDBtheme = (mID) => {
     var colorrr = ""
     var testalignnn = ""
@@ -494,12 +608,12 @@ class App extends React.Component {
             <Route exact path="/Sign out" render = { () => <Home getTheme={this.getTheme}/>}/>
             <Route exact path="/Getstarted" render = { () => <GetStarted saveMemberID={this.saveMemberID} getTheme={this.getTheme}/>}/>
             <Route exact path="/PersonalizePage" render = { () => <PersonalizePage setTheme={this.setTheme} theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"/>}/>
-            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} getTheme={this.getTheme} cart={this.state.cart} Items={this.state.Items} addItemToCart={this.addItemToCart} itemDetails={this.itemDetails}/>}/>
+            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} getTheme={this.getTheme} cart={this.state.cart} detailItem={this.state.detailItem} saveForLater={this.state.saveForLater} Items={this.state.Items} addItemToCart={this.addItemToCart} addItemToSaveForLater={this.addItemToSaveForLater} additemDetails={this.additemDetails}/>}/>
             {/* <Route exact path="/AnimationPersonalize" render = { () => <Themes />}/> */}
             {/* {this.state.search.length && <Route render = { () => <Search items={this.state.Items} search={this.state.search}/>} />} */}
             <Route exact path="/TodaysDeal" render = { () => <TodaysDeal getTheme={this.getTheme} deals={this.state.deals} handleRemoveClick={() => this.removeDeal(this.state.itemId)} handleShuffleClick={this.shuffle} id={this.state.itemId} key={this.state.itemId}/>}/>
             <Route exact path="/Settings" render = { () => <UserAccSettings setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} settingSubmit={this.settingSubmit} passwordReset={this.passwordReset}/>}/>
-            <Route exact path="/ItemDetails" render = { () => <ItemDetails getTheme={this.getTheme} itemDetails={this.itemDetails} cart={this.state.cart} Items={this.state.Items} theme={this.state.theme} currentUser={this.state.currentUser} />}/>
+            {/* <Route exact path="/ItemDetails" render = { () => <ItemDetails getTheme={this.getTheme} detailItem={this.state.detailItem} cart={this.state.cart} saveForLater={this.state.saveForLater} Items={this.state.Items} theme={this.state.theme} currentUser={this.state.currentUser} />}/> */}
 
           </Wrapper>
          

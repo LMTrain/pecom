@@ -8,6 +8,8 @@ import { Listup, ListItemup } from "../components/Listup";
 import { Redirect } from "react-router-dom";
 import API from "../utils/API";
 import SearchResults from '../components/SearchResults';
+import ItemDetails from '../components/ItemDetails'
+// import { Link } from "react-router-dom";
 
 
 
@@ -85,25 +87,24 @@ class UserPage extends Component {
 
     this.props.setTheme(id)    
   }
-  addItemToCart = (id) => {
-    console.log("THIS IS ITEM ID FROM USERPAGE===>")
-  }
 
+  
+  // GETTING USERS INFO FROM DB
   userCart = () => {
-    console.log("THIS IS USER CART===>")
+    console.log("THIS IS USER CART===>", userArray[0].cart)
+    console.log("THIS IS USER SAVE ITEM===>", userArray[0])
     console.log("THIS IS CURRENT USER===>", userArray[0].userName)
     this.loadAPIgetUser(userArray[0].userName)
-    console.log(userArray[0].cart)
     // console.log(props.user[0].contact)
   }
 
   logOutPage = () => {    
     this.setRedirect()
-    // localStorage.clear();
-    // console.log("cliasdk");
-    // return(
-    //     <Redirect to="/Signin/"/>
-    // )
+    localStorage.clear();
+    console.log("cliasdk");
+    return(
+        <Redirect to="/Signin/"/>
+    )
   }
 
   setRedirect = () => {    
@@ -117,21 +118,50 @@ class UserPage extends Component {
     }
   }
 
+  settingButton = () => {
+    this.setState({
+      redirect: true,       
+    })
+    if (this.state.redirect) {     
+      return <Redirect to='/Settings' />
+    }  
+  }
+
+  help = () => {
+    this.setState({
+      redirect: true,       
+    })
+    if (this.state.redirect) {     
+      return <Redirect to='/home' />
+    }  
+  }
+  
   
   
 
   render() {
-    console.log('propssss', this.props)
-    let itemName = this.props.cart.name
+    
+   
     return (
       <div>
         {this.renderRedirect()}
-        <div style={divStyle}><b> Welcome {membername}!</b></div>
+        <Row>              
+          <Col size="md-10">
+            <div style={divStyle}><b> Welcome {membername}</b></div>
+          </Col>
+          <Col size="md-2">
+            <div className="lineitems">            
+                <span><button type="submit" className="btn btn-success" onClick={() => this.settingButton()}>Settings</button></span>
+                <button type="submit" className="btn btn-success" onClick={() => this.help()}>Help</button>
+                <button type="submit" className="btn btn-success" onClick={() => this.logOutPage()}>Sign Out</button>
+            </div>        
+          </Col>
+        </Row>
         <Container style={{ marginTop: 60 }}>
         <div id="message"></div>
 
           
-          {this.props.Items.length !== 0 && <SearchResults Items={this.props.Items} cart={this.props.cart} addItemToCart={this.props.addItemToCart} itemDetails={this.props.itemDetails}/>}
+          {this.props.Items.length !== 0 && <SearchResults Items={this.props.Items} cart={this.props.cart} saveForLater={this.props.saveForLater} detailItem={this.props.detailItem} addItemToCart={this.props.addItemToCart} addItemToSaveForLater={this.props.addItemToSaveForLater} additemDetails={this.props.additemDetails}/>}
           
           <div className="gap"></div>            
             <Row>              
@@ -154,14 +184,14 @@ class UserPage extends Component {
                     <div className="upage-box-content">
                       <Listup className="list-overflow-container-uspage">
 
-
-                        <ListItemup key={this.props.cart.id}>
-                        <img alt={this.props.cart.name} width="80" height="100" className="img-fluid" src={this.props.cart.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : this.props.cart.largeImage} />
-                        <p><b>Item Name             :</b> {itemName}</p>
-                        <b>Price         :</b> ${this.props.cart.salePrice}
+                      {this.props.saveForLater.map(saveForLater => (
+                        <ListItemup key={saveForLater[0].id}>
+                        <img alt={saveForLater[0].name} width="80" height="100" className="img-fluid" src={saveForLater[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : saveForLater[0].largeImage} />
+                        <p><b>Item Name             :</b> {saveForLater[0].name}</p>
+                        <b>Price         :</b> ${saveForLater[0].salePrice}
                         </ListItemup>
 
-
+                      ))}
                         
                       </Listup>                      
                     </div>
@@ -187,11 +217,16 @@ class UserPage extends Component {
 
                   <div className="upage-box-content">
                     <Listup className="list-overflow-container-uspage">
-                      <ListItemup key={this.props.id}>
-                      <img alt={this.props.name} width="80" height="100" className="img-fluid" src={this.props.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : this.props.largeImage} />
-                      <p><b>Item Name             :</b> {this.props.name}</p>
-                      <b>Price         :</b> ${this.props.salePrice}
-                      </ListItemup>
+
+                    {this.props.cart.map(cart => (
+                        <ListItemup key={cart[0].id}>
+                        <img alt={cart[0].name} width="80" height="100" className="img-fluid" src={cart[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : cart[0].largeImage} />
+                        <p><b>Item Name             :</b> {cart[0].name}</p>
+                        <b>Price         :</b> ${cart[0].salePrice}
+                        </ListItemup>
+
+                      ))}
+
                     </Listup>               
                   </div>
 
@@ -216,11 +251,16 @@ class UserPage extends Component {
                   <div className="upage-box-content">
 
                     <Listup className="list-overflow-container-uspage">
-                      <ListItemup key={this.props.id}>
-                      <img alt={this.props.name} width="80" height="100" className="img-fluid" src={this.props.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : this.props.largeImage} />
-                      <p><b>Item Name             :</b> {this.props.name}</p>
-                      <b>Price         :</b> ${this.props.salePrice}
-                      </ListItemup>
+
+                    {this.props.cart.map(cart => (
+                        <ListItemup key={cart[0].id}>
+                        <img alt={cart[0].name} width="80" height="100" className="img-fluid" src={cart[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : cart[0].largeImage} />
+                        <p><b>Item Name             :</b> {cart[0].name}</p>
+                        <b>Price         :</b> ${cart[0].salePrice}
+                        </ListItemup>
+
+                      ))}
+
                     </Listup>               
                   </div>
 
@@ -229,8 +269,8 @@ class UserPage extends Component {
               </Col>                           
             </Row>
             
-            {/* <UserAccSettings userArray={this.state.userArray} settingSubmit={this.settingSubmit}/>       */}
-          
+            {this.props.Items.length !== 0 && <ItemDetails cart={this.props.cart} saveForLater={this.props.saveForLater} detailItem={this.props.detailItem} addItemToCart={this.props.addItemToCart} addItemToSaveForLater={this.props.addItemToSaveForLater} additemDetails={this.props.additemDetails}/>}
+        
         </Container>
       </div>
     );

@@ -26,22 +26,36 @@ export default {
     console.log("FROM CLIENT API updateUser ====", id)
     return axios.put("/api/users", id);
   },
-  // Update the user with the given id
-  // updateCart: function(id) {
-  //   console.log("FROM CLIENT API updateCart -- MEMBER_id ====", id)
-  //   console.log(id.memberId)
-  //   console.log(id.item)
-  //   return axios.put("/api/cart/" + id );
-  // },
-
-  updateCart: function(cart) {
-    // 
+  
+  // CART DB UPDATE
+  updateCart: function(cart) {   
     console.log("FROM CLIENT API updateCart -- MEMBER_id ====", cart)
     console.log(cart.memberId)
     console.log(cart.item)
     const id = cart._id;
-
     return axios.put(`/api/cart/current/${id}`, cart);
+    // server expects: /api/cart/current/someid
+    // /api/cat/currentsomeid
+  },
+  
+  // CART DB UPDATE
+  updateOrders: function(orders) {   
+    console.log("FROM CLIENT API updateOders -- MEMBER_id ====", orders)
+    console.log(orders.memberId)
+    console.log(orders.item)
+    const id = orders._id;
+    return axios.put(`/api/orders/current/${id}`, orders);
+    // server expects: /api/cart/current/someid
+    // /api/cat/currentsomeid
+  },
+
+  // SAVED ITEMS DB UPDATE
+  updateSavedItems: function(saved) {  
+    console.log("FROM CLIENT API updateSavedItems -- MEMBER_id ====", saved)
+    console.log(saved.memberId)
+    console.log(saved.item)
+    const id = saved._id;
+    return axios.put(`/api/saveditems/current/${id}`, saved);
     // server expects: /api/cart/current/someid
     // /api/cat/currentsomeid
   },
