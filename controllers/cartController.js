@@ -3,7 +3,7 @@ const db = require("../models");
 // Defining methods for the itemsController
 module.exports = {
   findAll: function(req, res) {
-    db.Cart
+    db.cart
       .find(req.query)
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
@@ -11,16 +11,16 @@ module.exports = {
   },
 
   findById: function(req, res) {
-    db.Cart
+    db.cart
       .find({userName : req.params.memberId})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   
   update: function(req, res) {
-    return db.Cart.create(req.body) 
+    return db.cart.create(req.body) 
       .then(function(dbCart) {
-        return db.User.findOneAndUpdate({ _id: req.params.id }, {cart: dbCart._id}, {new:true}, req.body)
+        return db.user.findOneAndUpdate({ _id: req.params.id }, {cart: dbCart._id}, {new:true}, req.body)
     })
       .then(dbCart => res.json(dbCart))
       .catch(err => {
@@ -30,7 +30,7 @@ module.exports = {
   },
   
   remove: function(req, res) {
-    db.Cart
+    db.cart
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))

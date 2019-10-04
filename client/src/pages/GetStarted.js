@@ -3,11 +3,7 @@ import API from "../utils/API";
 import Container from "../components/Container";
 import UserForm from "../components/UserForm";
 import { Redirect } from "react-router-dom";
-// import { Link } from "react-router-dom";
-// import PersonalizePage from "./PersonalizePage";
 
-// import UserPage from "../components/UserPage";
-// import Details from "../components/Details";
 
 var UsermemberID = ""
 class GetStarted extends Component {

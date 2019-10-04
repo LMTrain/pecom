@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
   findAll: function(req, res) {
-    db.User
+    db.user
       .find(req.query)
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
@@ -11,14 +11,14 @@ module.exports = {
   },
 
   findById: function(req, res) {
-    db.User
+    db.user
       .find({userName : req.params.userName})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
 
   find: function(req, res) {
-    db.User.find({"userName" : req.body.userName}, function(error, data){
+    db.user.find({"userName" : req.body.userName}, function(error, data){
       var hash = "";      
       if(error) throw error
       
@@ -50,7 +50,7 @@ module.exports = {
   },
 
   create: function(req, res) {
-  db.User.find({"userName" : req.body.userName}, function(error, data){
+  db.user.find({"userName" : req.body.userName}, function(error, data){
     if(error) throw error
       if(data.length !== 0){
         console.log('data', data)
@@ -61,7 +61,7 @@ module.exports = {
       }else{
         console.log('there is no data', data)
         req.body.password = bcrypt.hashSync(req.body.password, 10);
-        db.User
+        db.user
           .create(req.body)
           .then(dbModel => {
             console.log("create user", dbModel)
@@ -75,7 +75,7 @@ module.exports = {
   },
 
   update: function(req, res) {
-    db.User.find({"memberId" : req.body.memberId}, function(error, data){
+    db.user.find({"memberId" : req.body.memberId}, function(error, data){
       if(error) throw error
         if(data.length === 0){
           console.log('data', data)
@@ -84,7 +84,7 @@ module.exports = {
             "error": "User does not exist"
           })
         }else{
-          db.User.collection
+          db.user.collection
             .updateOne( { "memberId": req.body.memberId }, {$set: {userTheme: req.body.userTheme, colorDb: req.body.colorDb, textalignDb: req.body.textalignDb, divfontsizeDb: req.body.divfontsizeDb, pfontsizeDb: req.body.pfontsizeDb, fontfamilyDb: req.body.fontfamilyDb}})            
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));

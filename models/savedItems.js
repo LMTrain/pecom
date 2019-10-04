@@ -10,6 +10,6 @@ const savedItemsSchema = new Schema({
   thumbnail: String,  
 });
 
-const SavedItems = mongoose.model("SavedItems", savedItemsSchema);
+const savedItems = mongoose.model("savedItems", savedItemsSchema);
 
-module.exports = SavedItems;
+module.exports = savedItems;

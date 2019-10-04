@@ -1,10 +1,6 @@
 import React, { Component } from "react";
-// import API from "../utils/API";
-// import Container from "../components/Container";
-// import UserNavbar from "../components/UserNavbar";
 import SearchResults from "../components/SearchResults";
-// import ItemDetails from "../components/ItemDetails";
-// import { View } from "react-native";
+
 
 class Search extends Component {
   state = {

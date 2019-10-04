@@ -17,7 +17,7 @@ import UserAccSettings from "./components/UserAccSettings"
 import Wrapper from "./components/Wrapper";
 import dataSet from "./db.json"
 import deals from "./db.json"
-import { Redirect } from "react-router-dom";
+
 
 
  require('dotenv').config();
@@ -25,6 +25,7 @@ var itemsArray = []
 var itemToCart = []
 var itemToSaveForLater = []
 var itemDetailArray = []
+var emptyArray = []
 var userArray = []
 var memberInfo = ""
 var shuffleData = ""
@@ -497,7 +498,10 @@ class App extends React.Component {
   }
 
   logOut = () => {
-    this.setState ({user:[], userArray:[], cart: [], detailItem:[], saveForLater: [], memberId: "", membername: "", userName: "", currentUser: null, theme: -1, search:"", Items:[], totalItems: 0, totalSavedItems: 0,})
+    // this.state.cart = [...emptyArray]
+    // this.props.Items = [...emptyArray]
+    // this.props.saveForLater = [...emptyArray]
+    this.setState ({user: emptyArray, userArray: emptyArray, cart: emptyArray, detailItem: emptyArray, saveForLater: emptyArray, memberId: "", membername: "", userName: "", currentUser: null, theme: -1, search:"", Items:emptyArray, totalItems: 0, totalSavedItems: 0,})
   }
 
   passwordReset = () => {

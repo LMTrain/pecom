@@ -118,7 +118,7 @@ class UserPage extends Component {
       switch(redirectOption){
         case "logOut":
             localStorage.clear();
-          return <Redirect to="/home"/>;                 
+          return <Redirect to="/"/>;                 
         case "settings":
           return <Redirect to='/Settings' />;                 
         case "todaysDeal":

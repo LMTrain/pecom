@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
   memberId: { type: String, required: true },
   memberName: { type: String, required: true },
   userName: { type: String, required: true },
@@ -19,23 +19,23 @@ const UserSchema = new Schema({
   fontfamilyDb: { type: String, required: false },
   cart: {
     type: Schema.Types.ObjectId,
-    ref: "Cart"
+    ref: "cart"
   },
   bookExchange: {
     type: Schema.Types.ObjectId,
-    ref: "Book"
+    ref: "book"
   },
   orders: {
     type: Schema.Types.ObjectId,
-    ref: "Orders"
+    ref: "orders"
   },
   savedItems: {
     type: Schema.Types.ObjectId,
-    ref: "SavedItems"
+    ref: "savedItems"
   },
   
 });
 
-const User = mongoose.model("User", UserSchema);
+const user = mongoose.model("user", userSchema);
 
-module.exports = User;
+module.exports = user;

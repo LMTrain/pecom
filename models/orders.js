@@ -11,6 +11,6 @@ const ordersSchema = new Schema({
   thumbnail: String,  
 });
 
-const Orders = mongoose.model("Orders", ordersSchema);
+const orders = mongoose.model("orders", ordersSchema);
 
-module.exports = Orders;
+module.exports = orders;

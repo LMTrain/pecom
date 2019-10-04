@@ -5,7 +5,7 @@ ul.search-results img {
 .cart-box {
   background: #fff;
   border-radius: 2px;
-  height: 200px;
+  height: 235px;
   margin-right: 190px;
   position: relative;
   width: 800px;
@@ -18,7 +18,7 @@ ul.search-results img {
   height: 100%;
   overflow: hidden;
   text-align: left;
-  margin-top: 15px;
+  margin-top: 5px;
   margin-left: 30px;
   cursor: pointer;
 }
@@ -31,7 +31,7 @@ ul.search-results img {
   color: #ff1744;
   font-size: 48px;
   position: absolute;
-  top: -20px;
+  top: -10px;
   right: 5px;
   cursor: pointer;
 }

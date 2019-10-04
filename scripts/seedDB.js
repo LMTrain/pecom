@@ -32,9 +32,9 @@ const userSeed = [
   }  
 ];
 
-db.User
+db.user
   .remove({})
-  .then(() => db.User.collection.insertMany(userSeed))
+  .then(() => db.user.collection.insertMany(userSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
