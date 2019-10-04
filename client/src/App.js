@@ -5,7 +5,8 @@ import Home from "./pages/Home";
 import GetStarted from "./pages/GetStarted";
 import PersonalizePage from "./pages/PersonalizePage";
 import TodaysDeal from "./components/TodaysDeal";
-// import ItemDetails from "./components/ItemDetails";
+import ItemDetails from "./components/ItemDetails";
+import Cart from "./components/Cart"
 // import Themes from "./AnimationPersonalize"
 // import Search from "./pages/Search";
 import UserPage from "./pages/UserPage";
@@ -13,13 +14,9 @@ import API from "./utils/API";
 import Navbar from "./components/Navbar";
 import UserNavbar from "./components/UserNavbar";
 import UserAccSettings from "./components/UserAccSettings"
-// import ThemeNavbar from "./components/ThemeNavbar";
 import Wrapper from "./components/Wrapper";
 import dataSet from "./db.json"
 import deals from "./db.json"
-// import { Redirect } from "react-router-dom";
-// import Themes from "./AnimationPersonalize";
-// import {spring} from 'react-spring;'
 
 
  require('dotenv').config();
@@ -30,9 +27,10 @@ var itemDetailArray = []
 var userArray = []
 var memberInfo = ""
 var shuffleData = ""
-var ShuffledDatas = []  
-// var redirect = false
-// console.log(db)
+var ShuffledDatas = []
+var itemsTotal = 0
+var savedItemsTotal = 0
+
 class App extends React.Component {
   state = {
     user:[],
@@ -47,6 +45,8 @@ class App extends React.Component {
     theme: -1,
     search:"",    
     Items:[],
+    totalItems: 0,
+    totalSavedItems: 0,
     deals,
    
   }
@@ -77,25 +77,18 @@ class App extends React.Component {
 
   // ADD ITEM TO CART
   addItemToCart = (id) => {
-    console.log("THIS IS USERARRAY OBJECT IN APP$$$$", userArray);
     itemsArray = [...this.state.Items]
-    console.log("THIS IS ITEM ID FROM APP===>", id)
-    console.log("THESE ARE CURRENT ITEMS===>", itemsArray)
     for (var i = 0;  i < itemsArray.length; i++) {
        console.log(i, itemsArray[i])      
       if (id !== itemsArray[i].parentItemId) {
-            console.log("CONTINUE LOOKING FOR MY ITEM")
         }else{
           var app = this
-          console.log("THIS IS THE ITEM I WANT===>",itemsArray[i])
-          itemToCart.push([itemsArray[i]])           
-          console.log("THIS IS THE ITEM GOING TO DB CART===>", itemToCart)
-          console.log("THIS IS THE ITEM GOING TO DB CART NAME===>", itemToCart[0][0].name)
+          itemToCart.push([itemsArray[i]])
           app.setState({cart:itemToCart})
+          itemsTotal = itemsTotal + 1
+          app.setState({totalItems: itemsTotal})
           console.log("THIS IS THE ITEM IN CART STATE===>", app.state.cart, id)
-          console.log("THIS IS THE ITEM IN CART STATE NAME===>", app.state.cart.name)
           memberInfo = String(this.state.currentUser)
-          // id = String(userArray[0]._id)
           this.updateOrdersDB(userArray[0]._id)
           this.displayCart(userArray[0]._id)
         }          
@@ -105,29 +98,24 @@ class App extends React.Component {
       var app = this
       app.setState({cart:itemToCart})
       console.log("THIS IS THE ITEM IN CART STATE===>", app.state.cart, id)
-      console.log("THIS IS THE ITEM IN CART STATE NAME===>", app.state.cart.name)
       this.updateCartDB(userArray[0]._id)
-      
     }
+
+    
 
   //ITEM SAVED FOR LATER
   addItemToSaveForLater = (sFlId) => {
-    console.log("THIS IS USERARRAY OBJECT IN APP$$$$", userArray);
     itemsArray = [...this.state.Items]
-    console.log("THIS IS ITEM ID FROM APP===>", sFlId)
-    console.log("THESE ARE CURRENT ITEMS===>", itemsArray)
     for (var i = 0;  i < itemsArray.length; i++) {
         console.log(i, itemsArray[i])      
       if (sFlId !== itemsArray[i].parentItemId) {
-            console.log("CONTINUE LOOKING FOR MY SAVEDITEM")
-        }else{
-          console.log("THIS IS THE ITEM I WANT TO SAVE===>",itemsArray[i])
-          itemToSaveForLater.push([itemsArray[i]])           
-          console.log("THIS IS THE ITEM GOING TO DB SAVED FOR LATER===>", itemToSaveForLater)
+            
+        }else{          
+          itemToSaveForLater.push([itemsArray[i]])
+          savedItemsTotal = savedItemsTotal + 1
+          this.setState({totalSavedItems: savedItemsTotal}) 
           this.setState({saveForLater:itemToSaveForLater})
           memberInfo = String(this.state.currentUser)
-          // id = String(userArray[0]._id)
-          
           this.displaySaveForLater(userArray[0]._id)
         }          
       }    
@@ -136,26 +124,20 @@ class App extends React.Component {
     var app = this
       app.setState({saveForLater:itemToSaveForLater})      
       console.log("THIS IS THE ITEM IN SAVE ITEM STATE===>", app.state.saveForLater, id)
-      console.log("THIS IS THE ITEM IN SAVE ITEM STATE NAME===>", app.state.saveForLater.name)
       this.updateSaveItemDB(userArray[0]._id)
     }
   
   // ITEM DETAIL
   additemDetails = (id) => {     
     itemsArray = [...this.state.Items]
-    console.log("THIS IS ITEM ID FROM APP===>", id)
-    console.log("THESE ARE CURRENT ITEMS===>", itemsArray)
     for (var i = 0;  i < itemsArray.length; i++) {
         console.log(i, itemsArray[i])      
       if (id !== itemsArray[i].parentItemId) {
             console.log("CONTINUE LOOKING FOR ITEM DETAIL")
         }else{
-          var app = this       
-          console.log("THIS IS ITEM DETAIL===>",itemsArray[i])
+          var app = this
           itemDetailArray.push([itemsArray[i]])
           app.setState({detailItem:itemDetailArray})
-          console.log("THIS IS ITEM DETAILARRAY===>",itemDetailArray)
-          console.log("THIS IS ITEM DETAIL STATE===>", app.state.itemDetail)
           this.displayItemDetails(userArray[0]._id)          
           
         }          
@@ -448,7 +430,7 @@ class App extends React.Component {
     memberInfo = mID
     console.log("MID====>", mID)
    
-    // memberNName = mName
+    
     this.setState({
       currentUser: mID,
       memberId: mID,
@@ -457,7 +439,7 @@ class App extends React.Component {
     })
     memberInfo = this.state.currentUser
     console.log("CURRENTUSER ===>", this.state.currentUser)
-    // memberNName = this.state.memberName
+    
     this.getMemberInfo()
   }
 
@@ -468,17 +450,15 @@ class App extends React.Component {
         console.log("CURRENT USER ID====", this.state.currentUser)
         console.log("CURRENT USER NAME====", this.state.memberName)
         this.getAPIuserData(memberInfo);
-        // memberInfo = this.state.currentUser
+       
         break;
       case false:
       console.log("WHAT IS INSIDE", this.state.currentUser)
-      console.log("MID====>", memberInfo)
+   
       break;      
       default:
           console.log("FROM DEFAULT MID====>", memberInfo)
-        // memberInfo = this.state.currentUser
-        // this.getAPIuserData(memberInfo);
-        // return memberInfo = "Welcome Guest!"               
+                   
     }    
   } 
 
@@ -495,17 +475,9 @@ class App extends React.Component {
       })
     }).then(function(){
       console.log("THIS IS USER OBJECT IN APP", app.state.user);
-      // this.setState({ userArray: app.state.user})
-      // console.log("APP USERARRAY====>", app.state.userArray)
+     
       userArray = [...app.state.user]
-      // settingsArray = userArray[0].toLocaleString()
-      // console.log("THIS IS USERARRAY OBJECT IN APP$$$$", userArray);
-      // console.log(userArray[0].userName)
-      // usertheme = userArray[0].userTheme
-      // membername = userArray[0].memberName
-      // contact = userArray[0].contact
-      // console.log("USER THEME IS ===", usertheme)
-      // app.userTheme(usertheme);
+      
     })    
     // .then(res => {console.log(res)})
     .catch(err => console.log(err));
@@ -518,9 +490,6 @@ class App extends React.Component {
   searchForItems = (e) => {
     e.preventDefault();
     var app = this;
-    // API.search(app.state.search)
-    //   .then(res => app.setState({ Items: res.data.items }))          
-    //   .catch(err => console.log(err));
     var results = dataSet.filter(item => {
       return item.name.toLowerCase().indexOf(app.state.search.toLowerCase()) !== -1;
     })
@@ -531,6 +500,15 @@ class App extends React.Component {
     console.log(id, "THIS SHOULD BE A USERNAME")
     this.updateDBtheme(id);
   }
+
+  checkOut = () => {
+    this.setState ({cart: []})
+  }
+
+  logOut = () => {
+    this.setState ({user:[], userArray:[], cart: [], detailItem:[], saveForLater: [], memberId: "", membername: "", userName: "", currentUser: null, theme: -1, search:"", Items:[],})
+  }
+
   passwordReset = () => {
     console.log()
   }
@@ -608,12 +586,13 @@ class App extends React.Component {
             <Route exact path="/Sign out" render = { () => <Home getTheme={this.getTheme}/>}/>
             <Route exact path="/Getstarted" render = { () => <GetStarted saveMemberID={this.saveMemberID} getTheme={this.getTheme}/>}/>
             <Route exact path="/PersonalizePage" render = { () => <PersonalizePage setTheme={this.setTheme} theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"/>}/>
-            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} getTheme={this.getTheme} cart={this.state.cart} detailItem={this.state.detailItem} saveForLater={this.state.saveForLater} Items={this.state.Items} addItemToCart={this.addItemToCart} addItemToSaveForLater={this.addItemToSaveForLater} additemDetails={this.additemDetails}/>}/>
+            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} logOut={this.logOut} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} getTheme={this.getTheme} cart={this.state.cart} totalItems={this.state.totalItems} totalSavedItems={this.state.totalSavedItems} detailItem={this.state.detailItem} saveForLater={this.state.saveForLater} Items={this.state.Items} addItemToCart={this.addItemToCart} addItemToSaveForLater={this.addItemToSaveForLater} additemDetails={this.additemDetails}/>}/>
             {/* <Route exact path="/AnimationPersonalize" render = { () => <Themes />}/> */}
             {/* {this.state.search.length && <Route render = { () => <Search items={this.state.Items} search={this.state.search}/>} />} */}
             <Route exact path="/TodaysDeal" render = { () => <TodaysDeal getTheme={this.getTheme} deals={this.state.deals} handleRemoveClick={() => this.removeDeal(this.state.itemId)} handleShuffleClick={this.shuffle} id={this.state.itemId} key={this.state.itemId}/>}/>
             <Route exact path="/Settings" render = { () => <UserAccSettings setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} settingSubmit={this.settingSubmit} passwordReset={this.passwordReset}/>}/>
-            {/* <Route exact path="/ItemDetails" render = { () => <ItemDetails getTheme={this.getTheme} detailItem={this.state.detailItem} cart={this.state.cart} saveForLater={this.state.saveForLater} Items={this.state.Items} theme={this.state.theme} currentUser={this.state.currentUser} />}/> */}
+            <Route exact path="/ItemDetails" render = { () => <ItemDetails getTheme={this.getTheme} detailItem={this.state.detailItem} cart={this.state.cart} saveForLater={this.state.saveForLater} Items={this.state.Items} theme={this.state.theme} currentUser={this.state.currentUser} />}/>
+            <Route exact path="/Cart" render = { () => <Cart setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser}  getMemberInfo={this.state.getMemberInfo} cart={this.state.cart} checkOut={this.checkOut} Items={this.state.Items}/>}/>
 
           </Wrapper>
          

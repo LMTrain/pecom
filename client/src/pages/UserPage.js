@@ -18,6 +18,8 @@ var membername = ""
 var userName =""
 var usertheme = "";
 var divStyle = {};
+var redirectOption = " "
+// var totalItems = 0
 
 class UserPage extends Component {
   
@@ -91,7 +93,8 @@ class UserPage extends Component {
   
   // GETTING USERS INFO FROM DB
   userCart = () => {
-    console.log("THIS IS USER CART===>", userArray[0].cart)
+    console.log("THIS IS USER CART===>", this.props.cart)
+    console.log("THIS IS TOTAL ITEMS IN CART===>", this.props.totalItems)
     console.log("THIS IS USER SAVE ITEM===>", userArray[0])
     console.log("THIS IS CURRENT USER===>", userArray[0].userName)
     this.loadAPIgetUser(userArray[0].userName)
@@ -99,52 +102,58 @@ class UserPage extends Component {
   }
 
   logOutPage = () => {    
-    this.setRedirect()
-    localStorage.clear();
-    console.log("cliasdk");
-    return(
-        <Redirect to="/Signin/"/>
-    )
-  }
-
-  setRedirect = () => {    
-    this.setState({
-      redirect: true,      
-    })
-  }
-  renderRedirect = () => {
-    if (this.state.redirect) {     
-      return <Redirect to='/Logout' />
-    }
-  }
+    redirectOption = "logOut"
+    this.props.setTheme("theme0")
+    this.props.logOut()
+      this.setState({
+        redirect: true,
+      })
+  }  
 
   settingButton = () => {
+    redirectOption = "settings"
     this.setState({
       redirect: true,       
-    })
-    if (this.state.redirect) {     
-      return <Redirect to='/Settings' />
-    }  
-  }
-
-  help = () => {
-    this.setState({
-      redirect: true,       
-    })
-    if (this.state.redirect) {     
-      return <Redirect to='/home' />
-    }  
+    })    
   }
   
+  todaysDeal = () => {
+    redirectOption = "todaysDeal"
+    this.setState({
+      redirect: true,       
+    })    
+  }
+  
+  userCartPage = () => {
+    redirectOption = "usercartpage"
+    this.setState({
+      redirect: true,       
+    })    
+
+  }
   
   
 
   render() {
-    
+    if (this.state.redirect) {
+      switch(redirectOption){
+        case "logOut":
+            localStorage.clear();
+          return <Redirect to="/home"/>;                 
+        case "settings":
+          return <Redirect to='/Settings' />;                 
+        case "todaysDeal":
+          return <Redirect to='/TodaysDeal' />;
+        case "usercartpage":
+          return <Redirect to='/Cart' />;             
+        default:            
+          break;
+      }
+    }
    
     return (
       <div>
-        {this.renderRedirect()}
+        {/* {this.renderRedirect()} */}
         <Row>              
           <Col size="md-10">
             <div style={divStyle}><b> Welcome {membername}</b></div>
@@ -152,7 +161,7 @@ class UserPage extends Component {
           <Col size="md-2">
             <div className="lineitems">            
                 <span><button type="submit" className="btn btn-success" onClick={() => this.settingButton()}>Settings</button></span>
-                <button type="submit" className="btn btn-success" onClick={() => this.help()}>Help</button>
+                <button type="submit" className="btn btn-success" onClick={() => this.todaysDeal()}>Todays Deal</button>
                 <button type="submit" className="btn btn-success" onClick={() => this.logOutPage()}>Sign Out</button>
             </div>        
           </Col>
@@ -161,7 +170,7 @@ class UserPage extends Component {
         <div id="message"></div>
 
           
-          {this.props.Items.length !== 0 && <SearchResults Items={this.props.Items} cart={this.props.cart} saveForLater={this.props.saveForLater} detailItem={this.props.detailItem} addItemToCart={this.props.addItemToCart} addItemToSaveForLater={this.props.addItemToSaveForLater} additemDetails={this.props.additemDetails}/>}
+          {this.props.Items.length !== 0 && <SearchResults Items={this.props.Items} cart={this.props.cart} saveForLater={this.props.saveForLater} totalItems={this.state.totalItems} totalSavedItems={this.state.totalSavedItems} detailItem={this.props.detailItem} addItemToCart={this.props.addItemToCart} addItemToSaveForLater={this.props.addItemToSaveForLater} additemDetails={this.props.additemDetails}/>}
           
           <div className="gap"></div>            
             <Row>              
@@ -174,7 +183,7 @@ class UserPage extends Component {
                         <Col size="md-12">
                             <div className="inside-upage-box">
                               <div className="img-container">
-                                <b>Save For Later</b>
+                                <div><b>SavedItems</b><span>..</span><b>{this.props.totalSavedItems}</b></div>
                               </div>                  
                             </div>                          
                         </Col>
@@ -206,13 +215,14 @@ class UserPage extends Component {
                   <div className="img-container">
                   <Row>              
                     <Col size="md-12">
-                        <div className="inside-upage-box" onClick={() => this.userCart()}>
+                        <div className="inside-upage-box" onClick={() => this.userCartPage()}>
+                       
                           <div className="img-container">
-                            <b>Cart</b>
+                            <div><b><span>🛒</span>Cart</b><span>...</span><b>{this.props.totalItems}</b></div>
                           </div>                  
                         </div>                          
                     </Col>
-                  </Row>                    
+                  </Row>     
                   </div>
 
                   <div className="upage-box-content">
@@ -242,11 +252,11 @@ class UserPage extends Component {
                     <Col size="md-12">
                         <div className="inside-upage-box">
                           <div className="img-container">
-                            <b>Orders</b>
+                            <div><b>Orders</b><span>...</span><b>{this.props.totalItems}</b></div>
                           </div>                  
                         </div>                          
                     </Col>
-                  </Row>                    
+                  </Row>        
                   </div>
                   <div className="upage-box-content">
 

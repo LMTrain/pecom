@@ -25,9 +25,10 @@ function UserAccSettings(props) {
              
     <div>
       <Container style={{ marginTop: 60 }}>
+      <div style={divStyle}><b>Settings</b></div>
         <div className="setting-box">
           <div className="img-container">
-            <div style={divStyle}><b>Settings</b></div>
+            
             <ul className="list-group search-results">{props.user && props.user.map(result => (                            
               <li key={result.userName} className="list-group-item">
                 {/* <img alt={result.memberName} width="120" height="180" className="img-fluid" src={result.userImage == null ? 'https://lmtrain.github.io/lm-images/assets/  images/books5.jpg' : result.userImage} /><span></span>               */}
@@ -51,7 +52,7 @@ function UserAccSettings(props) {
                   <p><b>Font Size   :</b> {result.pfontsizeDb}</p><hr></hr><br></br>
                     {/* <span><b>contact :</b> {result.contact}</span> */}
                   <button id={result.userName} type="submit" onClick={() => props.settingSubmit(result.userName)} className="btn btn-success">Save Settings</button>
-                  <Link to="/UserPage"><button id={result.userName} type="submit" className="btn btn-success">Cancel</button></Link>
+                  <Link to="/UserPage"><button id={result.userName} type="submit" className="btn btn-success">Done</button></Link>
                   
               </li>
               ))}
