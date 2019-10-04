@@ -17,6 +17,7 @@ import UserAccSettings from "./components/UserAccSettings"
 import Wrapper from "./components/Wrapper";
 import dataSet from "./db.json"
 import deals from "./db.json"
+import { Redirect } from "react-router-dom";
 
 
  require('dotenv').config();
@@ -55,7 +56,6 @@ class App extends React.Component {
   }
 
   removeCar = (id) => {
-    console.log(id, "This is ID");
     let carsArray = [...this.state.deals]
     let deals = carsArray.filter(deal => {
       return deal.id !== id;
@@ -79,7 +79,7 @@ class App extends React.Component {
   addItemToCart = (id) => {
     itemsArray = [...this.state.Items]
     for (var i = 0;  i < itemsArray.length; i++) {
-       console.log(i, itemsArray[i])      
+          
       if (id !== itemsArray[i].parentItemId) {
         }else{
           var app = this
@@ -87,7 +87,6 @@ class App extends React.Component {
           app.setState({cart:itemToCart})
           itemsTotal = itemsTotal + 1
           app.setState({totalItems: itemsTotal})
-          console.log("THIS IS THE ITEM IN CART STATE===>", app.state.cart, id)
           memberInfo = String(this.state.currentUser)
           this.updateOrdersDB(userArray[0]._id)
           this.displayCart(userArray[0]._id)
@@ -97,7 +96,6 @@ class App extends React.Component {
     displayCart = (id) => {
       var app = this
       app.setState({cart:itemToCart})
-      console.log("THIS IS THE ITEM IN CART STATE===>", app.state.cart, id)
       this.updateCartDB(userArray[0]._id)
     }
 
@@ -107,9 +105,7 @@ class App extends React.Component {
   addItemToSaveForLater = (sFlId) => {
     itemsArray = [...this.state.Items]
     for (var i = 0;  i < itemsArray.length; i++) {
-        console.log(i, itemsArray[i])      
       if (sFlId !== itemsArray[i].parentItemId) {
-            
         }else{          
           itemToSaveForLater.push([itemsArray[i]])
           savedItemsTotal = savedItemsTotal + 1
@@ -122,8 +118,7 @@ class App extends React.Component {
     }
   displaySaveForLater = (id) => {
     var app = this
-      app.setState({saveForLater:itemToSaveForLater})      
-      console.log("THIS IS THE ITEM IN SAVE ITEM STATE===>", app.state.saveForLater, id)
+      app.setState({saveForLater:itemToSaveForLater})
       this.updateSaveItemDB(userArray[0]._id)
     }
   
@@ -131,7 +126,6 @@ class App extends React.Component {
   additemDetails = (id) => {     
     itemsArray = [...this.state.Items]
     for (var i = 0;  i < itemsArray.length; i++) {
-        console.log(i, itemsArray[i])      
       if (id !== itemsArray[i].parentItemId) {
             console.log("CONTINUE LOOKING FOR ITEM DETAIL")
         }else{
@@ -144,9 +138,8 @@ class App extends React.Component {
       }    
     }
   displayItemDetails= (id) => {
-   
     this.setState({detailItem:itemDetailArray})
-    console.log("THIS IS ITEM DETAIL STATE===>", this.state.itemDetail, id)
+    
   }
 
     // SAVING ITEM TO DB CART
@@ -216,14 +209,13 @@ class App extends React.Component {
   // SAVE ITEM FOR LATER DB
 
   updateSaveItemDB = (id) => {
-      console.log(id)
       let memberId = String(this.state.currentUser)
       let itemDB = String(itemToSaveForLater[0][0].name)     
       let unitPriceDB = Number(itemToSaveForLater[0][0].salePrice)
       let linkDB = String(itemToSaveForLater[0][0].productUrl)
       let descriptionDB = String(itemToSaveForLater[0][0].shortDescription)
       let thumbnailDB = String(itemToSaveForLater[0][0].largeImage)
-      console.log("THIS IS USER DB ID+++", id)
+   
       API.updateSavedItems({
         memberId: memberId,        
         item: itemDB,        
@@ -245,8 +237,6 @@ class App extends React.Component {
         
         .catch(err => console.log(err)); 
     }
-
-    
 
   //UPDATE THEME IN DB
   updateDBtheme = (mID) => {
@@ -383,9 +373,8 @@ class App extends React.Component {
           pfontsizeee = "16px";
           fontfamilyyy = "Calibri";         
     }
-    console.log("colorrr====", colorrr)
+   
     memberInfo = String(this.state.currentUser)
-    // memberNName = String(this.state.memberName)
     let memberId = String(this.state.currentUser)
     let memberName = String(this.state.memberName)
     let userName = String(mID)
@@ -396,7 +385,7 @@ class App extends React.Component {
     let formdivfontsizee =String(divfontsizeee)
     let formpfontsizee = String(pfontsizeee)
     let formfontfamilyy = String(fontfamilyyy)
-    console.log("testalignn====", formtestalignn)
+
     API.updateUser({
       memberId: memberId,
       memberName:memberName,
@@ -415,7 +404,7 @@ class App extends React.Component {
           console.log(res.data.error)
           document.getElementById("message").textContent = res.data.error;
         }else{
-          // console.log("No exisit")
+        
           document.getElementById("message").textContent = " ";
           
         }
@@ -428,8 +417,6 @@ class App extends React.Component {
 
   saveMemberID = (mID, mName) => {
     memberInfo = mID
-    console.log("MID====>", mID)
-   
     
     this.setState({
       currentUser: mID,
@@ -438,17 +425,12 @@ class App extends React.Component {
       userName: mID,
     })
     memberInfo = this.state.currentUser
-    console.log("CURRENTUSER ===>", this.state.currentUser)
-    
     this.getMemberInfo()
   }
 
   getMemberInfo = () => {
     switch(this.state.currentUser !== null){
-      case true:          
-        console.log("MEMBERINFO====", memberInfo)
-        console.log("CURRENT USER ID====", this.state.currentUser)
-        console.log("CURRENT USER NAME====", this.state.memberName)
+      case true:
         this.getAPIuserData(memberInfo);
        
         break;
@@ -474,12 +456,8 @@ class App extends React.Component {
         resolve(true);
       })
     }).then(function(){
-      console.log("THIS IS USER OBJECT IN APP", app.state.user);
-     
       userArray = [...app.state.user]
-      
-    })    
-    // .then(res => {console.log(res)})
+    })
     .catch(err => console.log(err));
   }
 
@@ -497,16 +475,29 @@ class App extends React.Component {
   } 
   
   settingSubmit = (id) => {
-    console.log(id, "THIS SHOULD BE A USERNAME")
     this.updateDBtheme(id);
   }
 
+  deleteItem = (id) => {
+    let cartArray = [...this.state.cart]
+    let cart = cartArray.filter(cart => {
+      return cart.id !== id;
+    });
+    var app = this
+    app.setState({ cart })
+    itemsTotal = itemsTotal - 1
+    app.setState({totalItems: itemsTotal})
+    
+
+  }
+
+
   checkOut = () => {
-    this.setState ({cart: []})
+    this.setState ({cart: [], totalItems: 0})
   }
 
   logOut = () => {
-    this.setState ({user:[], userArray:[], cart: [], detailItem:[], saveForLater: [], memberId: "", membername: "", userName: "", currentUser: null, theme: -1, search:"", Items:[],})
+    this.setState ({user:[], userArray:[], cart: [], detailItem:[], saveForLater: [], memberId: "", membername: "", userName: "", currentUser: null, theme: -1, search:"", Items:[], totalItems: 0, totalSavedItems: 0,})
   }
 
   passwordReset = () => {
@@ -592,7 +583,7 @@ class App extends React.Component {
             <Route exact path="/TodaysDeal" render = { () => <TodaysDeal getTheme={this.getTheme} deals={this.state.deals} handleRemoveClick={() => this.removeDeal(this.state.itemId)} handleShuffleClick={this.shuffle} id={this.state.itemId} key={this.state.itemId}/>}/>
             <Route exact path="/Settings" render = { () => <UserAccSettings setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} settingSubmit={this.settingSubmit} passwordReset={this.passwordReset}/>}/>
             <Route exact path="/ItemDetails" render = { () => <ItemDetails getTheme={this.getTheme} detailItem={this.state.detailItem} cart={this.state.cart} saveForLater={this.state.saveForLater} Items={this.state.Items} theme={this.state.theme} currentUser={this.state.currentUser} />}/>
-            <Route exact path="/Cart" render = { () => <Cart setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser}  getMemberInfo={this.state.getMemberInfo} cart={this.state.cart} checkOut={this.checkOut} Items={this.state.Items}/>}/>
+            <Route exact path="/Cart" render = { () => <Cart setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser}  getMemberInfo={this.state.getMemberInfo} cart={this.state.cart} deleteItem={this.state.deleteItem} checkOut={this.checkOut} Items={this.state.Items}/>}/>
 
           </Wrapper>
          

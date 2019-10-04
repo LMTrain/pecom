@@ -108,10 +108,8 @@ class Signin extends Component {
 
 
   render() {
-    if (this.state.redirect) {      
-      console.log("READY TO LOAD USER PAGE FINALLY===", UsermemberID)
+    if (this.state.redirect) {
       this.props.saveMemberID(UsermemberID)
-
       return <Redirect to='/UserPage' />
     }    
     return (

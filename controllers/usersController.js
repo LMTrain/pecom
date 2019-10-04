@@ -11,7 +11,6 @@ module.exports = {
   },
 
   findById: function(req, res) {
-    // console.log("USERNAME IN FINDBYID IN USERSCONTROLLER=====", req.params.userName)
     db.User
       .find({userName : req.params.userName})
       .then(dbModel => res.json(dbModel))
@@ -19,7 +18,6 @@ module.exports = {
   },
 
   find: function(req, res) {
-    console.log(req.body.userName, req.body.password);
     db.User.find({"userName" : req.body.userName}, function(error, data){
       var hash = "";      
       if(error) throw error
@@ -63,7 +61,6 @@ module.exports = {
       }else{
         console.log('there is no data', data)
         req.body.password = bcrypt.hashSync(req.body.password, 10);
-        // console.log("HASH", req.body.password)
         db.User
           .create(req.body)
           .then(dbModel => {
@@ -78,7 +75,6 @@ module.exports = {
   },
 
   update: function(req, res) {
-    console.log("memberId", req.body.memberId)
     db.User.find({"memberId" : req.body.memberId}, function(error, data){
       if(error) throw error
         if(data.length === 0){
@@ -88,9 +84,6 @@ module.exports = {
             "error": "User does not exist"
           })
         }else{
-          // console.log('THEME', data)
-          console.log("memberId", req.body.memberId)
-          console.log("userTheme", req.body.userTheme)
           db.User.collection
             .updateOne( { "memberId": req.body.memberId }, {$set: {userTheme: req.body.userTheme, colorDb: req.body.colorDb, textalignDb: req.body.textalignDb, divfontsizeDb: req.body.divfontsizeDb, pfontsizeDb: req.body.pfontsizeDb, fontfamilyDb: req.body.fontfamilyDb}})            
             .then(dbModel => res.json(dbModel))

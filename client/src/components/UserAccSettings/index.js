@@ -25,8 +25,8 @@ function UserAccSettings(props) {
              
     <div>
       <Container style={{ marginTop: 60 }}>
-      <div style={divStyle}><b>Settings</b></div>
         <div className="setting-box">
+        <div style={divStyle}><b>Settings</b></div>
           <div className="img-container">
             
             <ul className="list-group search-results">{props.user && props.user.map(result => (                            

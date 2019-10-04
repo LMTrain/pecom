@@ -18,20 +18,15 @@ export default {
   },
   // Gets the user with the given id
   getUser: function(currentAccount) {
-    console.log("FROM CLIENT API getUser ====", currentAccount)
     return axios.get(`/api/users/current/${currentAccount.userName}`);
   },
   // Update the user with the given id
   updateUser: function(id) {
-    console.log("FROM CLIENT API updateUser ====", id)
     return axios.put("/api/users", id);
   },
   
   // CART DB UPDATE
-  updateCart: function(cart) {   
-    console.log("FROM CLIENT API updateCart -- MEMBER_id ====", cart)
-    console.log(cart.memberId)
-    console.log(cart.item)
+  updateCart: function(cart) {
     const id = cart._id;
     return axios.put(`/api/cart/current/${id}`, cart);
     // server expects: /api/cart/current/someid
@@ -39,10 +34,7 @@ export default {
   },
   
   // CART DB UPDATE
-  updateOrders: function(orders) {   
-    console.log("FROM CLIENT API updateOders -- MEMBER_id ====", orders)
-    console.log(orders.memberId)
-    console.log(orders.item)
+  updateOrders: function(orders) {
     const id = orders._id;
     return axios.put(`/api/orders/current/${id}`, orders);
     // server expects: /api/cart/current/someid
@@ -50,10 +42,7 @@ export default {
   },
 
   // SAVED ITEMS DB UPDATE
-  updateSavedItems: function(saved) {  
-    console.log("FROM CLIENT API updateSavedItems -- MEMBER_id ====", saved)
-    console.log(saved.memberId)
-    console.log(saved.item)
+  updateSavedItems: function(saved) {
     const id = saved._id;
     return axios.put(`/api/saveditems/current/${id}`, saved);
     // server expects: /api/cart/current/someid
@@ -65,11 +54,9 @@ export default {
   },
   // Saves a user to the database.
   saveUser: function(newAccount) {
-    console.log("API saveUser ====", newAccount)
     return axios.post("/api/users", newAccount);
   },
   loginUser: function(userAccount) {
-    console.log("API loginUser ====", userAccount)
     return axios.post("/api/users/login", userAccount);
   }
 };

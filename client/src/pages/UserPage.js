@@ -19,7 +19,6 @@ var userName =""
 var usertheme = "";
 var divStyle = {};
 var redirectOption = " "
-// var totalItems = 0
 
 class UserPage extends Component {
   
@@ -31,9 +30,6 @@ class UserPage extends Component {
     redirect: false,    
   };
 
-
-
-  
   componentWillMount() {
     this.loadUserData();    
   }
@@ -43,7 +39,7 @@ class UserPage extends Component {
       userName: this.props.currentUser
     })
     userName = this.state.userName
-    console.log("THIS IS USERNAME", userName)
+  
     const currentAccount = {     
       userName,          
     }
@@ -62,43 +58,29 @@ class UserPage extends Component {
         resolve(true);
       })
     }).then(function(){
-      console.log("THIS IS USER OBJECT", app.state.user);
       userArray = [...app.state.user]
-      // settingsArray = userArray[0].toLocaleString()
-      console.log("USERNAME API ID$$$$", userArray);
-      console.log(userArray[0].userName)
       usertheme = userArray[0].userTheme
       membername = userArray[0].memberName
-      // contact = userArray[0].contact
-      console.log("USER THEME IS ===", usertheme)
       app.userTheme(usertheme);
-    })    
-    // .then(res => {console.log(res)})
+    })
     .catch(err => console.log(err));
   }
 
-  userTheme = (id) => {   
-    console.log("mID is : ", usertheme)    
-    
+  userTheme = (id) => { 
     divStyle = {
       color: userArray[0].colorDb,
       textAlign: userArray[0].textalignDb,
       fontSize: userArray[0].divfontsizeDb,
       fontFamily: userArray[0].fontfamilyDb,
     };
-
     this.props.setTheme(id)    
   }
 
   
   // GETTING USERS INFO FROM DB
   userCart = () => {
-    console.log("THIS IS USER CART===>", this.props.cart)
-    console.log("THIS IS TOTAL ITEMS IN CART===>", this.props.totalItems)
-    console.log("THIS IS USER SAVE ITEM===>", userArray[0])
-    console.log("THIS IS CURRENT USER===>", userArray[0].userName)
     this.loadAPIgetUser(userArray[0].userName)
-    // console.log(props.user[0].contact)
+
   }
 
   logOutPage = () => {    
@@ -131,8 +113,6 @@ class UserPage extends Component {
     })    
 
   }
-  
-  
 
   render() {
     if (this.state.redirect) {
@@ -153,10 +133,10 @@ class UserPage extends Component {
    
     return (
       <div>
-        {/* {this.renderRedirect()} */}
+      
         <Row>              
           <Col size="md-10">
-            <div style={divStyle}><b> Welcome {membername}</b></div>
+            <div style={divStyle}><b> Welcome {membername}!</b></div>
           </Col>
           <Col size="md-2">
             <div className="lineitems">            
@@ -170,7 +150,7 @@ class UserPage extends Component {
         <div id="message"></div>
 
           
-          {this.props.Items.length !== 0 && <SearchResults Items={this.props.Items} cart={this.props.cart} saveForLater={this.props.saveForLater} totalItems={this.state.totalItems} totalSavedItems={this.state.totalSavedItems} detailItem={this.props.detailItem} addItemToCart={this.props.addItemToCart} addItemToSaveForLater={this.props.addItemToSaveForLater} additemDetails={this.props.additemDetails}/>}
+          {this.props.Items.length !== 0 && <SearchResults Items={this.props.Items} cart={this.props.cart} saveForLater={this.props.saveForLater} totalItems={this.props.totalItems} totalSavedItems={this.props.totalSavedItems} detailItem={this.props.detailItem} addItemToCart={this.props.addItemToCart} addItemToSaveForLater={this.props.addItemToSaveForLater} additemDetails={this.props.additemDetails}/>}
           
           <div className="gap"></div>            
             <Row>              
