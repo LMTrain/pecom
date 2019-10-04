@@ -2,8 +2,7 @@ import React from "react";
 import Homeimage from "../components/Homeimage";
 import Container from "../components/Container";
 import "./style.css";
-// import Row from "../components/Row";
-// import Col from "../components/Col";
+
 
 function Home(props) {
   return (

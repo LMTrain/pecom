@@ -4,7 +4,7 @@ import "./themestyle.css";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import { Redirect } from "react-router-dom";
-// import UserAcctettings from "../components/UserAccSettings"
+
 
 var divStyle = {}
 var pStyle = {}
@@ -206,10 +206,7 @@ class PersonalizePage extends Component {
         fontSize: divfontsizee,
         fontFamily: fontfamilyy
       };
-      // pStyle = {
-      //   color: colorr,
-      //   fontFamily: fontfamilyy,        
-      // };
+      
     }
 
   render() {
@@ -218,9 +215,7 @@ class PersonalizePage extends Component {
       <div>
         {this.renderRedirect()}
         <div style={divStyle}>Personalize Your Account</div>
-        {/* <div>{this.props.currentUser}</div> */}
         <Container style={{ marginTop: 60 }}>
-          {/* <div className="theme-card-body"> */}
             <div style={divStyle}><b>Choose a Theme</b></div>
             <div id="memberinfo" style={pStyle}></div>
             <div id="message"></div>
@@ -356,8 +351,6 @@ class PersonalizePage extends Component {
                 <div className="create-acc-btn"><button title="Rock Light Waterfall" type="submit" id="theme0" onClick={() => this.choosenTheme(this.state.userThemes[0])} className="btn btn-primary float-left">Default Theme</button> </div>
               </Col>
             </Row>
-            
-        {/* <UserAcctettings choosenTheme={this.choosenTheme} /> */}
         </Container>
       </div>
     );

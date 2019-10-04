@@ -4,12 +4,11 @@ import "./themestyle.css";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import { Listup, ListItemup } from "../components/Listup";
-// import UserAccSettings from "../components/UserAccSettings";
 import { Redirect } from "react-router-dom";
 import API from "../utils/API";
 import SearchResults from '../components/SearchResults';
 import ItemDetails from '../components/ItemDetails'
-// import { Link } from "react-router-dom";
+
 
 
 

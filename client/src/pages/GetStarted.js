@@ -133,7 +133,7 @@ class GetStarted extends Component {
          
           this.loadPersonalizePage()
         }
-        // this.loadPersonalizePage()
+      
       })
       
       .catch(err => console.log(err));  

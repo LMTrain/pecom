@@ -567,7 +567,6 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          {/* <Navbar id="memberinfo"/> */}
           <UserNavbar search={this.state.search} submit={this.searchForItems} setSearch={this.setSearch}/>
           <Navbar settingsSubmit={this.userSettings}/>
           <Wrapper getTheme={this.getTheme}>

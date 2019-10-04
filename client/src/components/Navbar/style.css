@@ -189,21 +189,3 @@ button {
   display: flex;
   flex-direction: row;
 }
-
-/* #nav-search{
-  position: relative;
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;  
-  border-radius: 4px 4px 4px 4px;
-  border-radius: 4px;
-  box-sizing: border-box;  
-  width: 800px;
-  margin: 10px 0 0;
-} */
-
-/* .form-group {
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  
-} */

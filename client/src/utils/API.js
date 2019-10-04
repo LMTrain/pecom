@@ -6,7 +6,6 @@ import axios from "axios";
 export default {
   //Search for an item to buy
   // search: function(query) {
-    // return axios.get("https://api.walmartlabs.com/v1/search?&apiKey=vng9pukufs97mcyyjs5ps266&query=" +  query + "&format=json");
     // return axios.get(BASEURL + query + APIKEY);
     // return axios.get('/api/walmart/'+ query);
     // return axios.get(BASEURL + APIKEY + query + "&format=json");

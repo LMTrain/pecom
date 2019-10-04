@@ -29,12 +29,10 @@ class Search extends Component {
 
     return (
       <div>
-        {/* <Container style={{ marginTop: -25 }}> */}         
-         
-          {/* <View style={{flex: 1, flexDirection: 'row'}}></View> */}
+        
         {this.props.items && <SearchResults Items={this.props.items} cart={this.props.cart} saveForLater={this.props.saveForLater} detailItem={this.props.detailItem} addItemToCart={this.addItemToCart} addItemToSaveForLater={this.addItemToSaveForLater} additemDetails={this.additemDetails} />}
          
-        {/* </Container> */}
+  
       </div>
       
     );

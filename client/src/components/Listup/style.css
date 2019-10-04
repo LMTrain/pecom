@@ -13,15 +13,6 @@
 }
 
 
-/* .list-overflow-container-uspage {
-  height: 350px;
-  border: 1px #DDDDDD solid;
-  border-radius: 4px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  width: 400px;
-} */
-
 .list-overflow-container-uspage ul {
   margin: 0;
 }
