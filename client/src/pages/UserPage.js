@@ -197,7 +197,7 @@ class UserPage extends Component {
                         <div className="inside-upage-box" onClick={() => this.userCartPage()}>
                        
                           <div className="img-container">
-                            <div><b><span>🛒</span>Cart</b><span>...</span><b>{this.props.totalItems}</b></div>
+                            <div><b>Cart</b><span>...</span><b>{this.props.totalItems}</b></div>
                           </div>                  
                         </div>                          
                     </Col>
