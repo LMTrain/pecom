@@ -16,6 +16,7 @@ class Signin extends Component {
     redirect: false,
     isError: false,
     errorMessage: '',
+    message: '',
    
     
   };
@@ -35,16 +36,21 @@ class Signin extends Component {
     const {memberemail, memberpassword} = this.state
 
     if (!memberemail) {
-      document.getElementById("message").textContent = "Username cannot be empty";    
+      this.message = "Username cannot be empty"
+      this.setState({message: "Username cannot be empty"})         
       return;
     } else {
-      document.getElementById("message").textContent = "";
+      this.message = " "
+      this.setState({message: " "})      
     }
     
     if (!memberpassword) {
-      document.getElementById("message").textContent = "Password cannot be empty";   
+      this.message = "Password cannot be empty"
+      this.setState({message: "Password cannot be empty"})       
       return;
-    } else {document.getElementById("message").textContent = "";
+    } else {
+      this.message = " "
+      this.setState({message: " "})      
   }
 
     const userAccount = {     
@@ -71,21 +77,23 @@ class Signin extends Component {
       const { data } = res.data;
       if(res.data.error === "Invalid Password"){
         console.log(res.data)
-        document.getElementById("message").textContent = res.data.error;
+        this.message = res.data.error        
         this.setState({
           isError: true,         
           errorMessage: res.data.error,
           memberemail: " ",      
           memberpassword: " ",
+          message: res.data.error
         })
       } else if (res.data.error === "User does not exist!"){
           console.log(res.data)
-          document.getElementById("message").textContent = res.data.error;
+          this.message = res.data.error         
           this.setState({
             isError: true,            
             errorMessage: res.data.error,
             memberemail: " ",      
             memberpassword: " ",
+            message: res.data.error
           })
       
       } else {
@@ -116,7 +124,8 @@ class Signin extends Component {
       <div>            
         <Container style={{ marginTop: 80 }}>
           <div className="card card-body">
-            <div id="message"></div>
+            {/* <div id="message"></div> */}
+            <div id ="message">{this.message}</div>
             <h4 className="text-center mb-3">Sign In</h4>
             <form className="form-groups">          
               <div className="form-group">
