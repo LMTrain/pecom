@@ -128,7 +128,7 @@ class UserPage extends Component {
         default:            
           break;
       }
-    }
+  }
    
     return (
       <div>
