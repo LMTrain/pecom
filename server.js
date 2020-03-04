@@ -26,7 +26,6 @@ if (process.env.NODE_ENV === "production") {
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/usersinpecom");
-// mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://Layconmm:C0deme-2019@cluster0-fyenf.mongodb.net/test?retryWrites=true&w=majority");
 
 
 
