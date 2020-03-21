@@ -17,17 +17,24 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   
-  update: function(req, res) {
-    return db.savedItems.create(req.body) 
-      .then(function(dbsaveditems) {
-        return db.user.findOneAndUpdate({ _id: req.params.id }, {saveditems: dbsaveditems._id}, {new:true}, req.body)
-    })
-      .then(dbsaveditems => res.json(dbsaveditems))
-      .catch(err => {
-        console.error('Error creating the cart!', err);
-        return res.status(422).json(err)
-      });
+  create: function(req, res) {
+    console.log(req.body.title),
+    db.Book
+      .create(req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   },
+  // update: function(req, res) {
+  //   return db.savedItems.create(req.body) 
+  //     .then(function(dbsaveditems) {
+  //       return db.user.findOneAndUpdate({ _id: req.params.id }, {saveditems: dbsaveditems._id}, {new:true}, req.body)
+  //   })
+  //     .then(dbsaveditems => res.json(dbsaveditems))
+  //     .catch(err => {
+  //       console.error('Error creating the cart!', err);
+  //       return res.status(422).json(err)
+  //     });
+  // },
   
 
   

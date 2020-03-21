@@ -25,27 +25,20 @@ export default {
   },
   
   // CART DB UPDATE
-  updateCart: function(cart) {
-    const id = cart._id;
-    return axios.put(`/api/cart/current/${id}`, cart);
-    // server expects: /api/cart/current/someid
-    // /api/cat/currentsomeid
+  saveCart: function(cart) {    
+    return axios.post("/api/cart/", cart);
   },
   
   // CART DB UPDATE
   updateOrders: function(orders) {
     const id = orders._id;
-    return axios.put(`/api/orders/current/${id}`, orders);
-    // server expects: /api/cart/current/someid
-    // /api/cat/currentsomeid
+    return axios.put(`/api/orders/current/${id}`, orders);  
   },
 
   // SAVED ITEMS DB UPDATE
   updateSavedItems: function(saved) {
     const id = saved._id;
-    return axios.put(`/api/saveditems/current/${id}`, saved);
-    // server expects: /api/cart/current/someid
-    // /api/cat/currentsomeid
+    return axios.put(`/api/saveditems/current/${id}`, saved);   
   },
   
   deleteUser: function(id) {    

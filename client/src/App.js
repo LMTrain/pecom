@@ -79,17 +79,22 @@ class App extends React.Component {
   // ADD ITEM TO CART
   addItemToCart = (id) => {
     itemsArray = [...this.state.Items]
+    console.log("ITEMSARRAY =>", itemsArray)
     for (var i = 0;  i < itemsArray.length; i++) {
           
       if (id !== itemsArray[i].parentItemId) {
         }else{
           var app = this
           itemToCart.push([itemsArray[i]])
+          console.log("[itemsArray[i]] =>", [itemsArray[i]])
+          console.log("itemToCart =>", itemToCart)
           app.setState({cart:itemToCart})
           itemsTotal = itemsTotal + 1
           app.setState({totalItems: itemsTotal})
           memberInfo = String(this.state.currentUser)
-          this.updateOrdersDB(userArray[0]._id)
+          // this.updateOrdersDB(userArray[0]._id)
+          console.log("userArray =>", userArray)
+          console.log("userArray[0]._id =>", userArray[0]._id)
           this.displayCart(userArray[0]._id)
         }          
       }    
@@ -97,7 +102,7 @@ class App extends React.Component {
     displayCart = (id) => {
       var app = this
       app.setState({cart:itemToCart})
-      this.updateCartDB(userArray[0]._id)
+      // this.updateCartDB(userArray[0]._id)
     }
 
     
@@ -117,10 +122,10 @@ class App extends React.Component {
         }          
       }    
     }
-  displaySaveForLater = (id) => {
-    var app = this
-      app.setState({saveForLater:itemToSaveForLater})
-      this.updateSaveItemDB(userArray[0]._id)
+    displaySaveForLater = (id) => {
+      var app = this
+        app.setState({saveForLater:itemToSaveForLater})
+        this.updateSaveItemDB(userArray[0]._id)
     }
   
   // ITEM DETAIL
@@ -138,10 +143,10 @@ class App extends React.Component {
         }          
       }    
     }
-  displayItemDetails= (id) => {
-    this.setState({detailItem:itemDetailArray})
-    
-  }
+    displayItemDetails= (id) => {
+      this.setState({detailItem:itemDetailArray})
+      
+    }
 
     // SAVING ITEM TO DB CART
     updateCartDB = (id) => {      
@@ -152,7 +157,7 @@ class App extends React.Component {
       let linkDB = String(itemToCart[0][0].productUrl)
       let descriptionDB = String(itemToCart[0][0].shortDescription)
       let thumbnailDB = String(itemToCart[0][0].largeImage)
-      API.updateCart({
+      API.saveCart({
         memberId: memberId,        
         item: itemDB,
         qty:	qtyDB,

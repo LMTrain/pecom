@@ -16,18 +16,26 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  
-  update: function(req, res) {
-    return db.cart.create(req.body) 
-      .then(function(dbCart) {
-        return db.user.findOneAndUpdate({ _id: req.params.id }, {cart: dbCart._id}, {new:true}, req.body)
-    })
-      .then(dbCart => res.json(dbCart))
-      .catch(err => {
-        console.error('Error creating the cart!', err);
-        return res.status(422).json(err)
-      });
+
+  create: function(req, res) {
+    console.log(req.body),
+    db.cart
+      .create(req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   },
+  
+  // update: function(req, res) {
+  //   return db.cart.create(req.body) 
+  //     .then(function(dbCart) {
+  //       return db.user.findOneAndUpdate({ _id: req.params.id }, {cart: dbCart._id}, {new:true}, req.body)
+  //   })
+  //     .then(dbCart => res.json(dbCart))
+  //     .catch(err => {
+  //       console.error('Error creating the cart!', err);
+  //       return res.status(422).json(err)
+  //     });
+  // },
   
   remove: function(req, res) {
     db.cart
