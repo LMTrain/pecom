@@ -32,9 +32,8 @@ var userArray = []
 var memberInfo = ""
 var shuffleData = ""
 var ShuffledDatas = []
-var itemsTotal = 0
 var savedItemsTotal = 0
-var currentUserTheme = ""
+
 
 class App extends React.Component {
   state = {
@@ -80,6 +79,11 @@ class App extends React.Component {
     this.setState({ deals: dealsShuffled });  
   };
 
+  //DELETE ITEM IN CART
+  deleteItemInCart = (id) => {
+
+  }
+
   // ADD ITEM TO CART
   addItemToCart = (id) => {
     var itemCount = 0
@@ -87,8 +91,7 @@ class App extends React.Component {
     itemsArray = [...this.state.Items] 
     for (var i = 0;  i < itemsArray.length; i++) {          
       if (id !== itemsArray[i].parentItemId) {
-        }else{
-          var app = this
+        }else{   
           itemToCart.push([itemsArray[i]])
           itemCount = itemCount + 1
           if (itemCount === 1) {
@@ -96,8 +99,8 @@ class App extends React.Component {
             console.log("[itemsArray[i]] =>", [itemsArray[i]])
             console.log("itemToCartDisplayed =>", itemToCartDisplayed)
             // app.setState({cart:itemToCart})
-            itemsTotal = itemsTotal + 1
-            app.setState({totalItems: itemsTotal})
+            // itemsTotal = itemsTotal + 1
+            // app.setState({totalItems: itemToCartDisplayed.length})
             memberInfo = String(this.state.currentUser)
             // this.updateOrdersDB(userArray[0]._id)           
             this.displayCart()
@@ -107,11 +110,9 @@ class App extends React.Component {
     }
     displayCart = () => {
       var app = this
-      app.setState({cart: itemToCartDisplayed})
-      app.updateCartDB(userArray[0]._id)
+      app.setState({cart: itemToCartDisplayed, totalItems: itemToCartDisplayed.length})
+      // app.updateCartDB()
     }
-
-    
 
   //ITEM SAVED FOR LATER
   addItemToSaveForLater = (sFlId) => {
@@ -162,7 +163,7 @@ class App extends React.Component {
     }
 
     // SAVING ITEM TO DB CART
-    updateCartDB = (id) => {      
+    updateCartDB = () => {      
       let memberId = String(this.state.currentUser)
       let itemDB = String(itemToCart[0][0].name)
       let qtyDB = 1
@@ -497,18 +498,32 @@ class App extends React.Component {
     this.updateDBtheme(id);
   }
 
+
   deleteItem = (id) => {
-    let cartArray = [...this.state.cart]
-    let cart = cartArray.filter(cart => {
-      return cart.id !== id;
-    });
-    var app = this
-    app.setState({ cart })
-    itemsTotal = itemsTotal - 1
-    app.setState({totalItems: itemsTotal})
-    
+    console.log(itemToCartDisplayed)
+    const filteredCart = itemToCartDisplayed.filter((item) => item[0].itemId !== id)
+    console.log("filteredCart =>", filteredCart)    
+    itemToCartDisplayed = [...filteredCart] 
+    this.displayCart()
 
   }
+
+
+  // deleteItem = (id) => {
+  //   let cartArray = [...itemToCartDisplayed]
+  //   console.log ("cartArray =>", cartArray)
+  //   let cart = cartArray.filter(cart => {
+  //     console.log ("cart =>", cart)
+  //     return cart.id !== id;
+  //   });
+  //   var app = this
+  //   app.setState({ cart: cart })
+  //   console.log ("cart =>", app.state.cart)
+  //   itemsTotal = itemsTotal - 1
+  //   app.setState({totalItems: itemsTotal})
+  //   // this.displayCart()
+
+  // }
 
 
   checkOut = () => {
@@ -542,7 +557,6 @@ class App extends React.Component {
       case "theme0":       
         this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg";        
         break;
-
       case "theme1":
         this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_field-wf5.jpg"
         break;
@@ -627,13 +641,13 @@ class App extends React.Component {
             <Route exact path="/Sign out" render = { () => <Home getusertheme={this.state.currentUserThemes}/>}/>
             <Route exact path="/Getstarted" render = { () => <GetStarted saveMemberID={this.saveMemberID} />}/>
             <Route exact path="/PersonalizePage" render = { () => <PersonalizePage setTheme={this.setTheme} theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"/>}/>
-            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} logOut={this.logOut} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} cart={this.state.cart} totalItems={this.state.totalItems} totalSavedItems={this.state.totalSavedItems} detailItem={this.state.detailItem} saveForLater={this.state.saveForLater} Items={this.state.Items} addItemToCart={this.addItemToCart} addItemToSaveForLater={this.addItemToSaveForLater} additemDetails={this.additemDetails}/>}/>
+            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} logOut={this.logOut} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} cart={this.state.cart} totalItems={this.state.totalItems} totalSavedItems={this.state.totalSavedItems} detailItem={this.state.detailItem} saveForLater={this.state.saveForLater} Items={this.state.Items} addItemToCart={this.addItemToCart} addItemToSaveForLater={this.addItemToSaveForLater} additemDetails={this.additemDetails} deleteItem={this.deleteItem}/>}/>
             {/* <Route exact path="/AnimationPersonalize" render = { () => <Themes />}/> */}
             {/* {this.state.search.length && <Route render = { () => <Search items={this.state.Items} search={this.state.search}/>} />} */}
             <Route exact path="/TodaysDeal" render = { () => <TodaysDeal deals={this.state.deals} handleRemoveClick={() => this.removeDeal(this.state.itemId)} handleShuffleClick={this.shuffle} id={this.state.itemId} key={this.state.itemId}/>}/>
             <Route exact path="/Settings" render = { () => <UserAccSettings setTheme={this.setTheme} user={this.state.user} theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} settingSubmit={this.settingSubmit} passwordReset={this.passwordReset}/>}/>
             <Route exact path="/ItemDetails" render = { () => <ItemDetails detailItem={this.state.detailItem} cart={this.state.cart} saveForLater={this.state.saveForLater} Items={this.state.Items} theme={this.state.theme} currentUser={this.state.currentUser} />}/>
-            <Route exact path="/Cart" render = { () => <Cart setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser}  getMemberInfo={this.state.getMemberInfo} cart={this.state.cart} deleteItem={this.state.deleteItem} checkOut={this.checkOut} Items={this.state.Items}/>}/>
+            <Route exact path="/Cart" render = { () => <Cart setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser}  getMemberInfo={this.state.getMemberInfo} cart={this.state.cart} deleteItem={this.deleteItem} checkOut={this.checkOut} Items={this.state.Items}/>}/>
 
           </Wrapper>
          

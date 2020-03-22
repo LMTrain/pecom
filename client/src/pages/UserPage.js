@@ -25,6 +25,8 @@ class UserPage extends Component {
     user:[],
     userSettings: [],
     userArray: [],
+    userCart: [],
+    userTotalItems: 0,
     userName: this.props.currentUser,
     redirect: false,    
   };
@@ -112,8 +114,10 @@ class UserPage extends Component {
     })    
 
   }
+  
 
   render() {
+    console.log(this.props.cart)
     if (this.state.redirect) {
       switch(redirectOption){
         case "logOut":
@@ -128,7 +132,7 @@ class UserPage extends Component {
         default:            
           break;
       }
-  }
+    }
    
     return (
       <div>
@@ -149,7 +153,7 @@ class UserPage extends Component {
         <div id="message"></div>
 
           
-          {this.props.Items.length !== 0 && <SearchResults Items={this.props.Items} cart={this.props.cart} saveForLater={this.props.saveForLater} totalItems={this.props.totalItems} totalSavedItems={this.props.totalSavedItems} detailItem={this.props.detailItem} addItemToCart={this.props.addItemToCart} addItemToSaveForLater={this.props.addItemToSaveForLater} additemDetails={this.props.additemDetails}/>}
+          {this.props.Items.length !== 0 && <SearchResults userName={this.state.userName} Items={this.props.Items} cart={this.props.cart} saveForLater={this.props.saveForLater} totalItems={this.props.totalItems} totalSavedItems={this.props.totalSavedItems} detailItem={this.props.detailItem} addItemToCart={this.props.addItemToCart} addItemToSaveForLater={this.props.addItemToSaveForLater} additemDetails={this.props.additemDetails}/>}
           
           <div className="gap"></div>            
             <Row>              
@@ -173,7 +177,7 @@ class UserPage extends Component {
                       <Listup className="list-overflow-container-uspage">
 
                       {this.props.saveForLater.map(saveForLater => (
-                        <ListItemup key={saveForLater[0].id}>
+                        <ListItemup key={saveForLater[0].itemId}>
                         <img alt={saveForLater[0].name} width="80" height="100" className="img-fluid" src={saveForLater[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : saveForLater[0].largeImage} />
                         <p><b>Item Name             :</b> {saveForLater[0].name}</p>
                         <b>Price         :</b> ${saveForLater[0].salePrice}
@@ -208,10 +212,12 @@ class UserPage extends Component {
                     <Listup className="list-overflow-container-uspage">
 
                     {this.props.cart.map(cart => (
-                        <ListItemup key={cart[0].id}>
+                        <ListItemup key={cart[0].itemId}>
                         <img alt={cart[0].name} width="80" height="100" className="img-fluid" src={cart[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : cart[0].largeImage} />
+                        <button key={cart[0].itemId} onClick={() => this.props.deleteItem(cart[0].itemId)} className="btn btn-success">Delete</button>
                         <p><b>Item Name             :</b> {cart[0].name}</p>
                         <b>Price         :</b> ${cart[0].salePrice}
+                        <p>{cart[0].itemId}</p>
                         </ListItemup>
 
                       ))}
@@ -242,7 +248,7 @@ class UserPage extends Component {
                     <Listup className="list-overflow-container-uspage">
 
                     {this.props.cart.map(cart => (
-                        <ListItemup key={cart[0].id}>
+                        <ListItemup key={cart[0].itemId}>
                         <img alt={cart[0].name} width="80" height="100" className="img-fluid" src={cart[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : cart[0].largeImage} />
                         <p><b>Item Name             :</b> {cart[0].name}</p>
                         <b>Price         :</b> ${cart[0].salePrice}

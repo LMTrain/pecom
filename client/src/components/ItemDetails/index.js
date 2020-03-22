@@ -11,7 +11,7 @@ function ItemDetails(props) {
       
     props.detailItem.map(result => (        
       <div className="detail-box">
-        <div className="img-container" key={result[0].id} id={result[0].id}>
+        <div className="img-container" key={result[0].itemId} id={result[0].itemId}>
 
         <img alt={result[0].name} width="120" height="180" className="img-fluid" src={result[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result[0].largeImage} />
         <span><button key={result.itemId} id={result[0].itemId}type="submit" onClick={() => props.addItemToCart(result.itemId)} className="btn btn-success">Add to cart</button></span><span>  </span>
