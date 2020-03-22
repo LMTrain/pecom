@@ -9,7 +9,7 @@ function SearchResults(props) {
     <div>
       <List>                
         {props.Items.map(result => (
-          <ListItem>
+          <ListItem key={result.itemId}>
                 <img key={result.itemId} alt={result.name} width="120" height="180" className="img-fluid" src={result.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.largeImage} />
               <div className="content">
                     <p><b>Item Name             :</b> {result.name}</p>

@@ -30,15 +30,13 @@ export default {
   },
   
   // CART DB UPDATE
-  updateOrders: function(orders) {
-    const id = orders._id;
-    return axios.put(`/api/orders/current/${id}`, orders);  
+  saveOrders: function(orders) {    
+    return axios.put("/api/orders/", orders);  
   },
 
   // SAVED ITEMS DB UPDATE
-  updateSavedItems: function(saved) {
-    const id = saved._id;
-    return axios.put(`/api/saveditems/current/${id}`, saved);   
+  SavedItems: function(savedItem) {   
+    return axios.post("/api/saveditems/", savedItem);   
   },
   
   deleteUser: function(id) {    

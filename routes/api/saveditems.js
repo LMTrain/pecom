@@ -6,7 +6,10 @@ const saveditemsController = require("../../controllers/saveditemsController");
   .route("/")
   .post(saveditemsController.create)
   
-
+  router
+  .route("/:id")
+  .get(saveditemsController.findById) 
+  .delete(saveditemsController.remove);
   
   
 

@@ -24,6 +24,8 @@ import deals from "./db.json"
 var itemsArray = []
 var itemToCart = []
 var itemToSaveForLater = []
+var itemToSaveDisplayed = []
+var itemToCartDisplayed = []
 var itemDetailArray = []
 var emptyArray = []
 var userArray = []
@@ -32,6 +34,7 @@ var shuffleData = ""
 var ShuffledDatas = []
 var itemsTotal = 0
 var savedItemsTotal = 0
+var currentUserTheme = ""
 
 class App extends React.Component {
   state = {
@@ -44,6 +47,7 @@ class App extends React.Component {
     membername: "",
     userName: "",
     currentUser: null,
+    currentUserThemes: "",
     theme: -1,
     search:"",    
     Items:[],
@@ -78,54 +82,63 @@ class App extends React.Component {
 
   // ADD ITEM TO CART
   addItemToCart = (id) => {
-    itemsArray = [...this.state.Items]
-    console.log("ITEMSARRAY =>", itemsArray)
-    for (var i = 0;  i < itemsArray.length; i++) {
-          
+    var itemCount = 0
+    itemToCart = []
+    itemsArray = [...this.state.Items] 
+    for (var i = 0;  i < itemsArray.length; i++) {          
       if (id !== itemsArray[i].parentItemId) {
         }else{
           var app = this
           itemToCart.push([itemsArray[i]])
-          console.log("[itemsArray[i]] =>", [itemsArray[i]])
-          console.log("itemToCart =>", itemToCart)
-          app.setState({cart:itemToCart})
-          itemsTotal = itemsTotal + 1
-          app.setState({totalItems: itemsTotal})
-          memberInfo = String(this.state.currentUser)
-          // this.updateOrdersDB(userArray[0]._id)
-          console.log("userArray =>", userArray)
-          console.log("userArray[0]._id =>", userArray[0]._id)
-          this.displayCart(userArray[0]._id)
+          itemCount = itemCount + 1
+          if (itemCount === 1) {
+            itemToCartDisplayed.push([itemsArray[i]])
+            console.log("[itemsArray[i]] =>", [itemsArray[i]])
+            console.log("itemToCartDisplayed =>", itemToCartDisplayed)
+            // app.setState({cart:itemToCart})
+            itemsTotal = itemsTotal + 1
+            app.setState({totalItems: itemsTotal})
+            memberInfo = String(this.state.currentUser)
+            // this.updateOrdersDB(userArray[0]._id)           
+            this.displayCart()
+          }
         }          
       }    
     }
-    displayCart = (id) => {
+    displayCart = () => {
       var app = this
-      app.setState({cart:itemToCart})
-      // this.updateCartDB(userArray[0]._id)
+      app.setState({cart: itemToCartDisplayed})
+      app.updateCartDB(userArray[0]._id)
     }
 
     
 
   //ITEM SAVED FOR LATER
   addItemToSaveForLater = (sFlId) => {
+    var itemCount = 0
+    itemToSaveForLater = []
     itemsArray = [...this.state.Items]
     for (var i = 0;  i < itemsArray.length; i++) {
       if (sFlId !== itemsArray[i].parentItemId) {
         }else{          
           itemToSaveForLater.push([itemsArray[i]])
-          savedItemsTotal = savedItemsTotal + 1
-          this.setState({totalSavedItems: savedItemsTotal}) 
-          this.setState({saveForLater:itemToSaveForLater})
-          memberInfo = String(this.state.currentUser)
-          this.displaySaveForLater(userArray[0]._id)
+          itemCount = itemCount + 1
+          if (itemCount === 1) {
+            itemToSaveDisplayed.push([itemsArray[i]])
+            savedItemsTotal = savedItemsTotal + 1
+            this.setState({totalSavedItems: savedItemsTotal})
+            memberInfo = String(this.state.currentUser)           
+            this.displaySaveForLater()
+          }else{
+            console.log(itemsArray[i])
+          }
         }          
       }    
     }
-    displaySaveForLater = (id) => {
+    displaySaveForLater = () => {
       var app = this
-        app.setState({saveForLater:itemToSaveForLater})
-        this.updateSaveItemDB(userArray[0]._id)
+        app.setState({saveForLater:itemToSaveDisplayed})      
+        app.updateSaveItemDB()
     }
   
   // ITEM DETAIL
@@ -222,7 +235,7 @@ class App extends React.Component {
       let descriptionDB = String(itemToSaveForLater[0][0].shortDescription)
       let thumbnailDB = String(itemToSaveForLater[0][0].largeImage)
    
-      API.updateSavedItems({
+      API.SavedItems({
         memberId: memberId,        
         item: itemDB,        
         price: unitPriceDB,
@@ -523,80 +536,109 @@ class App extends React.Component {
     })
   }
 
-  getTheme = () => {
+  gettheme = () => {  
     
-    switch(this.state.theme){
-      case "theme0":
-        return "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg"
+    switch(this.state.theme){      
+      case "theme0":       
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg";        
+        break;
+
       case "theme1":
-        return "https://lmtrain.github.io/lm-images/assets/images/ls_field-wf5.jpg"
-      
-      case "theme2":
-        
-        return "https://lmtrain.github.io/lm-images/assets/images/ls_daylight.jpg"
-      
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_field-wf5.jpg"
+        break;
+
+      case "theme2":       
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_daylight.jpg"
+        break;
+
       case "theme3":
-        return "https://lmtrain.github.io/lm-images/assets/images/ls_field-cnn.jpg"
-      
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_field-cnn.jpg"
+       
+        break;
       case "theme4":
-        return "https://lmtrain.github.io/lm-images/assets/images/ls_field.jpg"
-     
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_field.jpg"
+       
+        break;
       case "theme5":
-        return "https://lmtrain.github.io/lm-images/assets/images/ls_wf1.jpg"
-     
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf1.jpg"
+        
+        break;
       case "theme6":
-        return "https://lmtrain.github.io/lm-images/assets/images/ls_wf2.jpg"
-        case "theme7":
-          return "https://lmtrain.github.io/lm-images/assets/images/ls_field2.jpg"
-        case "theme8":
-            return "https://lmtrain.github.io/lm-images/assets/images/ls_hale-azarya.jpg"
-        case "theme9":
-          return "https://lmtrain.github.io/lm-images/assets/images/marble_blackgold.jpg"
-          case "theme10":
-            return "https://lmtrain.github.io/lm-images/assets/images/marble_blackwhite.jpg"
-          case "theme11":
-              return "https://lmtrain.github.io/lm-images/assets/images/marble_bluecledonia.png"
-          case "theme12":
-            return "https://lmtrain.github.io/lm-images/assets/images/marble_browncircle.jpg"
-          case "theme13":
-            return "https://lmtrain.github.io/lm-images/assets/images/marble_gold.jpg"
-          case "theme14":
-              return ""
-          case "theme15":
-            return "https://lmtrain.github.io/lm-images/assets/images/marble_pinkmarble.jpg"
-          case "theme16":
-            return "https://lmtrain.github.io/lm-images/assets/images/marble_whitegray.jpg"
-      default :
-        return "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg"
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf2.jpg"
+       
+        break;
+      case "theme7":
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_field2.jpg"
+        
+        break;
+      case "theme8":
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_hale-azarya.jpg"
+       
+        break;
+      case "theme9":
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_blackgold.jpg"
+        
+        break;
+      case "theme10":
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_blackwhite.jpg"
+        
+        break;
+      case "theme11":
+        this.state.currentUserThemes =  "https://lmtrain.github.io/lm-images/assets/images/marble_bluecledonia.png"
+     
+        break;
+      case "theme12":
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_browncircle.jpg"
+        
+        break;
+      case "theme13":
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_gold.jpg"
+        
+        break;
+      case "theme14":
+        this.state.currentUserThemes = ""
+        
+        break;
+      case "theme15":
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_pinkmarble.jpg"
+       
+        break;
+      case "theme16":
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_whitegray.jpg"
+       
+        break;
+      default :      
+        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg";
+
     }
   }
  
   render(){
-    
+    this.gettheme();
     return (
       <Router>
-        <div>
+        <>
           <UserNavbar search={this.state.search} submit={this.searchForItems} setSearch={this.setSearch}/>
           <Navbar settingsSubmit={this.userSettings}/>
-          <Wrapper getTheme={this.getTheme}>
-            <Route exact path="/" render = { () => <Home getTheme={this.getTheme}/>}/>
-            <Route exact path="/home" render = { () => <Home getTheme={this.getTheme}/>}/>
-            <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} getTheme={this.getTheme}/>}/>
-            <Route exact path="/Sign out" render = { () => <Home getTheme={this.getTheme}/>}/>
-            <Route exact path="/Getstarted" render = { () => <GetStarted saveMemberID={this.saveMemberID} getTheme={this.getTheme}/>}/>
+          <Wrapper getusertheme={this.state.currentUserThemes}>
+            <Route exact path="/" render = { () => <Home getusertheme={this.state.currentUserThemes}/>}/>
+            <Route exact path="/home" render = { () => <Home getusertheme={this.state.currentUserThemes}/>}/>
+            <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} />}/>
+            <Route exact path="/Sign out" render = { () => <Home getusertheme={this.state.currentUserThemes}/>}/>
+            <Route exact path="/Getstarted" render = { () => <GetStarted saveMemberID={this.saveMemberID} />}/>
             <Route exact path="/PersonalizePage" render = { () => <PersonalizePage setTheme={this.setTheme} theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"/>}/>
-            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} logOut={this.logOut} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} getTheme={this.getTheme} cart={this.state.cart} totalItems={this.state.totalItems} totalSavedItems={this.state.totalSavedItems} detailItem={this.state.detailItem} saveForLater={this.state.saveForLater} Items={this.state.Items} addItemToCart={this.addItemToCart} addItemToSaveForLater={this.addItemToSaveForLater} additemDetails={this.additemDetails}/>}/>
+            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} logOut={this.logOut} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} cart={this.state.cart} totalItems={this.state.totalItems} totalSavedItems={this.state.totalSavedItems} detailItem={this.state.detailItem} saveForLater={this.state.saveForLater} Items={this.state.Items} addItemToCart={this.addItemToCart} addItemToSaveForLater={this.addItemToSaveForLater} additemDetails={this.additemDetails}/>}/>
             {/* <Route exact path="/AnimationPersonalize" render = { () => <Themes />}/> */}
             {/* {this.state.search.length && <Route render = { () => <Search items={this.state.Items} search={this.state.search}/>} />} */}
-            <Route exact path="/TodaysDeal" render = { () => <TodaysDeal getTheme={this.getTheme} deals={this.state.deals} handleRemoveClick={() => this.removeDeal(this.state.itemId)} handleShuffleClick={this.shuffle} id={this.state.itemId} key={this.state.itemId}/>}/>
-            <Route exact path="/Settings" render = { () => <UserAccSettings setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} settingSubmit={this.settingSubmit} passwordReset={this.passwordReset}/>}/>
-            <Route exact path="/ItemDetails" render = { () => <ItemDetails getTheme={this.getTheme} detailItem={this.state.detailItem} cart={this.state.cart} saveForLater={this.state.saveForLater} Items={this.state.Items} theme={this.state.theme} currentUser={this.state.currentUser} />}/>
+            <Route exact path="/TodaysDeal" render = { () => <TodaysDeal deals={this.state.deals} handleRemoveClick={() => this.removeDeal(this.state.itemId)} handleShuffleClick={this.shuffle} id={this.state.itemId} key={this.state.itemId}/>}/>
+            <Route exact path="/Settings" render = { () => <UserAccSettings setTheme={this.setTheme} user={this.state.user} theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} settingSubmit={this.settingSubmit} passwordReset={this.passwordReset}/>}/>
+            <Route exact path="/ItemDetails" render = { () => <ItemDetails detailItem={this.state.detailItem} cart={this.state.cart} saveForLater={this.state.saveForLater} Items={this.state.Items} theme={this.state.theme} currentUser={this.state.currentUser} />}/>
             <Route exact path="/Cart" render = { () => <Cart setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser}  getMemberInfo={this.state.getMemberInfo} cart={this.state.cart} deleteItem={this.state.deleteItem} checkOut={this.checkOut} Items={this.state.Items}/>}/>
 
           </Wrapper>
          
           
-        </div>
+        </>
       </Router>
     );
   }

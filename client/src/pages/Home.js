@@ -8,7 +8,7 @@ function Home(props) {
   return (
     <Container style={{ marginTop: -25 }}>
       <div>
-        <Homeimage backgroundImage={props.getTheme()}>
+        <Homeimage backgroundImage={props.getusertheme}>
 
           
         </Homeimage>        
