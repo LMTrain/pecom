@@ -2,18 +2,18 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Signin from "./pages/Signin";
 import Home from "./pages/Home";
-import GetStarted from "./pages/GetStarted";
-import PersonalizePage from "./pages/PersonalizePage";
-import TodaysDeal from "./components/TodaysDeal";
-import ItemDetails from "./components/ItemDetails";
-import Cart from "./components/Cart"
-// import Themes from "./AnimationPersonalize"
-// import Search from "./pages/Search";
-import UserPage from "./pages/UserPage";
+// import GetStarted from "./pages/GetStarted";
+// import PersonalizePage from "./pages/PersonalizePage";
+// import TodaysDeal from "./components/TodaysDeal";
+// import ItemDetails from "./components/ItemDetails";
+// import Cart from "./components/Cart"
+          // import Themes from "./AnimationPersonalize"
+          // import Search from "./pages/Search";
+// import UserPage from "./pages/UserPage";
 import API from "./utils/API";
 import Navbar from "./components/Navbar";
 import UserNavbar from "./components/UserNavbar";
-import UserAccSettings from "./components/UserAccSettings"
+// import UserAccSettings from "./components/UserAccSettings"
 import Wrapper from "./components/Wrapper";
 import dataSet from "./db.json"
 import deals from "./db.json"
@@ -46,7 +46,7 @@ class App extends React.Component {
     membername: "",
     userName: "",
     currentUser: null,
-    currentUserThemes: "",
+    currentUserThemes: "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg",
     theme: -1,
     search:"",    
     Items:[],
@@ -534,7 +534,12 @@ class App extends React.Component {
     // this.state.cart = [...emptyArray]
     // this.props.Items = [...emptyArray]
     // this.props.saveForLater = [...emptyArray]
-    this.setState ({user: emptyArray, userArray: emptyArray, cart: emptyArray, detailItem: emptyArray, saveForLater: emptyArray, memberId: "", membername: "", userName: "", currentUser: null, theme: -1, search:"", Items:emptyArray, totalItems: 0, totalSavedItems: 0,})
+    this.setState ({user: emptyArray, userArray: emptyArray, 
+                    cart: emptyArray, detailItem: emptyArray, 
+                    saveForLater: emptyArray, memberId: "", membername: "", 
+                    userName: "", currentUser: null, theme: -1, 
+                    search:"", Items:emptyArray, totalItems: 0, 
+                    totalSavedItems: 0 })
   }
 
   passwordReset = () => {
@@ -551,9 +556,10 @@ class App extends React.Component {
     })
   }
 
-  gettheme = () => {  
+  gettheme = () => { 
+    console.log(this.state.currentUserThemes);
     
-    switch(this.state.theme){      
+    // switch(this.state.theme){      
       // case "theme0":       
       //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg";        
       //   break;
@@ -621,10 +627,10 @@ class App extends React.Component {
       //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_whitegray.jpg"
        
       //   break;
-      default :      
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg";
+      // default :      
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg";
 
-    }
+    // }
   }
  
   render(){
@@ -638,16 +644,60 @@ class App extends React.Component {
             <Route exact path="/" render = { () => <Home getusertheme={this.state.currentUserThemes}/>}/>
             <Route exact path="/home" render = { () => <Home getusertheme={this.state.currentUserThemes}/>}/>
             <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} />}/>
-            <Route exact path="/Sign out" render = { () => <Home getusertheme={this.state.currentUserThemes}/>}/>
+            {/* <Route exact path="/Sign out" render = { () => <Home getusertheme={this.state.currentUserThemes}/>}/>
             <Route exact path="/Getstarted" render = { () => <GetStarted saveMemberID={this.saveMemberID} />}/>
-            <Route exact path="/PersonalizePage" render = { () => <PersonalizePage setTheme={this.setTheme} theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"/>}/>
-            <Route exact path="/UserPage" render = { () => <UserPage setTheme={this.setTheme} theme={this.state.theme} logOut={this.logOut} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} cart={this.state.cart} totalItems={this.state.totalItems} totalSavedItems={this.state.totalSavedItems} detailItem={this.state.detailItem} saveForLater={this.state.saveForLater} Items={this.state.Items} addItemToCart={this.addItemToCart} addItemToSaveForLater={this.addItemToSaveForLater} additemDetails={this.additemDetails} deleteItem={this.deleteItem}/>}/>
-            {/* <Route exact path="/AnimationPersonalize" render = { () => <Themes />}/> */}
-            {/* {this.state.search.length && <Route render = { () => <Search items={this.state.Items} search={this.state.search}/>} />} */}
-            <Route exact path="/TodaysDeal" render = { () => <TodaysDeal deals={this.state.deals} handleRemoveClick={() => this.removeDeal(this.state.itemId)} handleShuffleClick={this.shuffle} id={this.state.itemId} key={this.state.itemId}/>}/>
-            <Route exact path="/Settings" render = { () => <UserAccSettings setTheme={this.setTheme} user={this.state.user} theme={this.state.theme} currentUser={this.state.currentUser} updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} settingSubmit={this.settingSubmit} passwordReset={this.passwordReset}/>}/>
-            <Route exact path="/ItemDetails" render = { () => <ItemDetails detailItem={this.state.detailItem} cart={this.state.cart} saveForLater={this.state.saveForLater} Items={this.state.Items} theme={this.state.theme} currentUser={this.state.currentUser} />}/>
-            <Route exact path="/Cart" render = { () => <Cart setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser}  getMemberInfo={this.state.getMemberInfo} cart={this.state.cart} deleteItem={this.deleteItem} checkOut={this.checkOut} Items={this.state.Items}/>}/>
+            <Route exact path="/PersonalizePage" 
+              render = { () => 
+                <PersonalizePage 
+                  setTheme={this.setTheme} theme={this.state.theme} currentUser={this.state.currentUser} 
+                  updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"
+                />
+              }
+            />
+            <Route exact path="/UserPage" 
+              render = { () => 
+                <UserPage 
+                  setTheme={this.setTheme} theme={this.state.theme} logOut={this.logOut} saveMemberID={this.saveMemberID} 
+                  currentUser={this.state.currentUser} cart={this.state.cart} totalItems={this.state.totalItems} 
+                  totalSavedItems={this.state.totalSavedItems} detailItem={this.state.detailItem} saveForLater={this.state.saveForLater} 
+                  Items={this.state.Items} addItemToCart={this.addItemToCart} addItemToSaveForLater={this.addItemToSaveForLater} 
+                  additemDetails={this.additemDetails} deleteItem={this.deleteItem}
+                />
+              }
+            />
+           
+            <Route exact path="/TodaysDeal" 
+              render = { () => 
+                <TodaysDeal 
+                  deals={this.state.deals} handleRemoveClick={() => this.removeDeal(this.state.itemId)} handleShuffleClick={this.shuffle} 
+                  id={this.state.itemId} key={this.state.itemId}
+                />
+              }
+            />
+            <Route exact path="/Settings" 
+              render = { () => 
+                <UserAccSettings setTheme={this.setTheme} user={this.state.user} theme={this.state.theme} currentUser={this.state.currentUser} 
+                  updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} settingSubmit={this.settingSubmit} 
+                  passwordReset={this.passwordReset}
+                />
+              }
+            />
+            <Route exact path="/ItemDetails" 
+              render = { () => 
+                <ItemDetails 
+                  detailItem={this.state.detailItem} cart={this.state.cart} saveForLater={this.state.saveForLater} Items={this.state.Items} 
+                  theme={this.state.theme} currentUser={this.state.currentUser} 
+                />
+              }
+            />
+            <Route exact path="/Cart" 
+              render = { () => 
+                <Cart setTheme={this.setTheme} user={this.state.user}theme={this.state.theme} currentUser={this.state.currentUser}  
+                  getMemberInfo={this.state.getMemberInfo} cart={this.state.cart} deleteItem={this.deleteItem} checkOut={this.checkOut} 
+                  Items={this.state.Items}
+                />
+              }
+            /> */}
 
           </Wrapper>
          
