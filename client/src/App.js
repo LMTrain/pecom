@@ -554,73 +554,73 @@ class App extends React.Component {
   gettheme = () => {  
     
     switch(this.state.theme){      
-      case "theme0":       
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg";        
-        break;
-      case "theme1":
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_field-wf5.jpg"
-        break;
+      // case "theme0":       
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg";        
+      //   break;
+      // case "theme1":
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_field-wf5.jpg"
+      //   break;
 
-      case "theme2":       
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_daylight.jpg"
-        break;
+      // case "theme2":       
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_daylight.jpg"
+      //   break;
 
-      case "theme3":
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_field-cnn.jpg"
+      // case "theme3":
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_field-cnn.jpg"
        
-        break;
-      case "theme4":
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_field.jpg"
+      //   break;
+      // case "theme4":
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_field.jpg"
        
-        break;
-      case "theme5":
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf1.jpg"
+      //   break;
+      // case "theme5":
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf1.jpg"
         
-        break;
-      case "theme6":
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf2.jpg"
+      //   break;
+      // case "theme6":
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf2.jpg"
        
-        break;
-      case "theme7":
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_field2.jpg"
+      //   break;
+      // case "theme7":
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_field2.jpg"
         
-        break;
-      case "theme8":
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_hale-azarya.jpg"
+      //   break;
+      // case "theme8":
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_hale-azarya.jpg"
        
-        break;
-      case "theme9":
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_blackgold.jpg"
+      //   break;
+      // case "theme9":
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_blackgold.jpg"
         
-        break;
-      case "theme10":
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_blackwhite.jpg"
+      //   break;
+      // case "theme10":
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_blackwhite.jpg"
         
-        break;
-      case "theme11":
-        this.state.currentUserThemes =  "https://lmtrain.github.io/lm-images/assets/images/marble_bluecledonia.png"
+      //   break;
+      // case "theme11":
+      //   this.state.currentUserThemes =  "https://lmtrain.github.io/lm-images/assets/images/marble_bluecledonia.png"
      
-        break;
-      case "theme12":
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_browncircle.jpg"
+      //   break;
+      // case "theme12":
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_browncircle.jpg"
         
-        break;
-      case "theme13":
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_gold.jpg"
+      //   break;
+      // case "theme13":
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_gold.jpg"
         
-        break;
-      case "theme14":
-        this.state.currentUserThemes = ""
+      //   break;
+      // case "theme14":
+      //   this.state.currentUserThemes = ""
         
-        break;
-      case "theme15":
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_pinkmarble.jpg"
+      //   break;
+      // case "theme15":
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_pinkmarble.jpg"
        
-        break;
-      case "theme16":
-        this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_whitegray.jpg"
+      //   break;
+      // case "theme16":
+      //   this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/marble_whitegray.jpg"
        
-        break;
+      //   break;
       default :      
         this.state.currentUserThemes = "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg";
 
