@@ -34,7 +34,7 @@
     "express": "^4.17.1",
     "if-env": "^1.0.4",
     "jest": "^24.8.0",
-    "lodash-es": "4.17.11",
+    "lodash-es": "4.17.14",
     "mongoose": "^5.7.1",
     "react": "^16.13.1",
     "react-css-transition": "^0.7.4",
