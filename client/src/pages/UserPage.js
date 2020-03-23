@@ -1,10 +1,6 @@
 import React, { Component } from "react";
-// import Container from "../components/Container";
 import "./themestyle.css";
-// import Row from "../components/Row";
-// import Col from "../components/Col";
-// import { Row, Col } from "../components/Listup";
-import { Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
+import { Card, Row, Col} from 'reactstrap';
 import { Redirect } from "react-router-dom";
 import API from "../utils/API";
 import SearchResults from '../components/SearchResults';
