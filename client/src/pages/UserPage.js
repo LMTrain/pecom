@@ -150,6 +150,14 @@ class UserPage extends Component {
         <div id="message"></div>
         <Row>  
           <Col md="8">
+          { this.props.Items.length !== 0 && 
+              <ItemDetails cart={this.props.cart} 
+              saveForLater={this.props.saveForLater} 
+              detailItem={this.props.detailItem} 
+              addItemToCart={this.props.addItemToCart} 
+              addItemToSaveForLater={this.props.addItemToSaveForLater} 
+              additemDetails={this.props.additemDetails}/>
+            }          
             { this.props.Items.length !== 0 && 
               <SearchResults userName={this.state.userName} 
               Items={this.props.Items} 
@@ -166,7 +174,29 @@ class UserPage extends Component {
 
           <Col md="4">          
             <div className="gap"></div>            
-              <Row>              
+              <Row>
+              <Col size="md-4">
+                <Card className="contents-r2-c2">
+                  <div className="inside-upage-box" onClick={() => this.userCartPage()}>                        
+                    <div className="img-container">
+                      <div><b>Cart</b><span>...</span><b>{this.props.totalItems}</b></div>
+                    </div>                  
+                  </div>
+                  <div className="upage-box-content">
+                    <Row>
+                      {this.props.cart.map(cart => (
+                        <span key={cart[0].itemId}>
+                          <img alt={cart[0].name} width="80" height="100" className="img-fluid" src={cart[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : cart[0].largeImage} />
+                          <button key={cart[0].itemId} onClick={() => this.props.deleteItem(cart[0].itemId)} className="btn btn-success">Delete</button>
+                          <p><b>Item Name             :</b> {cart[0].name}</p>
+                          <b>Price         :</b> ${cart[0].salePrice}
+                          <p>{cart[0].itemId}</p>
+                        </span>
+                      ))}
+                    </Row>               
+                  </div>
+                </Card>                  
+                </Col>             
                 <Col size="md-4">
                   <Card className="contents-r2-c1">
                     <div className="inside-upage-box">
@@ -187,29 +217,8 @@ class UserPage extends Component {
                     </div>
                   </Card>
                 </Col>
-                <Col size="md-4">
-                  <Card className="contents-r2-c2">
-                    <div className="inside-upage-box" onClick={() => this.userCartPage()}>                        
-                      <div className="img-container">
-                        <div><b>Cart</b><span>...</span><b>{this.props.totalItems}</b></div>
-                      </div>                  
-                    </div>
-                    <div className="upage-box-content">
-                      <Row>
-                        {this.props.cart.map(cart => (
-                          <span key={cart[0].itemId}>
-                            <img alt={cart[0].name} width="80" height="100" className="img-fluid" src={cart[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : cart[0].largeImage} />
-                            <button key={cart[0].itemId} onClick={() => this.props.deleteItem(cart[0].itemId)} className="btn btn-success">Delete</button>
-                            <p><b>Item Name             :</b> {cart[0].name}</p>
-                            <b>Price         :</b> ${cart[0].salePrice}
-                            <p>{cart[0].itemId}</p>
-                          </span>
-                        ))}
-                      </Row>               
-                    </div>
-                  </Card>                  
-                </Col>
-                <Col size="md-4">
+                
+                {/* <Col size="md-4">
                   <Card className="contents-r2-c3">
                     <div className="inside-upage-box">
                       <div className="img-container">
@@ -228,17 +237,10 @@ class UserPage extends Component {
                       </Row>               
                     </div>                      
                   </Card>
-                </Col>                           
+                </Col>                            */}
               </Row>            
             </Col>            
-            { this.props.Items.length !== 0 && 
-              <ItemDetails cart={this.props.cart} 
-              saveForLater={this.props.saveForLater} 
-              detailItem={this.props.detailItem} 
-              addItemToCart={this.props.addItemToCart} 
-              addItemToSaveForLater={this.props.addItemToSaveForLater} 
-              additemDetails={this.props.additemDetails}/>
-            }          
+            
           </Row>          
         {/* </Container> */}
       </div>

@@ -1,19 +1,19 @@
 
 .detail-box {
-  background: #fff;
-  border-radius: 2px;
-  height: 850px;
-  margin: 3px;
-  margin-left: -200px;
-  margin-top: 160px;
-  position: relative;
-  width: 1500px;
-  font-size: 22px;
-  padding-top: 1px;
-  padding-left: 5px;
-  padding-right: 1px;
-  box-shadow: 0 -3px 15px #6f6666, 0 3px 15px #6f6666;
+  background:white;
+  border-radius: 32px;
+  height: 660px !important; 
+  position: inherit;
+  width: 1200px !important;
+  box-shadow: 0 -10px 29px #6f6666, 0 19px 29px #6f6666;
   text-align: left;
+  margin-top: 50px;
+  padding-top: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  font-size: 18px;
+  overflow: auto; 
 }
 
 .detail-box >.img-container {

@@ -1,6 +1,5 @@
 import React from "react";
-// import { List, ListItem } from "../List";
-import { Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
+import { Card, Row, Col} from 'reactstrap';
 import "../SearchResults/style.css";
 
 
@@ -8,21 +7,21 @@ function SearchResults(props) {
   
   return (
     <Row>
-      <Card item-row-display>
+      <Card className="item-display">
         <div className = "item-row-display">                    
             {props.Items.map(result => (
-              <Col key={result.itemId} md="3">
+              <Col key={result.itemId} md="4">
                 <div className="item-card">
                   <div className="img-container">                
                     <img 
                         key={result.itemId} 
-                        alt={result.name} width="120" height="180" className="img-fluid" 
+                        alt={result.name} width="220" height="280" className="img-fluid" 
                         src={result.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.largeImage} />
                   </div>
                   <div>
                     <div className="content">
                       <p>{result.name}</p>
-                      <p><b>Rating :</b> {result.customerRating}</p>
+                      <b>Rating :</b> {result.customerRating}
                       <p><b>${result.salePrice}</b></p>
                     </div>
                     <span>
