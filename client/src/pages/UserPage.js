@@ -1,16 +1,14 @@
 import React, { Component } from "react";
-import Container from "../components/Container";
+// import Container from "../components/Container";
 import "./themestyle.css";
-import Row from "../components/Row";
-import Col from "../components/Col";
-import { Listup, ListItemup } from "../components/Listup";
+// import Row from "../components/Row";
+// import Col from "../components/Col";
+// import { Row, Col } from "../components/Listup";
+import { Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
 import { Redirect } from "react-router-dom";
 import API from "../utils/API";
 import SearchResults from '../components/SearchResults';
-import ItemDetails from '../components/ItemDetails'
-
-
-
+import ItemDetails from '../components/ItemDetails';
 
 var userArray = []
 var membername = ""
@@ -135,8 +133,7 @@ class UserPage extends Component {
     }
    
     return (
-      <div>
-      
+      <div>      
         <Row>              
           <Col size="md-10">
             <div style={divStyle}><b> Welcome {membername}!</b></div>
@@ -149,124 +146,101 @@ class UserPage extends Component {
             </div>        
           </Col>
         </Row>
-        <Container style={{ marginTop: 60 }}>
+        {/* <Container style={{ marginTop: 60 }}> */}
         <div id="message"></div>
+        <Row>  
+          <Col md="8">
+            { this.props.Items.length !== 0 && 
+              <SearchResults userName={this.state.userName} 
+              Items={this.props.Items} 
+              cart={this.props.cart} 
+              saveForLater={this.props.saveForLater} 
+              totalItems={this.props.totalItems} 
+              totalSavedItems={this.props.totalSavedItems} 
+              detailItem={this.props.detailItem} 
+              addItemToCart={this.props.addItemToCart} 
+              addItemToSaveForLater={this.props.addItemToSaveForLater} 
+              additemDetails={this.props.additemDetails}/>
+            }          
+          </Col>
 
-          
-          {this.props.Items.length !== 0 && <SearchResults userName={this.state.userName} Items={this.props.Items} cart={this.props.cart} saveForLater={this.props.saveForLater} totalItems={this.props.totalItems} totalSavedItems={this.props.totalSavedItems} detailItem={this.props.detailItem} addItemToCart={this.props.addItemToCart} addItemToSaveForLater={this.props.addItemToSaveForLater} additemDetails={this.props.additemDetails}/>}
-          
-          <div className="gap"></div>            
-            <Row>              
-              <Col size="md-4">
-                <div className="contents-r2-c1">
-
-                  <div className="upage-box">
-                    <div className="img-container">
-                      <Row>              
-                        <Col size="md-12">
-                            <div className="inside-upage-box">
-                              <div className="img-container">
-                                <div><b>SavedItems</b><span>..</span><b>{this.props.totalSavedItems}</b></div>
-                              </div>                  
-                            </div>                          
-                        </Col>
-                      </Row>
+          <Col md="4">          
+            <div className="gap"></div>            
+              <Row>              
+                <Col size="md-4">
+                  <Card className="contents-r2-c1">
+                    <div className="inside-upage-box">
+                      <div className="img-container">
+                        <div><b>SavedItems</b><span>..</span><b>{this.props.totalSavedItems}</b></div>
+                      </div>                  
                     </div>
-                   
                     <div className="upage-box-content">
-                      <Listup className="list-overflow-container-uspage">
-
-                      {this.props.saveForLater.map(saveForLater => (
-                        <ListItemup key={saveForLater[0].itemId}>
-                        <img alt={saveForLater[0].name} width="80" height="100" className="img-fluid" src={saveForLater[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : saveForLater[0].largeImage} />
-                        <p><b>Item Name             :</b> {saveForLater[0].name}</p>
-                        <b>Price         :</b> ${saveForLater[0].salePrice}
-                        </ListItemup>
-
-                      ))}
-                        
-                      </Listup>                      
+                      <Row>
+                        {this.props.saveForLater.map(saveForLater => (
+                            <Col key={saveForLater[0].itemId} >
+                            <img alt={saveForLater[0].name} width="80" height="100" className="img-fluid" src={saveForLater[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : saveForLater[0].largeImage} />
+                            <p><b>Item Name             :</b> {saveForLater[0].name}</p>
+                            <b>Price         :</b> ${saveForLater[0].salePrice}
+                          </Col>
+                        ))}
+                      </Row>                      
                     </div>
-                                      
-                  </div>
-                </div>
-              </Col>
-              <Col size="md-4">
-              <div className="contents-r2-c2">
-
-                <div className="upage-box">
-                  <div className="img-container">
-                  <Row>              
-                    <Col size="md-12">
-                        <div className="inside-upage-box" onClick={() => this.userCartPage()}>
-                       
-                          <div className="img-container">
-                            <div><b>Cart</b><span>...</span><b>{this.props.totalItems}</b></div>
-                          </div>                  
-                        </div>                          
-                    </Col>
-                  </Row>     
-                  </div>
-
-                  <div className="upage-box-content">
-                    <Listup className="list-overflow-container-uspage">
-
-                    {this.props.cart.map(cart => (
-                        <ListItemup key={cart[0].itemId}>
-                        <img alt={cart[0].name} width="80" height="100" className="img-fluid" src={cart[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : cart[0].largeImage} />
-                        <button key={cart[0].itemId} onClick={() => this.props.deleteItem(cart[0].itemId)} className="btn btn-success">Delete</button>
-                        <p><b>Item Name             :</b> {cart[0].name}</p>
-                        <b>Price         :</b> ${cart[0].salePrice}
-                        <p>{cart[0].itemId}</p>
-                        </ListItemup>
-
-                      ))}
-
-                    </Listup>               
-                  </div>
-
-                </div>
-              </div>
-              </Col>
-              <Col size="md-4">
-              <div className="contents-r2-c3">
-
-                <div className="upage-box">
-                  <div className="img-container">
-                  <Row>              
-                    <Col size="md-12">
-                        <div className="inside-upage-box">
-                          <div className="img-container">
-                            <div><b>Orders</b><span>...</span><b>{this.props.totalItems}</b></div>
-                          </div>                  
-                        </div>                          
-                    </Col>
-                  </Row>        
-                  </div>
-                  <div className="upage-box-content">
-
-                    <Listup className="list-overflow-container-uspage">
-
-                    {this.props.cart.map(cart => (
-                        <ListItemup key={cart[0].itemId}>
-                        <img alt={cart[0].name} width="80" height="100" className="img-fluid" src={cart[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : cart[0].largeImage} />
-                        <p><b>Item Name             :</b> {cart[0].name}</p>
-                        <b>Price         :</b> ${cart[0].salePrice}
-                        </ListItemup>
-
-                      ))}
-
-                    </Listup>               
-                  </div>
-
-                </div>
-              </div>
-              </Col>                           
-            </Row>
-            
-            {this.props.Items.length !== 0 && <ItemDetails cart={this.props.cart} saveForLater={this.props.saveForLater} detailItem={this.props.detailItem} addItemToCart={this.props.addItemToCart} addItemToSaveForLater={this.props.addItemToSaveForLater} additemDetails={this.props.additemDetails}/>}
-        
-        </Container>
+                  </Card>
+                </Col>
+                <Col size="md-4">
+                  <Card className="contents-r2-c2">
+                    <div className="inside-upage-box" onClick={() => this.userCartPage()}>                        
+                      <div className="img-container">
+                        <div><b>Cart</b><span>...</span><b>{this.props.totalItems}</b></div>
+                      </div>                  
+                    </div>
+                    <div className="upage-box-content">
+                      <Row>
+                        {this.props.cart.map(cart => (
+                          <span key={cart[0].itemId}>
+                            <img alt={cart[0].name} width="80" height="100" className="img-fluid" src={cart[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : cart[0].largeImage} />
+                            <button key={cart[0].itemId} onClick={() => this.props.deleteItem(cart[0].itemId)} className="btn btn-success">Delete</button>
+                            <p><b>Item Name             :</b> {cart[0].name}</p>
+                            <b>Price         :</b> ${cart[0].salePrice}
+                            <p>{cart[0].itemId}</p>
+                          </span>
+                        ))}
+                      </Row>               
+                    </div>
+                  </Card>                  
+                </Col>
+                <Col size="md-4">
+                  <Card className="contents-r2-c3">
+                    <div className="inside-upage-box">
+                      <div className="img-container">
+                        <div><b>Orders</b><span>...</span><b>{this.props.totalItems}</b></div>
+                      </div>                  
+                    </div>
+                    <div className="upage-box-content">
+                      <Row>
+                        {this.props.cart.map(cart => (
+                          <div key={cart[0].itemId}>
+                            <img alt={cart[0].name} width="80" height="100" className="img-fluid" src={cart[0].largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : cart[0].largeImage} />
+                            <p><b>Item Name             :</b> {cart[0].name}</p>
+                            <b>Price         :</b> ${cart[0].salePrice}
+                          </div>
+                        ))}
+                      </Row>               
+                    </div>                      
+                  </Card>
+                </Col>                           
+              </Row>            
+            </Col>            
+            { this.props.Items.length !== 0 && 
+              <ItemDetails cart={this.props.cart} 
+              saveForLater={this.props.saveForLater} 
+              detailItem={this.props.detailItem} 
+              addItemToCart={this.props.addItemToCart} 
+              addItemToSaveForLater={this.props.addItemToSaveForLater} 
+              additemDetails={this.props.additemDetails}/>
+            }          
+          </Row>          
+        {/* </Container> */}
       </div>
     );
   }

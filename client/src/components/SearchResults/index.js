@@ -1,34 +1,42 @@
 import React from "react";
 // import { List, ListItem } from "../List";
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
 import "../SearchResults/style.css";
 
 
 function SearchResults(props) {
   
   return (
-    <div>
-      <ListGroup>                
-        {props.Items.map(result => (
-          <ListGroupItem key={result.itemId}>
-                <img key={result.itemId} alt={result.name} width="120" height="180" className="img-fluid" src={result.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.largeImage} />
-              <div className="content">
-                    <p><b>Item Name             :</b> {result.name}</p>
-                    <span><b>Price         :</b> ${result.salePrice} | |</span>
-                    <span><b>Rating :</b> {result.customerRating}</span>
-              </div>
-            
-            <span><button key={result.itemId} id={result.itemId} type="submit" onClick={() => props.addItemToCart(result.itemId)} className="btn btn-success">Add to cart</button></span><span>  </span>
-            <span><button key={result.itemId} id={result.itemId} type="submit" onClick={() => props.additemDetails(result.itemId)} className="btn btn-success">Item Details</button></span><span>  </span>
-            <span><button key={result.itemId} id={result.itemId} type="submit" onClick={() => props.addItemToSaveForLater(result.itemId)} className="btn btn-success">Save For Later</button></span><span>  </span>                             
-          </ListGroupItem> 
-                    
-                  
-                    
-        ))}
-                  
-      </ListGroup>            
-    </div>
+    <Row>
+      <Card item-row-display>
+        <div className = "item-row-display">                    
+            {props.Items.map(result => (
+              <Col key={result.itemId} md="3">
+                <div className="item-card">
+                  <div className="img-container">                
+                    <img 
+                        key={result.itemId} 
+                        alt={result.name} width="120" height="180" className="img-fluid" 
+                        src={result.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.largeImage} />
+                  </div>
+                  <div>
+                    <div className="content">
+                      <p>{result.name}</p>
+                      <p><b>Rating :</b> {result.customerRating}</p>
+                      <p><b>${result.salePrice}</b></p>
+                    </div>
+                    <span>
+                      <button key={result.itemId} id={result.itemId} onClick={() => props.addItemToCart(result.itemId)} className="btn btn-success">Add to cart</button>
+                      <span><button key={result.itemId} id={result.itemId} onClick={() => props.additemDetails(result.itemId)} className="btn btn-success">Item Details</button></span>
+                      <span><button key={result.itemId} id={result.itemId} onClick={() => props.addItemToSaveForLater(result.itemId)} className="btn btn-success">Save For Later</button></span>                             
+                    </span>                  
+                  </div>
+                </div>
+              </Col> 
+            ))}
+        </div>
+      </Card>
+    </Row>
     
   );
   
